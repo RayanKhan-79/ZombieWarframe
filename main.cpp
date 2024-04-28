@@ -9,12 +9,6 @@ using namespace sf;
 using namespace std;
 
 
-
-
-
-
-
-
 //Drawing the background
 void createBack(RenderWindow& window) {
 	//Drawing the background

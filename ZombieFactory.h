@@ -1,5 +1,6 @@
 #pragma once
 #include"Zombie.h"
+#include"FootballZombie.h"
 #include<iostream>
 #include<ctime>
 
@@ -28,6 +29,8 @@ public:
 
 
 	void DrawZombies(RenderWindow& window, float deltaTime);
+
+	~ZombieFactory();
 
 };
 

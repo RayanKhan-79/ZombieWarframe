@@ -6,7 +6,7 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y) :Pos(x, y), heal
 
 	texture.loadFromImage(image);
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset*120,0,120,190));
+	sprite.setTextureRect(IntRect(offset * 120, 0, 120, 190));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
@@ -38,4 +38,9 @@ void Zombie::Move()
 	Pos.x -= speed;
 	health -= 2;
 	sprite.setPosition(Pos.x, Pos.y);
+}
+
+int randGrid(int Y_pixels)
+{
+	return (108 * (rand() % 5 - 1)) + Y_pixels;
 }

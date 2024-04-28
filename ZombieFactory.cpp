@@ -31,7 +31,15 @@ void ZombieFactory::spawnZombie()
 	if (num_Of_Zombie >= zombie_limit)
 		return;
 
-	zombies[num_Of_Zombie] = new Zombie(200, 1, 5, 1000, (108 * (rand() % 5 - 1)) + 190);
+	switch (rand() % 2)
+	{
+		case 0:
+			zombies[num_Of_Zombie] = new Zombie();
+			break;
+		case 1:
+			zombies[num_Of_Zombie] = new FootballZombie();
+			break;
+	}
 	num_Of_Zombie++;
 }
 
@@ -43,4 +51,11 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 		zombies[i]->Move();
 		zombies[i]->Draw(window, deltaTime);
 	}
+}
+
+ZombieFactory::~ZombieFactory()
+{
+	for (int i = 0; i < num_Of_Zombie; i++)
+		delete zombies[i];
+	delete[] zombies;
 }

@@ -3,8 +3,11 @@
 #include"coordinates.h"
 using namespace sf;
 
+int randGrid(int);
+
 class Zombie
 {
+protected:
 	int health;
 	int speed;
 	int damage;
@@ -19,10 +22,10 @@ class Zombie
 	coordinates Pos;
 
 public:
-	Zombie(int=200, int=1, int=5, int=1000, int=240);
+	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(190));
 	void Draw(RenderWindow&, float);
 	void Move();
-	void UpdateAnimation(float interval);
+	virtual void UpdateAnimation(float interval);
 	//void Attack();
 	//void Collision();
 

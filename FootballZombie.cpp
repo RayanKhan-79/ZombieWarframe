@@ -43,14 +43,14 @@ void FootballZombie::Move()
 	Pos.x -= speed;
 	health -= 3;
 
-	int random = rand() % 10;
+	int random = rand() % 20;
 	
 	if (random == 0 && Pos.y <= 514 - 108)
 	{
 		Pos.y += 108;
 	}
 
-	if (random == 9 && Pos.y >= 62 + 108)
+	if (random == 19 && Pos.y >= 62 + 108)
 	{
 		Pos.y -= 108;
 	}

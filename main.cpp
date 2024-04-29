@@ -77,7 +77,7 @@ int main()
 	window.setFramerateLimit(10);
 
 	//Zombie z1(200, 1, 20, 1000, 150);
-	ZombieFactory zf(2);
+	ZombieFactory zf;
 
 	float deltaTime;
 	while (window.isOpen())

@@ -7,16 +7,22 @@
 class ZombieFactory
 {
 	float spawnInterval;
+	
 	int num_Of_Zombie;
-	int zombie_limit;
-	Zombie** zombies;
+	int zombie_Limit;
+
+	int waves_Spawned;
+	int num_Of_Waves;
+	
+	Zombie*** zombies;
 	Clock clock;
+	
 	bool waveCalled;
 	
 
 
 public:
-	ZombieFactory();
+	ZombieFactory(int num_Of_Waves);
 
 
 	bool isIntervalReached();
@@ -29,6 +35,10 @@ public:
 
 
 	void DrawZombies(RenderWindow& window, float deltaTime);
+
+
+	bool waveDefeated();
+
 
 	~ZombieFactory();
 

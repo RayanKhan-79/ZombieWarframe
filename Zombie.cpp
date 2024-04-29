@@ -40,6 +40,12 @@ void Zombie::Move()
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
+
+int Zombie::getHealth() const
+{
+	return health;
+}
+
 int randGrid(int Y_pixels)
 {
 	return (108 * (rand() % 5 - 1)) + Y_pixels;

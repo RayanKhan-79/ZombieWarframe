@@ -2,7 +2,7 @@
 
 
 ZombieFactory::ZombieFactory()
-	: spawnInterval(3), num_Of_Zombie(0), zombie_limit(10), zombies(NULL), waveCalled(false) {}
+	: spawnInterval(3), num_Of_Zombie(0), zombie_Limit(4), waveCalled(false), zombies(NULL) {}
 
 bool ZombieFactory::isIntervalReached()
 {
@@ -15,20 +15,27 @@ bool ZombieFactory::isIntervalReached()
 
 void ZombieFactory::spawnWave()
 {
-	if (!waveCalled)
+
+	if (!waveCalled) 
 	{
-		zombies = new Zombie * [zombie_limit];
+		
+		zombies = new Zombie*[zombie_Limit];
 		waveCalled = true;
+		
+		
 	}
+
+	
 	spawnZombie();
 }
 
 void ZombieFactory::spawnZombie()
 {
+
 	if (!isIntervalReached())
 		return;
 
-	if (num_Of_Zombie >= zombie_limit)
+	if (num_Of_Zombie >= zombie_Limit)
 		return;
 
 	switch (rand() % 2)
@@ -45,17 +52,21 @@ void ZombieFactory::spawnZombie()
 
 void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 {
-	for (int i = 0; i < num_Of_Zombie; i++)
-	{
 
-		zombies[i]->Move();
-		zombies[i]->Draw(window, deltaTime);
-	}
+		for (int j = 0; j < num_Of_Zombie; j++)
+		{
+			if (zombies[j]->getHealth() > 0)
+			{
+				zombies[j]->Move();
+				zombies[j]->Draw(window, deltaTime);
+			}
+		}
 }
 
 ZombieFactory::~ZombieFactory()
 {
 	for (int i = 0; i < num_Of_Zombie; i++)
 		delete zombies[i];
+		
 	delete[] zombies;
 }

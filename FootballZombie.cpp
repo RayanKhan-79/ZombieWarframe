@@ -3,6 +3,7 @@
 FootballZombie::FootballZombie(int health, int speed, int damage, int x, int y) : Zombie(health, speed, damage, x, y) 
 {
 	image.loadFromFile("./Images/ffzanimation.png");
+	//image.loadFromFile("../Animations/gif.webp");
 
 	texture.loadFromImage(image);
 	sprite.setTexture(texture);
@@ -35,4 +36,24 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 	texture.loadFromFile("./Images/hfzanimation.png");
 	sprite.setTextureRect(IntRect(offset * 237, 0, 237, 212));
 
+}
+
+void FootballZombie::Move()
+{
+	Pos.x -= speed;
+	health -= 3;
+
+	int random = rand() % 20;
+	
+	if (random == 0 && Pos.y <= 514 - 108)
+	{
+		Pos.y += 108;
+	}
+
+	if (random == 19 && Pos.y >= 62 + 108)
+	{
+		Pos.y -= 108;
+	}
+
+	sprite.setPosition(Pos.x, Pos.y);
 }

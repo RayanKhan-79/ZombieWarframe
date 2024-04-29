@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"coordinates.h"
+
 using namespace sf;
 
 int randGrid(int);
@@ -24,10 +25,15 @@ protected:
 public:
 	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(190));
 	void Draw(RenderWindow&, float);
-	void Move();
+	virtual void Move();
 	virtual void UpdateAnimation(float interval);
 	//void Attack();
 	//void Collision();
+
+
+	// Getters & Setters
+	int getHealth() const;
+
 
 };
 

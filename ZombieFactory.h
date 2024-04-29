@@ -1,6 +1,8 @@
 #pragma once
 #include"Zombie.h"
 #include"FootballZombie.h"
+#include"DancingZombie.h"
+#include"BackUpDancer.h"
 #include<iostream>
 #include<ctime>
 

@@ -24,7 +24,7 @@ protected:
 
 public:
 	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(190));
-	void Draw(RenderWindow&, float);
+	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
 	//void Attack();

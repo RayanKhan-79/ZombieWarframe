@@ -14,9 +14,11 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y) :Pos(x, y), heal
 void Zombie::Draw(RenderWindow& window, float deltaTime)
 {
 
-	UpdateAnimation(deltaTime);
-	window.draw(sprite);
-	
+	if (health > 0)
+	{
+		UpdateAnimation(deltaTime);
+		window.draw(sprite);
+	}
 }
 
 void Zombie::UpdateAnimation(float deltaTime)

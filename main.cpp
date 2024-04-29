@@ -73,11 +73,14 @@ int main()
 
 
 	Clock clock;
-	Clock time;
+	Clock Time;
 	window.setFramerateLimit(10);
 
-	//Zombie z1(200, 1, 20, 1000, 150);
+
+
 	ZombieFactory zf;
+
+
 
 	float deltaTime;
 	while (window.isOpen())
@@ -103,7 +106,6 @@ int main()
 		}
 
 
-
 		//Create a background
 		createBack(window);
 		createMap(window);
@@ -112,9 +114,6 @@ int main()
 
 		zf.spawnWave();
 		zf.DrawZombies(window,deltaTime);
-		//z1.Draw(window, deltaTime);
-		//z1.Move();
-		//z1.UpdateAnimation(deltaTime);
 
 
 		

@@ -30,6 +30,15 @@
     <ClCompile Include="FootballZombie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DancingZombie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BackUpDancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Screens.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Zombie.h">
@@ -42,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FootballZombie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DancingZombie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BackUpDancer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

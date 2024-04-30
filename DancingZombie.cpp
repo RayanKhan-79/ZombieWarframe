@@ -3,11 +3,11 @@
 DancingZombie::DancingZombie(float spawnInterval, int count, int health, int speed, int damage, int x, int y)
 	: Zombie(health, speed, damage, x, y), spawnInterval(spawnInterval), count(count), backUpDancers(NULL)
 {
-	image.loadFromFile("./Images/DancingZombie_Smaller.png");
+//	image.loadFromFile("./Images/11.png");
 
-	texture.loadFromImage(image);
+	texture.loadFromFile("./Images/11.png");
 	sprite.setTexture(texture);
-//	sprite.setTextureRect(IntRect(offset * 120, 0, 120, 190));
+	sprite.setTextureRect(IntRect(offset * 125, 0, 125, 180));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
@@ -74,7 +74,19 @@ void DancingZombie::SpawnBackUp()
 
 }
 void DancingZombie::UpdateAnimation(float deltaTime)
-{}
+{
+	Total_Animation_Time += deltaTime;
+	if (Total_Animation_Time >= switchTime)
+	{
+		Total_Animation_Time -= switchTime;
+		
+		offset++;
+		if (offset == 4)
+			offset = 0;
+	}
+
+	sprite.setTextureRect(IntRect(offset * 125, 0, 125, 180));
+}
 
 void DancingZombie::Move()
 {
@@ -92,6 +104,7 @@ void DancingZombie::Move()
 
 void DancingZombie::Draw(RenderWindow& window, float deltaTime)
 {
+	UpdateAnimation(deltaTime);
 	sprite.setPosition(Pos.x, Pos.y);
 	for (int i = 0; i < count; i++)
 		if (backUpDancers != NULL)

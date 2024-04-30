@@ -5,7 +5,7 @@
 class FootballZombie : public Zombie
 {
 
-
+//	int offset_y = 0;
 
 public:
 	FootballZombie(int = 600, int = 3, int = 8, int = 1000, int = randGrid(170));

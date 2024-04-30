@@ -17,11 +17,16 @@ class ZombieFactory
 	Clock clock;
 	
 	bool waveCalled;
+
+	int test = 0;
 	
 
 
 public:
 	ZombieFactory();
+
+	
+	bool spawnNextWave();
 
 
 	bool isIntervalReached();

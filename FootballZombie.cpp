@@ -41,7 +41,7 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 void FootballZombie::Move()
 {
 	Pos.x -= speed;
-	//health -= 3;
+	health -= 3;
 
 	int random = rand() % 20;
 	

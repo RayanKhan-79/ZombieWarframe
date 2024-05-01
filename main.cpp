@@ -3,6 +3,7 @@
 #include <ctime>
 #include"coordinates.h"
 #include"ZombieFactory.h"
+#include"PlantFactory.h"
 //#include"../SFML/Images/"
 
 using namespace sf;
@@ -75,11 +76,11 @@ int main()
 	Clock clock;
 	Clock Time;
 	window.setFramerateLimit(10);
-
+	srand(time(0));
 
 
 	ZombieFactory zf;
-
+	PlantFactory pf;
 
 
 	float deltaTime;
@@ -114,8 +115,8 @@ int main()
 
 		zf.spawnWave();
 		zf.DrawZombies(window,deltaTime);
-
-
+		pf.spawnSunflowerRandomly(ROWS, COLS);
+		pf.DrawPlants(window, deltaTime);
 		
 		window.setSize(sf::Vector2u(1200, 700));
 		window.setPosition(Vector2i(100, 100));

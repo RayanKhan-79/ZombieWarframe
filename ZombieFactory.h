@@ -1,6 +1,8 @@
 #pragma once
 #include"Zombie.h"
 #include"FootballZombie.h"
+#include"DancingZombie.h"
+#include"BackUpDancer.h"
 #include<iostream>
 #include<ctime>
 
@@ -15,11 +17,16 @@ class ZombieFactory
 	Clock clock;
 	
 	bool waveCalled;
+
+	int test = 0;
 	
 
 
 public:
 	ZombieFactory();
+
+	
+	bool spawnNextWave();
 
 
 	bool isIntervalReached();

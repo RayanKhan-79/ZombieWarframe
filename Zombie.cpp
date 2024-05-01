@@ -1,6 +1,6 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int health, int speed, int damage, int x, int y) :Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3)
+Zombie::Zombie(int health, int speed, int damage, int x, int y) :Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.6)
 {
 	image.loadFromFile("./Images/zanimation2.png");
 
@@ -14,9 +14,11 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y) :Pos(x, y), heal
 void Zombie::Draw(RenderWindow& window, float deltaTime)
 {
 
-	UpdateAnimation(deltaTime);
-	window.draw(sprite);
-	
+	if (health > 0)
+	{
+		UpdateAnimation(deltaTime);
+		window.draw(sprite);
+	}
 }
 
 void Zombie::UpdateAnimation(float deltaTime)

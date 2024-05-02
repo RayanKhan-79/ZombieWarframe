@@ -58,7 +58,7 @@ void ZombieFactory::spawnZombie()
 	if (num_Of_Zombie >= zombie_Limit)
 		return;
 
-	switch (rand() % 3)
+	switch (rand() % 4)
 	{
 		case 0:
 			zombies[num_Of_Zombie] = new Zombie;
@@ -71,6 +71,11 @@ void ZombieFactory::spawnZombie()
 		case 2:
 			zombies[num_Of_Zombie] = new DancingZombie;
 			break;
+
+		case 3:
+			zombies[num_Of_Zombie] = new BalloonZombie;
+			break;
+
 	}
 	num_Of_Zombie++;
 }

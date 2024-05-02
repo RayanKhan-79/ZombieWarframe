@@ -1,13 +1,23 @@
 ﻿#include "PlayGameScreen.h"
 #include "ZombieFactory.h"
 
+// Grid 
+// origin	  -->   [300px ,85px]
+// SE corner  -->   [1155px, 675px]
+// width	  -->	1155px - 300px = 855px
+// height	  -->	675px - 85px = 590px
+// tile		  -->	95px * 118px
+
+const int tile_dx = 95;
+const int tile_dy = 118;
+
 //Drawing the background
 void createBack(RenderWindow& window) {
 	//Drawing the background
 	Image map_image;
-	map_image.loadFromFile("./Images/backwindow.jpg");
+	//map_image.loadFromFile("./Images/backwindow.jpg");
 	//map_image.loadFromFile("./Images/lvl_1_w_back.png");   //"../SFML/Images/backwindow.jpg"
-	//map_image.loadFromFile("./Images/lvl_2_w_back.png");   //"../SFML/Images/backwindow.jpg"
+	map_image.loadFromFile("./Images/lvl_2_w_back.png");   //"../SFML/Images/backwindow.jpg"
 	//map_image.loadFromFile("./Images/lvl_5_w_back.png");   //"../SFML/Images/backwindow.jpg"
 	Texture map;
 	map.loadFromImage(map_image);
@@ -19,6 +29,9 @@ void createBack(RenderWindow& window) {
 
 //Drawing the map
 void createMap(RenderWindow& window) {
+
+	return;
+
 	//Drawing a map
 	Image map_image;//объект изображения для карты
 	map_image.loadFromFile("./Images/lvl_1_map.png");//load the file for the map
@@ -41,21 +54,7 @@ PlayGameScreen::PlayGameScreen()
 
 void PlayGameScreen::render()
 {
-	//window.create(VideoMode(1200, 700), "Game");
-	//while (window.isOpen())
-	//{
 
-	//	Event e;
-	//	while (window.pollEvent(e))
-	//	{
-	//		if (e.type == Event::Closed)
-	//			window.close();
-	//	}
-
-	//	window.clear();
-	//	window.draw(sprite);
-	//	window.display();
-	//}
 
 
 	srand(time(0));
@@ -93,7 +92,7 @@ void PlayGameScreen::render()
 
 	Clock clock;
 	Clock time;
-	window.setFramerateLimit(10);
+	window.setFramerateLimit(20);
 
 	//Zombie z1(200, 1, 20, 1000, 150);
 	ZombieFactory zf;
@@ -119,6 +118,11 @@ void PlayGameScreen::render()
 		{
 			if (event.type == Event::Closed)
 				window.close();
+
+
+
+			if (event.type == Event::MouseButtonReleased)
+				std::cout << "Game --> x: " << Mouse::getPosition(window).x << " y: " << Mouse::getPosition(window).y << "\n";
 		}
 
 

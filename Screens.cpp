@@ -1,6 +1,6 @@
 #include"Screens.h"
 
-Screens::Screens() : pos(0,0) {};
+Screens::Screens() {};
 
 RenderWindow& Screens::getWindow()
 {

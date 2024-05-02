@@ -37,7 +37,7 @@ void ZombieFactory::spawnWave()
 
 	if (zombies == NULL) 
 	{
-		std::cout << test << '\n';
+		//std::cout << test << '\n';
 		test++;
 		zombies = new Zombie*[zombie_Limit];
 		waveCalled = true;

@@ -5,7 +5,10 @@
 void createBack(RenderWindow& window) {
 	//Drawing the background
 	Image map_image;
-	map_image.loadFromFile("./Images/backwindow.jpg");   //"../SFML/Images/backwindow.jpg"
+	map_image.loadFromFile("./Images/backwindow.jpg");
+	//map_image.loadFromFile("./Images/lvl_1_w_back.png");   //"../SFML/Images/backwindow.jpg"
+	//map_image.loadFromFile("./Images/lvl_2_w_back.png");   //"../SFML/Images/backwindow.jpg"
+	//map_image.loadFromFile("./Images/lvl_5_w_back.png");   //"../SFML/Images/backwindow.jpg"
 	Texture map;
 	map.loadFromImage(map_image);
 	Sprite s_map;
@@ -18,7 +21,7 @@ void createBack(RenderWindow& window) {
 void createMap(RenderWindow& window) {
 	//Drawing a map
 	Image map_image;//объект изображения для карты
-	map_image.loadFromFile("./Images/grid.png");//load the file for the map
+	map_image.loadFromFile("./Images/lvl_1_map.png");//load the file for the map
 	Texture map;
 	map.loadFromImage(map_image);
 	Sprite s_map;

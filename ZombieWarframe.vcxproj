@@ -144,6 +144,7 @@
     <ClCompile Include="DancingZombie.cpp" />
     <ClCompile Include="FootballZombie.cpp" />
     <ClCompile Include="HighScoreScreen.cpp" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="InstructionScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="DancingZombie.h" />
     <ClInclude Include="FootballZombie.h" />
     <ClInclude Include="HighScoreScreen.h" />
+    <ClInclude Include="Icon.h" />
     <ClInclude Include="InstructionScreen.h" />
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="PlayGameScreen.h" />

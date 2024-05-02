@@ -3,6 +3,7 @@
 #include"PlayGameScreen.h"
 #include"InstructionScreen.h"
 #include"HighScoreScreen.h"
+#include"Icon.h"
 
 class MainMenuScreen : public Screens
 {
@@ -10,8 +11,14 @@ class MainMenuScreen : public Screens
 	InstructionScreen instructionScreen;
 	HighScoreScreen highScoreScreen;
 
+	Icon playgameIcon;
+	Icon InstructionIcon;
+	Icon highScoreIcon;
+	Icon Quit;
+
 public:
 	MainMenuScreen();
+	void drawIcons();
 	void render();
 };
 

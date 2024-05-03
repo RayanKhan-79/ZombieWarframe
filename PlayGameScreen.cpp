@@ -1,6 +1,6 @@
 ﻿#include "PlayGameScreen.h"
 #include "ZombieFactory.h"
-
+#include "Sentry.h"
 // Grid 
 // origin	  -->   [300px ,85px]
 // SE corner  -->   [1155px, 675px]
@@ -30,7 +30,7 @@ void createBack(RenderWindow& window) {
 //Drawing the map
 void createMap(RenderWindow& window) {
 
-	return;
+
 
 	//Drawing a map
 	Image map_image;//объект изображения для карты
@@ -94,9 +94,9 @@ void PlayGameScreen::render()
 	Clock time;
 	window.setFramerateLimit(20);
 
-	//Zombie z1(200, 1, 20, 1000, 150);
+	//Zombie* z1(NULL); 
 	ZombieFactory zf;
-
+	Sentry sentry;
 	float deltaTime;
 	while (window.isOpen())
 	{
@@ -117,7 +117,9 @@ void PlayGameScreen::render()
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
+			{
 				window.close();
+			}
 
 
 
@@ -129,15 +131,31 @@ void PlayGameScreen::render()
 
 		//Create a background
 		createBack(window);
-		createMap(window);
+		//createMap(window);
 
+		//if (z1 == NULL)
+		//{
+		//	z1 = new Zombie(200, 1, 20, 1000, 118 * 2 + 85 - 180);
+		//}
+		//
+		//if (z1 && z1->getHealth() < 0)
+		//{
+		//	delete z1;
+		//	z1 = NULL;
+		//}
 
-
+		sentry.shoot();
+		sentry.draw(window);
+		
 		zf.spawnWave();
 		zf.DrawZombies(window, deltaTime);
-		//z1.Draw(window, deltaTime);
-		//z1.Move();
-		//z1.UpdateAnimation(deltaTime);
+		//if (z1)
+		//{
+		//	z1->Collision(sentry.getBullet());
+		//	z1->Draw(window, deltaTime);
+		//	z1->Move();
+		//	z1->UpdateAnimation(deltaTime);
+		//}
 
 
 
@@ -145,4 +163,6 @@ void PlayGameScreen::render()
 		window.setPosition(Vector2i(100, 100));
 		window.display();
 	}
+
+	//MainMenuScreen::render();
 }

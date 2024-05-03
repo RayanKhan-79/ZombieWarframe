@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"coordinates.h"
+#include"Sentry.h"
 
 using namespace sf;
 
@@ -30,7 +31,7 @@ public:
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
 	//void Attack();
-	//void Collision();
+	void Collision(Bullet*);
 
 
 	// Getters & Setters

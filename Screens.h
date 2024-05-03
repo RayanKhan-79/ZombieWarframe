@@ -7,6 +7,7 @@ using namespace sf;
 class Screens
 {
 protected:
+	bool end = false;
 	RenderWindow window;
 	Texture texture;
 	Sprite sprite;

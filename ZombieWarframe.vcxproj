@@ -151,6 +151,7 @@
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="PlayGameScreen.cpp" />
     <ClCompile Include="Screens.cpp" />
+    <ClCompile Include="Sentry.cpp" />
     <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieFactory.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="PlayGameScreen.h" />
     <ClInclude Include="Screens.h" />
+    <ClInclude Include="Sentry.h" />
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="ZombieFactory.h" />
   </ItemGroup>

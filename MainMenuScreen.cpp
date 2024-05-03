@@ -40,7 +40,10 @@ void MainMenuScreen::render()
 		{
 
 			if (e.type == Event::Closed || Quit.isClicked(e))
+			{
+				end = true;
 				window.close();
+			}
 
 
 			// For Testing
@@ -52,7 +55,7 @@ void MainMenuScreen::render()
 
 			if (InstructionIcon.isClicked(e))
 			{
-//				this->getWindow().close();
+				this->getWindow().close();
 				playGame.getWindow().close();
 
 				highScoreScreen.getWindow().close();
@@ -62,7 +65,7 @@ void MainMenuScreen::render()
 
 			if (playgameIcon.isClicked(e))
 			{
-//				this->getWindow().close();
+				this->getWindow().close();
 				highScoreScreen.getWindow().close();
 				
 				instructionScreen.getWindow().close();
@@ -72,12 +75,18 @@ void MainMenuScreen::render()
 
 			if (highScoreIcon.isClicked(e))
 			{
-//				this->getWindow().close();
+				this->getWindow().close();
 				playGame.getWindow().close();
 				
 				instructionScreen.getWindow().close();
 				
 				highScoreScreen.render();
+			}
+
+			
+			if (!(window.isOpen()) && end == false)
+			{
+				this->render();
 			}
 
 

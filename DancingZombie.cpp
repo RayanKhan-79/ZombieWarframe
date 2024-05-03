@@ -1,7 +1,7 @@
 #include "DancingZombie.h"
 
 DancingZombie::DancingZombie(float spawnInterval, int count, int health, int speed, int damage, int x, int y)
-	: Zombie(health, speed, damage, x, y), spawnInterval(spawnInterval), count(count), backUpDancers(NULL)
+	: Zombie(health, speed, damage, x, y), spawnInterval(spawnInterval), count(count), backUpDancers(NULL), speed_y(speed)
 {
 //	image.loadFromFile("./Images/11.png");
 
@@ -48,24 +48,24 @@ void DancingZombie::SpawnBackUp()
 
 
 	backUpDancers = new BackUpDancer * [4] {};
-	backUpDancers[0] = new BackUpDancer(200, 1, 5, Pos.x + 108, Pos.y);  // East
-	backUpDancers[1] = new BackUpDancer(200, 1, 5, Pos.x - 108, Pos.y);  // West
+	backUpDancers[0] = new BackUpDancer(200, 1, 5, Pos.x + 95, Pos.y);  // East
+	backUpDancers[1] = new BackUpDancer(200, 1, 5, Pos.x - 95, Pos.y);  // West
 	
-	if (Pos.y <= 514 - 108)
+	if (Pos.y + 180 <= 118*4 + 85)
 	{
-		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y + 108);  // South
+		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y + 118);  // South
 	}
 	else
 	{
-		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x - 54, Pos.y);
+		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
 	}
-	if (Pos.y >= 62 + 108)
+	if (Pos.y + 180 >=  118*2 + 85)
 	{
-		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y - 108);  // North
+		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y - 118);  // North
 	}
 	else
 	{
-		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x - 54, Pos.y);
+		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
 	}
 
 
@@ -95,6 +95,19 @@ void DancingZombie::Move()
 		return;
 
 	Pos.x -= speed;
+
+	if (/*Pos.y + 180 >= 118 * 1 + 85 &&*/ Pos.y + 180 <= 118 * 2 + 85)
+		speed_y = speed;
+
+	if (/*Pos.y + 180 <= 118 * 5 + 85 &&*/ Pos.y + 180 >= 118 * 5 + 85)
+		speed_y = -speed;
+
+	//if (Pos.y + 180 <= 118 * 5 + 85 && Pos.y + 180 >= 118 * 4 + 85)
+	//	speed_y = -speed_y;
+
+	Pos.y += speed_y;
+
+	//health -= 3;
 	for (int i = 0; i < count; i++)
 	{
 		if (backUpDancers != NULL)

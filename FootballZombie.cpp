@@ -15,27 +15,6 @@ FootballZombie::FootballZombie(int health, int speed, int damage, int x, int y) 
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
-void FootballZombie::switchLane(int dir)
-{
-	if (dir == 0)
-	{
-		Pos.y += speed * 3;
-		if (Pos.y >= 118 * 3 + 85 - 180 && Pos.y <= 118 * 4 + 85 - 180)
-			switchRow = 2;
-
-		return;
-	}
-
-	if (dir == 1)
-	{
-		Pos.y -= speed * 3;
-		if (Pos.y >= 118 * 0 + 85 - 180 && Pos.y <= 118 * 1 + 85 - 180)
-			switchRow = 2;
-
-		return;
-	}
-}
-
 void FootballZombie::UpdateAnimation(float deltaTime)
 {
 	Total_Animation_Time += deltaTime;
@@ -66,18 +45,17 @@ void FootballZombie::Move()
 	Pos.x -= speed;
 	health -= 3;
 
-	int random = rand() % 20;
+	int random = rand() % 50;
 	
-	if (random == 0 && Pos.y <= 118*4 + 85 - 180)
+	if (random == 0 && Pos.y + 180 <= 118*4 + 85)
 	{
-		switchRow = 0;
+		Pos.y += 118;
 	}
 
-	if (random == 19 && Pos.y >= 118*0 + 85)
+	if (random == 49 && Pos.y + 180 >= 118*2 + 85)
 	{
-		switchRow = 1;
+		Pos.y -= 118;
 	}
 
-	switchLane(switchRow);
 	sprite.setPosition(Pos.x, Pos.y);
 }

@@ -6,6 +6,7 @@ class DancingZombie : public Zombie
 {
 	BackUpDancer** backUpDancers;
 	int count;
+	int speed_y;
 	float spawnInterval;
 	Clock clock;
 

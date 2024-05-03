@@ -1,7 +1,7 @@
 #include "BackUpDancer.h"
 
 BackUpDancer::BackUpDancer(int health, int speed, int damage, int x, int y)
-	: Zombie(health, speed, damage, x, y)
+	: Zombie(health, speed, damage, x, y), speed_y(speed)
 {
 
 }
@@ -32,8 +32,17 @@ void BackUpDancer::Move()
 	if (!spawned || health <= 0)
 		return;
 
+	if (/*Pos.y + 180 >= 118 * 1 + 85 &&*/ Pos.y + 180 <= 118 * 2 + 85)
+		speed_y = speed;
+
+	if (/*Pos.y + 180 <= 118 * 5 + 85 &&*/ Pos.y + 180 >= 118 * 5 + 85)
+		speed_y = -speed;
+
+
 	Pos.x -= speed;
-	health -= 2;
+	Pos.y += speed_y;
+
+	//health -= 2;
 	sprite.setPosition(Pos.x, Pos.y);
 }
 

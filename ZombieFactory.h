@@ -3,6 +3,7 @@
 #include"FootballZombie.h"
 #include"DancingZombie.h"
 #include"BackUpDancer.h"
+#include"BalloonZombie.h"
 #include<iostream>
 #include<ctime>
 

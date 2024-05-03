@@ -3,40 +3,57 @@
 #include <ctime>
 #include"coordinates.h"
 #include"ZombieFactory.h"
+#include"MainMenuScreen.h"
 //#include"../SFML/Images/"
 
 using namespace sf;
 using namespace std;
 
 
-//Drawing the background
-void createBack(RenderWindow& window) {
-	//Drawing the background
-	Image map_image;
-	map_image.loadFromFile("./Images/backwindow.jpg");   //"../SFML/Images/backwindow.jpg"
-	Texture map;
-	map.loadFromImage(map_image);
-	Sprite s_map;
-	s_map.setTexture(map);
-	s_map.setPosition(0, 0);
-	window.draw(s_map);
+
+////Drawing the background
+//void createBack(RenderWindow& window) {
+//	//Drawing the background
+//	Image map_image;
+//	map_image.loadFromFile("./Images/backwindow.jpg");   //"../SFML/Images/backwindow.jpg"
+//	Texture map;
+//	map.loadFromImage(map_image);
+//	Sprite s_map;
+//	s_map.setTexture(map);
+//	s_map.setPosition(0, 0);
+//	window.draw(s_map);
+//}
+//
+////Drawing the map
+//void createMap(RenderWindow& window) {
+//	//Drawing a map
+//	Image map_image;//объект изображения для карты
+//	map_image.loadFromFile("./Images/grid.png");//load the file for the map
+//	Texture map;
+//	map.loadFromImage(map_image);
+//	Sprite s_map;
+//	s_map.setTexture(map);
+//	s_map.setPosition(300, 140);
+//
+//	window.draw(s_map);
+//}
+
+
+int main()
+{
+	MainMenuScreen MMS;
+	MMS.render();
+	return 0;
 }
 
-//Drawing the map
-void createMap(RenderWindow& window) {
-	//Drawing a map
-	Image map_image;//объект изображения для карты
-	map_image.loadFromFile("./Images/grid.png");//load the file for the map
-	Texture map;
-	map.loadFromImage(map_image);
-	Sprite s_map;
-	s_map.setTexture(map);
-	s_map.setPosition(300, 140);
-
-	window.draw(s_map);
-}
 
 
+
+
+
+
+
+/*
 int main()
 {
 	srand(time(0));
@@ -123,3 +140,4 @@ int main()
 	}
 	return 0;
 }
+*/

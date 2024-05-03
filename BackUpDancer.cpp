@@ -60,7 +60,7 @@ void BackUpDancer::SpawnAnimation(float deltaTime)
 		}
 	}
 
-	sprite.setTextureRect(IntRect(offset * 134, 0, 134, 177));
+	sprite.setTextureRect(IntRect(offset * 153, 0, 153, 180));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 

@@ -94,8 +94,8 @@ void PlayGameScreen::render()
 	Clock time;
 	window.setFramerateLimit(20);
 
-	//Zombie* z1(NULL); 
-	ZombieFactory zf;
+	Zombie* z1(NULL); 
+	//ZombieFactory zf;
 	Sentry sentry;
 	float deltaTime;
 	while (window.isOpen())
@@ -133,29 +133,29 @@ void PlayGameScreen::render()
 		createBack(window);
 		//createMap(window);
 
-		//if (z1 == NULL)
-		//{
-		//	z1 = new Zombie(200, 1, 20, 1000, 118 * 2 + 85 - 180);
-		//}
-		//
-		//if (z1 && z1->getHealth() < 0)
-		//{
-		//	delete z1;
-		//	z1 = NULL;
-		//}
+		if (z1 == NULL)
+		{
+			z1 = new Zombie(200, 1, 20, 1000, 118 * 2 + 85 - 180);
+		}
+		
+		if (z1 && z1->getHealth() < 0)
+		{
+			delete z1;
+			z1 = NULL;
+		}
 
 		sentry.shoot();
 		sentry.draw(window);
 		
-		zf.spawnWave();
-		zf.DrawZombies(window, deltaTime);
-		//if (z1)
-		//{
-		//	z1->Collision(sentry.getBullet());
-		//	z1->Draw(window, deltaTime);
-		//	z1->Move();
-		//	z1->UpdateAnimation(deltaTime);
-		//}
+		//zf.spawnWave();
+		//zf.DrawZombies(window, deltaTime);
+		if (z1)
+		{
+			z1->Collision(sentry.getBullet());
+			z1->Draw(window, deltaTime);
+			z1->Move();
+			z1->UpdateAnimation(deltaTime);
+		}
 
 
 

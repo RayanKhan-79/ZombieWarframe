@@ -20,6 +20,7 @@ public:
 	MainMenuScreen();
 	void drawIcons();
 	void render();
+	bool EndStatus() const { return end; }
 };
 
 

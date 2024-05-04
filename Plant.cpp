@@ -1,5 +1,5 @@
 #include "Plant.h"
-Plant::Plant(int x, int y, int health) :Pos(x, y), health(health), offset(0), Total_Animation_Time(0), switchTime(0.6)
+Plant::Plant(int x, int y, int health) :Pos(x, y), health(health), offset(0), Total_Animation_Time(0), switchTime(0.3)
 {
 	texture.loadFromFile("./Images/Sunflower.png");
 	sprite.setTexture(texture);

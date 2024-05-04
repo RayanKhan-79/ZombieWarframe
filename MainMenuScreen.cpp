@@ -84,10 +84,10 @@ void MainMenuScreen::render()
 			}
 
 			
-			if (!(window.isOpen()) && end == false)
-			{
-				this->render();
-			}
+			//if (!(window.isOpen()) && end == false)
+			//{
+			//	this->render();
+			//}
 
 
 

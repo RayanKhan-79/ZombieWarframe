@@ -55,7 +55,7 @@ PlayGameScreen::PlayGameScreen()
 void PlayGameScreen::render()
 {
 
-
+	return;
 
 	srand(time(0));
 	//Create a window, n*n
@@ -76,7 +76,7 @@ void PlayGameScreen::render()
 	const int ROWS = 5;
 	const int COLS = 9;
 
-	bool FIELD_GAME_STATUS[ROWS][COLS];
+	bool FIELD_GAME_STATUS[ROWS][COLS]{};
 
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
@@ -164,5 +164,4 @@ void PlayGameScreen::render()
 		window.display();
 	}
 
-	//MainMenuScreen::render();
 }

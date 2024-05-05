@@ -5,6 +5,9 @@
 #include"HighScoreScreen.h"
 #include"Icon.h"
 
+// Delete this class
+// Game already acts as mainMenu
+
 class MainMenuScreen : public Screens
 {
 	PlayGameScreen playGame;

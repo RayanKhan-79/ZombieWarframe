@@ -17,9 +17,6 @@ class ZombieFactory
 	Zombie** zombies;
 	Clock clock;
 	
-	bool waveCalled;
-
-	int test = 0;
 	
 
 

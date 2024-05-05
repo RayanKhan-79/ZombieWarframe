@@ -63,6 +63,21 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Levels.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlantFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BeginnersGarden.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NightTimeSiege.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Zombie.h">
@@ -108,6 +123,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlantFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BeginnersGarden.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NightTimeSiege.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

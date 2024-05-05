@@ -2,7 +2,7 @@
 
 
 ZombieFactory::ZombieFactory()
-	: spawnInterval(3), num_Of_Zombie(0), zombie_Limit(5), waveCalled(false), zombies(NULL) {}
+	: spawnInterval(3), num_Of_Zombie(0), zombie_Limit(5), zombies(NULL) {}
 
 bool ZombieFactory::isIntervalReached()
 {
@@ -37,12 +37,9 @@ void ZombieFactory::spawnWave()
 
 	if (zombies == NULL) 
 	{
-		//std::cout << test << '\n';
-		test++;
-		zombies = new Zombie*[zombie_Limit];
-		waveCalled = true;
-		
-		
+
+
+		zombies = new Zombie*[zombie_Limit];		
 	}
 
 	

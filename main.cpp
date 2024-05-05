@@ -9,8 +9,6 @@ using namespace std;
 
 int main()
 {
-	//MainMenuScreen MMS;
-	//MMS.render();
 
 	Game PlantsVsZombeis;
 	PlantsVsZombeis.playGame();

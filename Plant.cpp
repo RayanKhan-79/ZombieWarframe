@@ -1,5 +1,5 @@
 #include "Plant.h"
-Plant::Plant(int x, int y, int health) :Pos(x, y), health(health), offset(0), Total_Animation_Time(0), switchTime(0.6)
+Plant::Plant(int x, int y, int health) :Pos(x, y), health(health), offset(0), Total_Animation_Time(0), switchTime(0.2)
 {
 	texture.loadFromFile("./Images/Sunflower.png");
 	sprite.setTexture(texture);
@@ -24,7 +24,7 @@ void Plant::UpdateAnimation(float deltaTime)
 		Total_Animation_Time -= switchTime;
 		offset++;
 
-		if (offset > 6)
+		if (offset == 6)
 			offset = 0;
 	}
 	sprite.setTextureRect(IntRect(offset * 101, 0, 101, 138));

@@ -3,6 +3,7 @@
 #include"FootballZombie.h"
 #include"DancingZombie.h"
 #include"BackUpDancer.h"
+#include"BalloonZombie.h"
 #include<iostream>
 #include<ctime>
 
@@ -16,9 +17,6 @@ class ZombieFactory
 	Zombie** zombies;
 	Clock clock;
 	
-	bool waveCalled;
-
-	int test = 0;
 	
 
 

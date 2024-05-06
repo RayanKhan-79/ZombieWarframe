@@ -39,6 +39,6 @@ public:
 
     }
     void DrawPlants(RenderWindow& window, float deltaTime);
-    void DrawIcons();
+    void DrawIcons(); // Draw all icons
     void spawnSunflowerRandomly(int numRows, int numCols);
 };

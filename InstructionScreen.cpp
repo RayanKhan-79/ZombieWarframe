@@ -1,10 +1,10 @@
 #include "InstructionScreen.h"
 
-InstructionScreen::InstructionScreen() : Back("Back",coordinates(910,540)) 
+InstructionScreen::InstructionScreen() : Back("Back",coordinates(910,540), 60, 25)
 {
 	Texture texture_icon;
 	texture_icon.loadFromFile("./Images/button.png");
-	Back.setTexture(texture_icon, 60, 25);
+	Back.setTexture(texture_icon);
 
 	texture.loadFromFile("./Images/I.png");
 	sprite.setTexture(texture);

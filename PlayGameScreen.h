@@ -4,14 +4,14 @@
 // Delete this Class
 // class Levels already act as a play game screen
 
-class PlayGameScreen : public Screens
-{
-
-
-public:
-	PlayGameScreen();
-	void render();
-};
+//class PlayGameScreen : public Screens
+//{
+//
+//
+//public:
+//	PlayGameScreen();
+//	void render();
+//};
 
 
 

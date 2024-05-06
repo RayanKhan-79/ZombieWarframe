@@ -8,23 +8,23 @@
 // Delete this class
 // Game already acts as mainMenu
 
-class MainMenuScreen : public Screens
-{
-	PlayGameScreen playGame;
-	InstructionScreen instructionScreen;
-	HighScoreScreen highScoreScreen;
-
-	Icon playgameIcon;
-	Icon InstructionIcon;
-	Icon highScoreIcon;
-	Icon Quit;
-
-public:
-	MainMenuScreen();
-	void drawIcons();
-	void render();
-	bool EndStatus() const { return end; }
-};
+//class MainMenuScreen : public Screens
+//{
+//	PlayGameScreen playGame;
+//	InstructionScreen instructionScreen;
+//	HighScoreScreen highScoreScreen;
+//
+//	Icon playgameIcon;
+//	Icon InstructionIcon;
+//	Icon highScoreIcon;
+//	Icon Quit;
+//
+//public:
+//	MainMenuScreen();
+//	void drawIcons();
+//	void render();
+//	bool EndStatus() const { return end; }
+//};
 
 
 

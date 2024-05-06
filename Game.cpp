@@ -2,14 +2,15 @@
 
 
 Game::Game()
-	: level(NULL), playgameIcon("Play", coordinates(456, 130)), InstructionIcon("Instructions", coordinates(465, 280)), highScoreIcon("High Score", coordinates(465, 430)), Quit("Quit", coordinates(910, 540)), end(false)
+	: level(NULL), playgameIcon("Play", coordinates(456, 130), 56, 27), InstructionIcon("Instructions", coordinates(465, 280), 149, 25), highScoreIcon("High Score", coordinates(465, 430), 137, 31), 
+	Quit("Quit", coordinates(910, 540), 58, 29), end(false)
 {
 	Texture texture_1;
 	texture_1.loadFromFile("./Images/button.png");
-	playgameIcon.setTexture(texture_1, 56, 27);
-	InstructionIcon.setTexture(texture_1, 149, 25);
-	highScoreIcon.setTexture(texture_1, 137, 31);
-	Quit.setTexture(texture_1, 58, 29);
+	playgameIcon.setTexture(texture_1);
+	InstructionIcon.setTexture(texture_1);
+	highScoreIcon.setTexture(texture_1);
+	Quit.setTexture(texture_1);
 
 	mainTexture.loadFromFile("./Images/main_back.png");
 	MainMenu.setTexture(mainTexture);

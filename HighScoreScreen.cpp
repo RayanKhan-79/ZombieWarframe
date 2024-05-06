@@ -1,10 +1,10 @@
 #include "HighScoreScreen.h"
 
-HighScoreScreen::HighScoreScreen() : Back("Back", coordinates(910, 540))
+HighScoreScreen::HighScoreScreen() : Back("Back", coordinates(910, 540), 60, 25)
 {
 	Texture texture_icon;
 	texture_icon.loadFromFile("./Images/button.png");
-	Back.setTexture(texture_icon, 60, 25);
+	Back.setTexture(texture_icon);
 
 	texture.loadFromFile("./Images/H_S.png");
 	sprite.setTexture(texture);

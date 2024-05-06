@@ -6,6 +6,7 @@ using namespace sf;
 
 class Icon
 {
+protected:
 	Texture icontexture;
 	Sprite iconSprite;
 	Font font;
@@ -16,16 +17,18 @@ class Icon
 	coordinates dimensions;
 
 public:
-	Icon(std::string, coordinates);
+	Icon(std::string, coordinates,int,int);
 
-	void setTexture(Texture, int, int);
+	Icon(coordinates);
+
+	void setTexture(Texture);
 
 	void draw(RenderWindow&);
 
 	bool isClicked(Event&);
 
 	//coordinates getPos() const { return pos; }
-	//Sprite getSprite() const { return iconSprite; }
+	Sprite getSprite() const { return iconSprite; }
 	
 };
 

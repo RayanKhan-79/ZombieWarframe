@@ -67,6 +67,10 @@ void Levels::start()
 				window.close();
 			}
 
+			if (pauseIcon.isClicked(event))
+				std::cin.get();
+
+		
 
 
 			if (event.type == Event::MouseButtonReleased)
@@ -77,6 +81,7 @@ void Levels::start()
 
 		//Create a background
 		createBack(window);
+		pauseIcon.draw(window);
 
 		//if (z1 == NULL)
 		//{
@@ -91,10 +96,12 @@ void Levels::start()
 
 		//sentry.shoot();
 		//sentry.draw(window);
+		
 		pf.spawnSunflowerRandomly(5, 9);
 		pf.DrawPlants(window, deltaTime);
 		zf.spawnWave();
 		zf.DrawZombies(window, deltaTime);
+		
 		//if (z1)
 		//{
 		//	z1->Collision(sentry.getBullet());

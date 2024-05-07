@@ -5,7 +5,6 @@ Plant::Plant(int x, int y, int health) :Pos(x, y), health(health), offset(0), To
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(offset * 101, 0, 101, 135));
 	sprite.setPosition(Pos.x, Pos.y);
-
 }
 void Plant::Draw(RenderWindow& window, float deltaTime)
 {

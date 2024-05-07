@@ -3,6 +3,7 @@
 class Sunflower :public Plant
 {
 public:
-	//Sunflower();
+	Sunflower();
+	Sunflower(int x, int y, int health);
 };
 

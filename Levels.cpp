@@ -58,7 +58,7 @@ void Levels::start()
 		time = time / 800;
 
 
-
+		coordinates MousePosition;
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -69,8 +69,15 @@ void Levels::start()
 
 			if (pauseIcon.isClicked(event))
 				std::cin.get();
+			if (event.type == Event::MouseButtonReleased) {
+				//std::cout << "jaskc";
+				MousePosition.x = Mouse::getPosition(window).x;
+				MousePosition.y = Mouse::getPosition(window).y;
+				std::cout << "x: " << MousePosition.x<<std::endl;
+				std::cout << "y: " << MousePosition.y<<std::endl;
+				pf.spawnSunflowerAtPosition(MousePosition.x, MousePosition.y);
+			}
 
-		
 
 
 			if (event.type == Event::MouseButtonReleased)
@@ -97,7 +104,7 @@ void Levels::start()
 		//sentry.shoot();
 		//sentry.draw(window);
 		
-		pf.spawnSunflowerRandomly(5, 9);
+		pf.DrawIcons(window);
 		pf.DrawPlants(window, deltaTime);
 		zf.spawnWave();
 		zf.DrawZombies(window, deltaTime);

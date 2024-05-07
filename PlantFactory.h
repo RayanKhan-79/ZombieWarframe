@@ -17,7 +17,7 @@ protected:
     SeedPackets** seedPackets = NULL;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
-    Plant* plants[10]; 
+    Plant* plants[10]{};
     int numPlants;
 public:
     PlantFactory();
@@ -33,12 +33,14 @@ public:
         for (int i = 0; i < plantsUnlocked; i++)
         {
             seedPackets[i] = new SeedPackets(coordinates(10, (80 * i) + 80), true);
-            seedPackets[i]->setTexture(seedTextures[0]);
+            seedPackets[i]->setTexture(seedTextures[i]);
         }
 
 
     }
     void DrawPlants(RenderWindow& window, float deltaTime);
-    void DrawIcons(); // Draw all icons
-    void spawnSunflowerRandomly(int numRows, int numCols);
+    void DrawIcons(RenderWindow& window); // Draw all icons
+
+    //testing
+    void spawnSunflowerAtPosition(int x, int y);
 };

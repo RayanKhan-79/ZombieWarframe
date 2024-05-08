@@ -4,12 +4,6 @@ void Icon::setTexture(Texture texture)
 {
 	icontexture = texture;
 	iconSprite.setTexture(icontexture);
-
-	
-	dimensions.x += pos.x;
-	dimensions.y += pos.y;
-	
-	//text.setPosition(pos.x + (270 - txt_width)/2, pos.y + (140 - txt_height)/2);
 }
 
 Icon::Icon(coordinates pos) : pos(pos)
@@ -24,7 +18,7 @@ void Icon::draw(RenderWindow& window)
 	window.draw(text);
 }
 
-Icon::Icon(std::string message, coordinates pos, int txt_width, int txt_height) : pos(pos), dimensions(270, 140)
+Icon::Icon(std::string message, coordinates pos, int txt_width, int txt_height) : pos(pos)
 {
 	Color green(1, 50, 32);
 	font.loadFromFile("font/Noland-Bold.otf");

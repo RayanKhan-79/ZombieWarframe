@@ -156,6 +156,7 @@
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="NightTimeSiege.cpp" />
     <ClCompile Include="PeaShooter.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="PlantFactory.cpp" />
     <ClCompile Include="PlayGameScreen.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Levels.h" />
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="NightTimeSiege.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="PlantFactory.h" />

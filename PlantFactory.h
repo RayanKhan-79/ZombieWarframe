@@ -21,7 +21,13 @@ protected:
     int numPlants;
 public:
     PlantFactory();
+
     void DrawPlants(RenderWindow& window, float deltaTime);
+    void DrawIcons(); // Draw all icons
+    //void spawnSunflowerRandomly(int numRows, int numCols);
+
+    int getNumPlants() const { return numPlants; }
+    Plant* const* getPlants() const { return plants; }
     void DrawIcons(RenderWindow& window); // Draw all icons
 
     //testing

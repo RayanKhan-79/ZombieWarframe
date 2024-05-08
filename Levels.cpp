@@ -57,6 +57,7 @@ void Levels::start()
 		clock.restart();
 		time = time / 800;
 
+		createBack(window);
 
 		coordinates MousePosition;
 		Event event;
@@ -67,10 +68,19 @@ void Levels::start()
 				window.close();
 			}
 
-			if (pauseIcon.isClicked(event))
-				std::cin.get();
-			if (event.type == Event::MouseButtonReleased) {
-				//std::cout << "jaskc";
+			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
+			{
+				pauseMenu.paused = true;
+			}
+
+			if (pauseMenu.resumeIsClicked(event))
+			{
+				pauseMenu.paused = false;
+			}
+
+
+			if (event.type == Event::MouseButtonReleased) 
+			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
 				std::cout << "x: " << MousePosition.x<<std::endl;
@@ -87,7 +97,7 @@ void Levels::start()
 
 
 		//Create a background
-		createBack(window);
+
 		pauseIcon.draw(window);
 
 		//if (z1 == NULL)
@@ -103,11 +113,24 @@ void Levels::start()
 
 		//sentry.shoot();
 		//sentry.draw(window);
+		if (pauseMenu.paused == false) 
+		{
+		//	pf.spawnSunflowerRandomly(5, 9);
+			pf.DrawPlants(window, deltaTime);
+			zf.spawnWave();
+			zf.DrawZombies(window, deltaTime);
+			collisionDetection();
+		}
+
+		else if (pauseMenu.paused == true)
+		{
+			pauseMenu.draw(window);
+		}
 		
 		pf.DrawIcons(window);
-		pf.DrawPlants(window, deltaTime);
-		zf.spawnWave();
-		zf.DrawZombies(window, deltaTime);
+		//pf.DrawPlants(window, deltaTime);
+		//zf.spawnWave();
+		//zf.DrawZombies(window, deltaTime);
 		
 		//if (z1)
 		//{

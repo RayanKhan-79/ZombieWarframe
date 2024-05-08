@@ -142,9 +142,11 @@
     <ClCompile Include="BackUpDancer.cpp" />
     <ClCompile Include="BalloonZombie.cpp" />
     <ClCompile Include="BeginnersGarden.cpp" />
+    <ClCompile Include="CherryBomb.cpp" />
     <ClCompile Include="coordinates.cpp" />
     <ClCompile Include="DancingZombie.cpp" />
     <ClCompile Include="FootballZombie.cpp" />
+    <ClCompile Include="FumeShroom.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HighScoreScreen.cpp" />
     <ClCompile Include="Icon.cpp" />
@@ -153,12 +155,17 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="NightTimeSiege.cpp" />
+    <ClCompile Include="PeaShooter.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="PlantFactory.cpp" />
     <ClCompile Include="PlayGameScreen.cpp" />
+    <ClCompile Include="Repeater.cpp" />
     <ClCompile Include="Screens.cpp" />
     <ClCompile Include="Sentry.cpp" />
+    <ClCompile Include="SnowPea.cpp" />
+    <ClCompile Include="Sunflower.cpp" />
+    <ClCompile Include="Walnut.cpp" />
     <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieFactory.cpp" />
   </ItemGroup>
@@ -166,9 +173,11 @@
     <ClInclude Include="BackUpDancer.h" />
     <ClInclude Include="BalloonZombie.h" />
     <ClInclude Include="BeginnersGarden.h" />
+    <ClInclude Include="CherryBomb.h" />
     <ClInclude Include="coordinates.h" />
     <ClInclude Include="DancingZombie.h" />
     <ClInclude Include="FootballZombie.h" />
+    <ClInclude Include="FumeShroom.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="HighScoreScreen.h" />
     <ClInclude Include="Icon.h" />
@@ -177,11 +186,16 @@
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="NightTimeSiege.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="PlantFactory.h" />
     <ClInclude Include="PlayGameScreen.h" />
+    <ClInclude Include="Repeater.h" />
     <ClInclude Include="Screens.h" />
     <ClInclude Include="Sentry.h" />
+    <ClInclude Include="SnowPea.h" />
+    <ClInclude Include="Sunflower.h" />
+    <ClInclude Include="Walnut.h" />
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="ZombieFactory.h" />
   </ItemGroup>

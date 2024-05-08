@@ -17,15 +17,19 @@ protected:
     SeedPackets** seedPackets = NULL;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
-    Plant* plants[20]; 
+    Plant* plants[10]{};
     int numPlants;
 public:
     PlantFactory();
 
     void DrawPlants(RenderWindow& window, float deltaTime);
-    void DrawIcons();
-    void spawnSunflowerRandomly(int numRows, int numCols);
+    void DrawIcons(); // Draw all icons
+    //void spawnSunflowerRandomly(int numRows, int numCols);
 
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }
+    void DrawIcons(RenderWindow& window); // Draw all icons
+
+    //testing
+    void spawnSunflowerAtPosition(int x, int y);
 };

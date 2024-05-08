@@ -10,20 +10,18 @@
 class ZombieFactory
 {
 	float spawnInterval;
-	
+
 	int num_Of_Zombie;
 	int zombie_Limit;
-	
+
 	Zombie** zombies;
 	Clock clock;
-	
-	
+
+
 
 
 public:
 	ZombieFactory();
-
-	
 	bool spawnNextWave();
 
 	bool isIntervalReached();
@@ -40,6 +38,5 @@ public:
 
 
 	~ZombieFactory();
-
 };
 

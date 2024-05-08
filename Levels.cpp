@@ -78,11 +78,9 @@ void Levels::start()
 				pauseMenu.paused = false;
 			}
 
-		
-			if (pauseIcon.isClicked(event))
-				std::cin.get();
-			if (event.type == Event::MouseButtonReleased) {
-				//std::cout << "jaskc";
+
+			if (event.type == Event::MouseButtonReleased) 
+			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
 				std::cout << "x: " << MousePosition.x<<std::endl;
@@ -117,7 +115,7 @@ void Levels::start()
 		//sentry.draw(window);
 		if (pauseMenu.paused == false) 
 		{
-			pf.spawnSunflowerRandomly(5, 9);
+		//	pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
 			zf.spawnWave();
 			zf.DrawZombies(window, deltaTime);
@@ -130,9 +128,9 @@ void Levels::start()
 		}
 		
 		pf.DrawIcons(window);
-		pf.DrawPlants(window, deltaTime);
-		zf.spawnWave();
-		zf.DrawZombies(window, deltaTime);
+		//pf.DrawPlants(window, deltaTime);
+		//zf.spawnWave();
+		//zf.DrawZombies(window, deltaTime);
 		
 		//if (z1)
 		//{

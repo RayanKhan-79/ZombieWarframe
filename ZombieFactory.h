@@ -23,10 +23,19 @@ class ZombieFactory
 public:
 	ZombieFactory();
 	bool spawnNextWave();
-	bool isIntervalReached();
-	void spawnWave();
-	void spawnZombie();
-	void DrawZombies(RenderWindow& window, float deltaTime);
-	~ZombieFactory();
-};
 
+
+	void DrawZombies(RenderWindow& window, float deltaTime);
+
+	Zombie** getZombies() { return zombies; }
+
+	int getNumberOfZombies() { return num_Of_Zombie; }
+
+
+	void spawnZombie();
+	~ZombieFactory();
+
+};
+	void DrawZombies(RenderWindow& window, float deltaTime);
+
+};

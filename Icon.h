@@ -14,7 +14,6 @@ protected:
 	std::string message;
 
 	coordinates pos;
-	coordinates dimensions;
 
 public:
 	Icon(std::string, coordinates,int,int);

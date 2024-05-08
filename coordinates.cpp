@@ -9,3 +9,8 @@ bool approxMatch(const coordinates& pos_1, const coordinates& hit_1, const coord
 
 	return false;
 }
+
+int randGrid(int Y_pixels)
+{
+	return (118 * (rand() % 4 + 1)) + 85 - Y_pixels;
+}

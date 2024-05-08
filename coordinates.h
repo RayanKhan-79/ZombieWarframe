@@ -1,4 +1,6 @@
 #pragma once
+#include<iostream>
+
 struct coordinates 
 {
 
@@ -8,4 +10,5 @@ struct coordinates
 
 };
 bool approxMatch(const coordinates&, const coordinates&, const coordinates&);
+int randGrid(int);
 	

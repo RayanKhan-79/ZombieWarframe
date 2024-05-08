@@ -1,8 +1,8 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY) 
+Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
 	: Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY),
-	hitArea(x+95, y+pixelsY)
+	hitArea(x + 95, y + pixelsY), action("moving")
 {
 	//switchTime = 0.15;
 	//image.loadFromFile("./Images/zanimation2.png");
@@ -16,6 +16,16 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int
 	
 }
 
+void Zombie::Attack(Plant* plant)
+{
+	plant->mark();
+	plant->getHealth() -= damage;
+	if (health <= 0 || plant->getHealth() <= 0)
+	{
+		action = "moving";
+		return;
+	}
+}
 
 void Zombie::Draw(RenderWindow& window, float deltaTime)
 {
@@ -43,6 +53,9 @@ void Zombie::UpdateAnimation(float deltaTime)
 
 void Zombie::Move()
 {
+	if (action == "attacking")
+		return;
+
 	Pos.x -= speed;
 	hitArea.x -= speed;
 	//health -= 2;
@@ -79,7 +92,3 @@ void Zombie::Collision(Bullet* bullet)
 	}
 }
 
-int randGrid(int Y_pixels)
-{
-	return (118 * (rand() % 4 + 1 )) + 85 - Y_pixels;
-}

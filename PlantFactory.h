@@ -17,7 +17,7 @@ protected:
     SeedPackets** seedPackets = NULL;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
-    Plant* plants[10]; 
+    Plant* plants[20]; 
     int numPlants;
 public:
     PlantFactory();

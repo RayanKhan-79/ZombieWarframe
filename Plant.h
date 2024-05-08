@@ -1,7 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"coordinates.h"
-#include "Zombie.h"
+
 using namespace sf;
 class Plant
 {
@@ -20,7 +20,9 @@ public:
 	virtual void UpdateAnimation(float interval);
 	bool isClick();
 	coordinates getPosition() { return Pos; }
-	void mark() {
+	int& getHealth() { return health; }
+	void mark() 
+	{
 		Color c(255, 0, 0);
 		sprite.setColor(c);
 	}

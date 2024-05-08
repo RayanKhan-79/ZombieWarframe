@@ -6,20 +6,20 @@
 PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 {
     // Initialize all textures (even locked ones)
-    seedTextures[0].loadFromFile("./Images/sunFlower_i.png");  // Sunflower
-    seedTextures[1].loadFromFile("./Images/peaShooter_i.png");  // Peashooter
-    seedTextures[2].loadFromFile("./Images/wallNut_i.png");  // Walnut
-    seedTextures[3].loadFromFile("./Images/cherryBomb_i.png");  // CherryBomb
-    seedTextures[4].loadFromFile("./Images/rePeater_i.png");  // Repeater
-    seedTextures[5].loadFromFile("./Images/snowPea_i.png");  // Snowpea
-    seedTextures[6].loadFromFile("./Images/fumeShroom_i.png");  // fumeShroom
+    seedTextures[0].loadFromFile("./Images/Sunflower_SD.png");  // Sunflower
+    seedTextures[1].loadFromFile("./Images/Peashooter_SD.png");  // Peashooter
+    seedTextures[2].loadFromFile("./Images/Walnut_SD.png");  // Walnut
+    seedTextures[3].loadFromFile("./Images/Cherrybomb_SD.png");  // CherryBomb
+    seedTextures[4].loadFromFile("./Images/Repeater_SD.png");  // Repeater
+    seedTextures[5].loadFromFile("./Images/Snowpea_SD.png");  // Snowpea
+    seedTextures[6].loadFromFile("./Images/Fumeshroom_SD.png");  // fumeShroom
    
 
     seedPackets = new SeedPackets * [plantsUnlocked] {};
 
     for (int i = 0; i < plantsUnlocked; i++)
     {
-        seedPackets[i] = new SeedPackets(coordinates(10, (80 * i) + 80), true);
+        seedPackets[i] = new SeedPackets(coordinates(10, (83 * i) + 83), true);
         seedPackets[i]->setTexture(seedTextures[i]);
     }
 

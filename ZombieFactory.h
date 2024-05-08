@@ -26,16 +26,15 @@ public:
 
 	bool isIntervalReached();
 
+	void spawnWave();
 
 	void DrawZombies(RenderWindow& window, float deltaTime);
+
+	void spawnZombie();
 
 	Zombie** getZombies() { return zombies; }
 
 	int getNumberOfZombies() { return num_Of_Zombie; }
 
-
 	~ZombieFactory();
-
-	void DrawZombies(RenderWindow& window, float deltaTime);
-
 };

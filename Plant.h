@@ -5,7 +5,7 @@
 using namespace sf;
 class Plant
 {
-private:
+protected:
 	int health;
 	coordinates Pos;
 	Image image;

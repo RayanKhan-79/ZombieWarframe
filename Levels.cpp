@@ -59,6 +59,7 @@ void Levels::start()
 
 		createBack(window);
 
+		coordinates MousePosition;
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -77,7 +78,16 @@ void Levels::start()
 				pauseMenu.paused = false;
 			}
 
-		
+
+			if (event.type == Event::MouseButtonReleased) 
+			{
+				MousePosition.x = Mouse::getPosition(window).x;
+				MousePosition.y = Mouse::getPosition(window).y;
+				std::cout << "x: " << MousePosition.x<<std::endl;
+				std::cout << "y: " << MousePosition.y<<std::endl;
+				pf.spawnSunflowerAtPosition(MousePosition.x, MousePosition.y);
+			}
+
 
 
 			if (event.type == Event::MouseButtonReleased)
@@ -105,7 +115,7 @@ void Levels::start()
 		//sentry.draw(window);
 		if (pauseMenu.paused == false) 
 		{
-			pf.spawnSunflowerRandomly(5, 9);
+		//	pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
 			zf.spawnWave();
 			zf.DrawZombies(window, deltaTime);
@@ -116,6 +126,12 @@ void Levels::start()
 		{
 			pauseMenu.draw(window);
 		}
+		
+		pf.DrawIcons(window);
+		//pf.DrawPlants(window, deltaTime);
+		//zf.spawnWave();
+		//zf.DrawZombies(window, deltaTime);
+		
 		//if (z1)
 		//{
 		//	z1->Collision(sentry.getBullet());

@@ -24,6 +24,8 @@ public:
 	ZombieFactory();
 	bool spawnNextWave();
 
+	bool isIntervalReached();
+
 
 	void DrawZombies(RenderWindow& window, float deltaTime);
 
@@ -32,7 +34,6 @@ public:
 	int getNumberOfZombies() { return num_Of_Zombie; }
 
 
-	void spawnZombie();
 	~ZombieFactory();
 
 	void DrawZombies(RenderWindow& window, float deltaTime);

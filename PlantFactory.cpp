@@ -1,20 +1,16 @@
 #include "PlantFactory.h"
+#include "Sunflower.h"
 PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 {
     // Initialize all textures (even locked ones)
     seedTextures[0].loadFromFile("./Images/sunFlower_i.png");  // Sunflower
     seedTextures[1].loadFromFile("./Images/peaShooter_i.png");  // Peashooter
-    seedTextures[2].loadFromFile("./Images/wallNut_i.png");  // whaterver is unlocked in the next level
-    seedTextures[3].loadFromFile("./Images/cherryBomb_i.png");  // Peashooter
-    seedTextures[4].loadFromFile("./Images/rePeater_i.png");  // Sunflower
-    seedTextures[5].loadFromFile("./Images/snowPea_i.png");  // whaterver is unlocked in the next level
-    seedTextures[6].loadFromFile("./Images/fumeShroom_i.png");  // Sunflower
+    seedTextures[2].loadFromFile("./Images/wallNut_i.png");  // Walnut
+    seedTextures[3].loadFromFile("./Images/cherryBomb_i.png");  // CherryBomb
+    seedTextures[4].loadFromFile("./Images/rePeater_i.png");  // Repeater
+    seedTextures[5].loadFromFile("./Images/snowPea_i.png");  // Snowpea
+    seedTextures[6].loadFromFile("./Images/fumeShroom_i.png");  // fumeShroom
    
-
-    // Initialize all textures (even locked ones)
-    seedTextures[0].loadFromFile("./Images/img3.png");  // Sunflower
-    seedTextures[1].loadFromFile("./Images/img4.png");  // Peashooter
-    seedTextures[2].loadFromFile("./Images/img5.png");  // whaterver is unlocked in the next level
 
     seedPackets = new SeedPackets * [plantsUnlocked] {};
 
@@ -37,7 +33,7 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
     if (numPlants < 10) {
-        plants[numPlants] = new Plant(x, y, 100); 
+        plants[numPlants] = new Sunflower(x, y, 100); 
         numPlants++;
     }
 }

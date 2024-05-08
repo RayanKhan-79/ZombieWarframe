@@ -1,10 +1,12 @@
 #include "Plant.h"
+
+Plant::Plant() :Pos(0, 0), health(0), offset(0), Total_Animation_Time(0), switchTime(0)
+{
+
+}
 Plant::Plant(int x, int y, int health) :Pos(x, y), health(health), offset(0), Total_Animation_Time(0), switchTime(0.2)
 {
-	texture.loadFromFile("./Images/Sunflower.png");
-	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 101, 0, 101, 135));
-	sprite.setPosition(Pos.x, Pos.y);
+	
 }
 void Plant::Draw(RenderWindow& window, float deltaTime)
 {

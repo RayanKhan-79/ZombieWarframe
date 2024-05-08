@@ -1,5 +1,6 @@
 #include "PlantFactory.h"
 #include "Sunflower.h"
+#include "PeaShooter.h"
 PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 {
     // Initialize all textures (even locked ones)
@@ -33,7 +34,7 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
     if (numPlants < 10) {
-        plants[numPlants] = new Sunflower(x, y, 100); 
+        plants[numPlants] = new PeaShooter(x, y, 100); 
         numPlants++;
     }
 }

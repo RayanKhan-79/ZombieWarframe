@@ -3,6 +3,7 @@
 class BackUpDancer : public Zombie
 {
 	bool spawned = false;
+	int speed_y;
 
 public:
 	BackUpDancer(int = 200, int = 1, int = 5, int = 1000, int = randGrid(190));

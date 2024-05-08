@@ -2,11 +2,13 @@
 
 FootballZombie::FootballZombie(int health, int speed, int damage, int x, int y) : Zombie(health, speed, damage, x, y) 
 {
-	image.loadFromFile("./Images/ffzanimation.png");
+	switchTime = 0.15;
+	//image.loadFromFile("./Images/image_2_2.png");
 
-	texture.loadFromImage(image);
+	//texture.loadFromImage(image);
+	texture.loadFromFile("./Images/image_2_2.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 176, 0, 176, 196));
+	sprite.setTextureRect(IntRect(offset * 215, 0, 215, 180));
 
 
 
@@ -21,20 +23,20 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 		Total_Animation_Time -= switchTime;
 		offset++;
 
-		if (offset == 3)
+		if (offset == 6)
 			offset = 0;
 	}
 	
-	if (health >= 300)
-	{
-		sprite.setTextureRect(IntRect(offset * 176, 0, 176, 196));
-		return;
-	}
+	//if (health >= 300)
+	//{
+		sprite.setTextureRect(IntRect(offset * 215, 0, 215, 180));
+	//	return;
+	//}
 
 
 
-	texture.loadFromFile("./Images/hfzanimation.png");
-	sprite.setTextureRect(IntRect(offset * 237, 0, 237, 212));
+	//texture.loadFromFile("./Images/hfzanimation.png");
+	//sprite.setTextureRect(IntRect(offset * 237, 0, 237, 212));
 
 }
 
@@ -43,16 +45,16 @@ void FootballZombie::Move()
 	Pos.x -= speed;
 	health -= 3;
 
-	int random = rand() % 20;
+	int random = rand() % 50;
 	
-	if (random == 0 && Pos.y <= 514 - 108)
+	if (random == 0 && Pos.y + 180 <= 118*4 + 85)
 	{
-		Pos.y += 108;
+		Pos.y += 118;
 	}
 
-	if (random == 19 && Pos.y >= 62 + 108)
+	if (random == 49 && Pos.y + 180 >= 118*2 + 85)
 	{
-		Pos.y -= 108;
+		Pos.y -= 118;
 	}
 
 	sprite.setPosition(Pos.x, Pos.y);

@@ -1,12 +1,16 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int health, int speed, int damage, int x, int y) :Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.6)
+Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY) 
+	: Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY)
 {
-	image.loadFromFile("./Images/zanimation2.png");
+	//switchTime = 0.15;
+	//image.loadFromFile("./Images/zanimation2.png");
+	//image.loadFromFile("./Images/zombie.png");
 
-	texture.loadFromImage(image);
+	//texture.loadFromImage(image);
+	texture.loadFromFile("./Images/zombie.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 120, 0, 120, 190));
+	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
@@ -29,16 +33,16 @@ void Zombie::UpdateAnimation(float deltaTime)
 		Total_Animation_Time -= switchTime;
 		offset++;
 
-		if (offset > 2)
+		if (offset == 5)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 120, 0, 120, 190));
+	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 }
 
 void Zombie::Move()
 {
 	Pos.x -= speed;
-	health -= 2;
+	//health -= 2;
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
@@ -48,7 +52,31 @@ int Zombie::getHealth() const
 	return health;
 }
 
+void Zombie::Collision(Bullet* bullet)
+{
+	if (!bullet)
+	{
+		std::cout << "NULL\n";
+		return;
+	}
+
+	// hit area
+	int h_y = Pos.y + pixelsY;
+	int h_x = Pos.x + pixelsX/2;
+
+	// [h_y --- h_y - 118]
+	// [h_x --- h_x + 95]
+	if (bullet->getCoordinates().y <= h_y && bullet->getCoordinates().y >= h_y - 118 &&
+		bullet->getCoordinates().x >= h_x && bullet->getCoordinates().x <= h_x + 95)
+	{
+		std::cout << "Collided!!\n";
+		health -= 10;
+		bullet->setCollisonStatus(true);
+	
+	}
+}
+
 int randGrid(int Y_pixels)
 {
-	return (108 * (rand() % 5 - 1)) + Y_pixels;
+	return (118 * (rand() % 4 + 1 )) + 85 - Y_pixels;
 }

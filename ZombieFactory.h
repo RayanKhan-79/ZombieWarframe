@@ -35,7 +35,6 @@ public:
 	void spawnZombie();
 	~ZombieFactory();
 
-};
 	void DrawZombies(RenderWindow& window, float deltaTime);
 
 };

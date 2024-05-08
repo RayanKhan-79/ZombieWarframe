@@ -57,7 +57,7 @@ void Levels::start()
 		clock.restart();
 		time = time / 800;
 
-
+		createBack(window);
 
 		Event event;
 		while (window.pollEvent(event))
@@ -67,8 +67,15 @@ void Levels::start()
 				window.close();
 			}
 
-			if (pauseIcon.isClicked(event))
-				std::cin.get();
+			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
+			{
+				pauseMenu.paused = true;
+			}
+
+			if (pauseMenu.resumeIsClicked(event))
+			{
+				pauseMenu.paused = false;
+			}
 
 		
 
@@ -80,7 +87,7 @@ void Levels::start()
 
 
 		//Create a background
-		createBack(window);
+
 		pauseIcon.draw(window);
 
 		//if (z1 == NULL)
@@ -96,12 +103,19 @@ void Levels::start()
 
 		//sentry.shoot();
 		//sentry.draw(window);
-		
-		pf.spawnSunflowerRandomly(5, 9);
-		pf.DrawPlants(window, deltaTime);
-		zf.spawnWave();
-		zf.DrawZombies(window, deltaTime);
-		
+		if (pauseMenu.paused == false) 
+		{
+			pf.spawnSunflowerRandomly(5, 9);
+			pf.DrawPlants(window, deltaTime);
+			zf.spawnWave();
+			zf.DrawZombies(window, deltaTime);
+			collisionDetection();
+		}
+
+		else if (pauseMenu.paused == true)
+		{
+			pauseMenu.draw(window);
+		}
 		//if (z1)
 		//{
 		//	z1->Collision(sentry.getBullet());

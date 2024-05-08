@@ -2,10 +2,11 @@
 #include<SFML/Graphics.hpp>
 #include"coordinates.h"
 #include"Sentry.h"
+#include"Plant.h"
 
 using namespace sf;
 
-int randGrid(int);
+
 
 class Zombie
 {
@@ -14,7 +15,6 @@ protected:
 	int speed;
 	int damage;
 
-	//Image image;
 	float Total_Animation_Time;
 	float switchTime;
 	int offset;
@@ -24,18 +24,25 @@ protected:
 	Texture texture;
 	Sprite sprite;
 	coordinates Pos;
+	coordinates hitArea;
+
+public:
+	std::string action;
 
 public:
 	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(180), int=180, int=180);
 	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
-	//void Attack();
+	void Attack(Plant*);
 	void Collision(Bullet*);
+
 
 
 	// Getters & Setters
 	int getHealth() const;
+	coordinates getPosition() const { return Pos; }
+	coordinates getHitArea() const { return hitArea; }
 
 
 };

@@ -109,6 +109,7 @@ void Levels::start()
 			pf.DrawPlants(window, deltaTime);
 			zf.spawnWave();
 			zf.DrawZombies(window, deltaTime);
+			collisionDetection();
 		}
 
 		else if (pauseMenu.paused == true)

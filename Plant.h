@@ -19,5 +19,10 @@ public:
 	virtual void Draw(RenderWindow& window, float deltaTime);
 	virtual void UpdateAnimation(float interval);
 	bool isClick();
+	coordinates getPosition() { return Pos; }
+	void mark() {
+		Color c(255, 0, 0);
+		sprite.setColor(c);
+	}
 };
 

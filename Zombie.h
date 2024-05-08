@@ -24,6 +24,7 @@ protected:
 	Texture texture;
 	Sprite sprite;
 	coordinates Pos;
+	coordinates hitArea;
 
 public:
 	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(180), int=180, int=180);
@@ -36,6 +37,8 @@ public:
 
 	// Getters & Setters
 	int getHealth() const;
+	coordinates getPosition() const { return Pos; }
+	coordinates getHitArea() const { return hitArea; }
 
 
 };

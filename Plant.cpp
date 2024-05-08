@@ -25,8 +25,8 @@ void Plant::UpdateAnimation(float deltaTime)
 		Total_Animation_Time -= switchTime;
 		offset++;
 
-		if (offset == 6)
+		if (offset == 8)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 101, 0, 101, 138));
+	sprite.setTextureRect(IntRect(offset * 117, 0, 117, 138));
 }

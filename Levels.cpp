@@ -57,6 +57,7 @@ void Levels::start()
 		clock.restart();
 		time = time / 800;
 
+		createBack(window);
 
 		coordinates MousePosition;
 		Event event;
@@ -67,6 +68,17 @@ void Levels::start()
 				window.close();
 			}
 
+			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
+			{
+				pauseMenu.paused = true;
+			}
+
+			if (pauseMenu.resumeIsClicked(event))
+			{
+				pauseMenu.paused = false;
+			}
+
+		
 			if (pauseIcon.isClicked(event))
 				std::cin.get();
 			if (event.type == Event::MouseButtonReleased) {
@@ -87,7 +99,7 @@ void Levels::start()
 
 
 		//Create a background
-		createBack(window);
+
 		pauseIcon.draw(window);
 
 		//if (z1 == NULL)
@@ -103,6 +115,19 @@ void Levels::start()
 
 		//sentry.shoot();
 		//sentry.draw(window);
+		if (pauseMenu.paused == false) 
+		{
+			pf.spawnSunflowerRandomly(5, 9);
+			pf.DrawPlants(window, deltaTime);
+			zf.spawnWave();
+			zf.DrawZombies(window, deltaTime);
+			collisionDetection();
+		}
+
+		else if (pauseMenu.paused == true)
+		{
+			pauseMenu.draw(window);
+		}
 		
 		pf.DrawIcons(window);
 		pf.DrawPlants(window, deltaTime);

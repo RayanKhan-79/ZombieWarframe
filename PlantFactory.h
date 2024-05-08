@@ -23,8 +23,8 @@ public:
     PlantFactory();
 
     void DrawPlants(RenderWindow& window, float deltaTime);
-    void DrawIcons(); // Draw all icons
-    //void spawnSunflowerRandomly(int numRows, int numCols);
+
+    void spawnSunflowerRandomly(int numRows, int numCols);
 
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }

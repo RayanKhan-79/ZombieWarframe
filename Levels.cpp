@@ -115,7 +115,7 @@ void Levels::start()
 		//sentry.draw(window);
 		if (pauseMenu.paused == false) 
 		{
-		//	pf.spawnSunflowerRandomly(5, 9);
+			pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
 			zf.spawnWave();
 			zf.DrawZombies(window, deltaTime);

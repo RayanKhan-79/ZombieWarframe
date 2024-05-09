@@ -126,20 +126,20 @@ void Levels::start()
 				z1[i]->Draw(window, deltaTime);
 			}
 
-			for (int i = 0; i < 1; i++)
+			for (int i = 0; i < 5; i++)
 				for (int j = 0; j < pf.getNumPlants(); j++)
 				{
-					if (approxMatch(z1.getHitArea(), pf.getPlants()[j]->getPosition()))
+					if (approxMatch(z1[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
 					{
-						z1.action = "attacking";
-						z1.Attack(pf.getPlants()[j]);
+						//z1[i] ->action = "attacking";
+						//z1[i]->Attack(pf.getPlants()[j]);
 
-						std::cout << pf.getPlants()[j]->getHealth() << '\n';
+						//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 
 					}
-					if (z1.getBackUp())
+					if (z1[i]->getBackUp())
 					{
-						BackUpDancer** back = z1.getBackUp();
+						BackUpDancer** back = z1[i]->getBackUp();
 						for (int k = 0; k < 4; k++)
 							if (approxMatch(back[k]->getHitArea(), pf.getPlants()[j]->getPosition()))
 							{

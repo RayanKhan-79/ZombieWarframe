@@ -28,13 +28,14 @@ protected:
 
 public:
 	std::string action;
+	std::string name = "default";
 
 public:
 	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(180), int=180, int=180);
 	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
-	void Attack(Plant*);
+	virtual void Attack(Plant*);
 	void Collision(Bullet*);
 
 

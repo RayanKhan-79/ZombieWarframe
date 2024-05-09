@@ -2,7 +2,7 @@
 
 
 ZombieFactory::ZombieFactory()
-	: spawnInterval(3), num_Of_Zombie(0), zombie_Limit(7), zombies(NULL) {}
+	: spawnInterval(3), num_Of_Zombie(0), zombie_Limit(1), zombies(NULL) {}
 
 bool ZombieFactory::isIntervalReached()
 {
@@ -55,19 +55,19 @@ void ZombieFactory::spawnZombie()
 	if (num_Of_Zombie >= zombie_Limit)
 		return;
 
-	//switch (rand() % 4)
+	//switch (rand() % 3)
 	//{
 	//	case 0:
-			zombies[num_Of_Zombie] = new Zombie(200,8);
+	//		zombies[num_Of_Zombie] = new Zombie();
 	//		break;
 
 	//	case 1:
 	//		zombies[num_Of_Zombie] = new FootballZombie;
 	//		break;
 
-	//	case 2:
-	//		zombies[num_Of_Zombie] = new DancingZombie(10,4,200,8);
-	//		break;
+		//case 2:
+			zombies[num_Of_Zombie] = new DancingZombie(10,4,200,4);
+			//break;
 
 	//	case 3:
 	//		zombies[num_Of_Zombie] = new BalloonZombie;

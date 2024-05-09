@@ -1,16 +1,15 @@
 #include "FootballZombie.h"
 
-FootballZombie::FootballZombie(int health, int speed, int damage, int x, int y) : Zombie(health, speed, damage, x, y) 
+FootballZombie::FootballZombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY) 
+	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY) 
 {
 	switchTime = 0.15;
-	//image.loadFromFile("./Images/image_2_2.png");
+	hitArea.x = Pos.x + 95;
+	hitArea.y = Pos.y + pixelsY;
 
-	//texture.loadFromImage(image);
-	texture.loadFromFile("./Images/image_2_2.png");
+	texture.loadFromFile("./Images/footballZombie.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 215, 0, 215, 180));
-
-
+	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 
 	sprite.setPosition(Pos.x, Pos.y);
 }
@@ -29,7 +28,7 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 	
 	//if (health >= 300)
 	//{
-		sprite.setTextureRect(IntRect(offset * 215, 0, 215, 180));
+		sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 	//	return;
 	//}
 
@@ -42,19 +41,25 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 
 void FootballZombie::Move()
 {
+	if (action == "attacking")
+		return;
+
 	Pos.x -= speed;
-	health -= 3;
+	hitArea.x -= speed;
+	//health -= 3;
 
 	int random = rand() % 50;
 	
 	if (random == 0 && Pos.y + 180 <= 118*4 + 85)
 	{
 		Pos.y += 118;
+		hitArea.y += 118;
 	}
 
 	if (random == 49 && Pos.y + 180 >= 118*2 + 85)
 	{
 		Pos.y -= 118;
+    	hitArea.y -= 118;
 	}
 
 	sprite.setPosition(Pos.x, Pos.y);

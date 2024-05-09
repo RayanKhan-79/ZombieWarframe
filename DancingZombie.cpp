@@ -1,15 +1,37 @@
 #include "DancingZombie.h"
 
-DancingZombie::DancingZombie(float spawnInterval, int count, int health, int speed, int damage, int x, int y)
-	: Zombie(health, speed, damage, x, y), spawnInterval(spawnInterval), count(count), backUpDancers(NULL), speed_y(speed)
+DancingZombie::DancingZombie(float spawnInterval, int count, int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
+	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY), spawnInterval(5), count(count), backUpDancers(NULL), speed_y(speed)
 {
-//	image.loadFromFile("./Images/11.png");
-
+	hitArea.x = Pos.x + 95;
+	hitArea.y = Pos.y + pixelsY;
+	name = "dancer";
 	texture.loadFromFile("./Images/11.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 125, 0, 125, 180));
+	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
+
 	sprite.setPosition(Pos.x, Pos.y);
 }
+
+/*
+void DancingZombie::Attack(Plant* plant)
+{
+	plant->mark();
+	plant->getHealth() -= damage;
+	if (health <= 0 || plant->getHealth() <= 0)
+	{
+		action = "moving";
+		return;
+	}
+	//if (backUpDancers)
+	//{
+	//	for (int i = 0; i < count; i++)
+	//	{
+	//		backUpDancers[i]->Attack(plant)
+	//	}
+	//}
+}
+*/
 
 void DancingZombie::checkStatus()
 {
@@ -85,16 +107,20 @@ void DancingZombie::UpdateAnimation(float deltaTime)
 			offset = 0;
 	}
 
-	sprite.setTextureRect(IntRect(offset * 125, 0, 125, 180));
+	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 }
 
 void DancingZombie::Move()
 {
+	if (action == "attacking")
+		return;
+
 	SpawnBackUp();
 	if (backUpDancers && clock.getElapsedTime().asSeconds() < 5)
 		return;
 
 	Pos.x -= speed;
+	hitArea.x -= speed;
 
 	if (/*Pos.y + 180 >= 118 * 1 + 85 &&*/ Pos.y + 180 <= 118 * 2 + 85)
 		speed_y = speed;
@@ -106,6 +132,7 @@ void DancingZombie::Move()
 	//	speed_y = -speed_y;
 
 	Pos.y += speed_y;
+	hitArea.y += speed_y;
 
 	//health -= 3;
 	for (int i = 0; i < count; i++)
@@ -129,10 +156,10 @@ void DancingZombie::Draw(RenderWindow& window, float deltaTime)
 
 DancingZombie::~DancingZombie()
 {
-	if (backUpDancers != NULL)
+	if (backUpDancers)
 	{
 		for (int i = 0; i < count; i++)
-			if (backUpDancers[i] != NULL)
+			if (backUpDancers[i])
 			{
 				delete backUpDancers[i];
 				backUpDancers = NULL;

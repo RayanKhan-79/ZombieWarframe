@@ -9,6 +9,6 @@ struct coordinates
 	coordinates(int = 0, int = 0); 
 
 };
-bool approxMatch(const coordinates&, const coordinates&, const coordinates&);
+bool approxMatch(const coordinates&, const coordinates&);
 int randGrid(int);
 	

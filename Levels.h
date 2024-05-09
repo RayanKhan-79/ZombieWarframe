@@ -30,7 +30,8 @@ public:
 	{
 		for (int i = 0; i < zf.getNumberOfZombies(); i++)
 			for (int j = 0; j < pf.getNumPlants(); j++)
-				if (approxMatch(zf.getZombies()[i]->getPosition(), zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			{
+				if (approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
 				{
 					//pf.getPlants()[j]->mark();
 					zf.getZombies()[i]->action = "attacking";
@@ -45,6 +46,15 @@ public:
 					//system("pause");
 				}
 				//if (zf.getZombies()[i]->getPosition().x >= pf.getPlants()[j]->getPosition().x)
+				if (zf.getZombies()[i]->name == "dancer")
+				{
+					Zombie* danc = zf.getZombies()[i];
+					for (int k = 0; k < 4; k++)
+					{
+						
+					}
+				}
+			}
 	}
 
 	virtual void createBack(RenderWindow& window) = 0;

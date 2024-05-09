@@ -10,13 +10,17 @@ class DancingZombie : public Zombie
 	float spawnInterval;
 	Clock clock;
 
+
+
 public:
-	DancingZombie(float = 10, int = 4, int = 200, int = 1, int = 5, int = 1000, int = randGrid(180));
+	DancingZombie(float = 10, int = 4, int = 200, int = 1, int = 5, int = 1000, int = randGrid(180), int = 125, int = 180);
 	void SpawnBackUp();
 	void UpdateAnimation(float deltaTime);
 	void Draw(RenderWindow&, float);
+	//virtual void Attack(Plant*);
 	void checkStatus();
 	void Move();
+	BackUpDancer** getBackUp() { return backUpDancers; }
 	~DancingZombie();
 
 };

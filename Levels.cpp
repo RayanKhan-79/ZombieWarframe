@@ -40,7 +40,9 @@ void Levels::start()
 	Clock time;
 	window.setFramerateLimit(20);
 
-	//Zombie* z1(NULL);
+	DancingZombie* z1[5]{};
+	for (int i = 0; i < 5; i++)
+		z1[i] = new DancingZombie(5, 4, 200, 4);
 	//ZombieFactory zf;
 	//Sentry sentry;
 	float deltaTime;
@@ -117,9 +119,40 @@ void Levels::start()
 		{
 			pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
-			zf.spawnWave();
-			zf.DrawZombies(window, deltaTime);
-			collisionDetection();
+			
+			for (int i = 0; i < 5; i++)
+			{
+				z1[i]->Move();
+				z1[i]->Draw(window, deltaTime);
+			}
+
+			for (int i = 0; i < 1; i++)
+				for (int j = 0; j < pf.getNumPlants(); j++)
+				{
+					if (approxMatch(z1.getHitArea(), pf.getPlants()[j]->getPosition()))
+					{
+						z1.action = "attacking";
+						z1.Attack(pf.getPlants()[j]);
+
+						std::cout << pf.getPlants()[j]->getHealth() << '\n';
+
+					}
+					if (z1.getBackUp())
+					{
+						BackUpDancer** back = z1.getBackUp();
+						for (int k = 0; k < 4; k++)
+							if (approxMatch(back[k]->getHitArea(), pf.getPlants()[j]->getPosition()))
+							{
+								back[k]->action = "attacking";
+								back[k]->Attack(pf.getPlants()[j]);
+								std::cout << pf.getPlants()[j]->getHealth() << '\n';
+							}
+					}
+				
+				}
+			//zf.spawnWave();
+			//zf.DrawZombies(window, deltaTime);
+			//collisionDetection();
 		}
 
 		else if (pauseMenu.paused == true)

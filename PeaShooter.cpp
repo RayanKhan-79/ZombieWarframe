@@ -20,5 +20,5 @@ void PeaShooter::UpdateAnimation(float deltaTime) {
 		if (offset == 8)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 117, 0, 117, 138));
+	sprite.setTextureRect(IntRect(offset * 121, 0, 121, 138));
 }

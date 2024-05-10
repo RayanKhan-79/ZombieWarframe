@@ -2,6 +2,7 @@
 #include "Sunflower.h"
 #include "PeaShooter.h"
 #include "Walnut.h"
+#include "CherryBomb.h"
 
 PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 {
@@ -36,7 +37,7 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
     if (numPlants < 10) {
-        plants[numPlants] = new Walnut(x, y, 100); 
+        plants[numPlants] = new CherryBomb(x, y, 10); 
         numPlants++;
     }
 }

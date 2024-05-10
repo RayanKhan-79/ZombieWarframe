@@ -25,7 +25,7 @@ class ZombieFactory
 	Clock spawnClock;
 	
 	bool waveCalled = false;
-
+	int waveCount = 0;
 
 
 

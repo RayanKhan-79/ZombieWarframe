@@ -17,13 +17,20 @@ protected:
 	ZombieFactory zf;
 	PlantFactory pf;
 
-	int waveCount = 0;
+	int lives = 3;
+	int killCount;
+	int maxZombies;
+	//int plantsUnlocked;
+	//int zombiesUnlocked;
 
 public:
-	Levels();
+	Levels(int);
 	void collisionDetection();
 	virtual void createBack(RenderWindow& window) = 0;
-	void start();
+	bool start();
+	int getKills() { return killCount; }
+	int getMax() { return maxZombies; }
+	int winCondition();
 
 };
 

@@ -102,6 +102,18 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ZombieOutskirts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SunflowerFields.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FoggyForest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoofTopRampage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Zombie.h">
@@ -186,6 +198,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZombieOutskirts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SunflowerFields.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FoggyForest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoofTopRampage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

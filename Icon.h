@@ -14,11 +14,12 @@ protected:
 	std::string message;
 
 	coordinates pos;
+	coordinates Area;
 
 public:
-	Icon(std::string, coordinates,int,int);
+	Icon(std::string, coordinates, int, int, coordinates);
 
-	Icon(coordinates);
+	Icon(coordinates, coordinates);
 
 	void setTexture(Texture);
 

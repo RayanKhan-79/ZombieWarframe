@@ -1,6 +1,6 @@
 #include "InstructionScreen.h"
 
-InstructionScreen::InstructionScreen() : Back("Back",coordinates(910,540), 60, 25)
+InstructionScreen::InstructionScreen() : Back("Back",coordinates(910,540), 60, 25, coordinates(1180, 680))
 {
 	Texture texture_icon;
 	texture_icon.loadFromFile("./Images/button.png");

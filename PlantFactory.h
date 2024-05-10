@@ -7,7 +7,7 @@ class SeedPackets : public Icon  // Create a seperate file for this
 {
     bool unlocked;
 public:
-    SeedPackets(coordinates pos, bool unlocked) : Icon(pos), unlocked(unlocked)
+    SeedPackets(coordinates pos, coordinates area, bool unlocked) : Icon(pos,area), unlocked(unlocked)
     {}
 };
 
@@ -20,7 +20,8 @@ protected:
     Plant* plants[10]{};
     int numPlants;
 public:
-    PlantFactory();
+
+    PlantFactory(int plantsUnlocked);
 
     void DrawPlants(RenderWindow& window, float deltaTime);
 

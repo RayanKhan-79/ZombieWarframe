@@ -2,8 +2,12 @@
 
 
 Game::Game()
-	: level(NULL), playgameIcon("Play", coordinates(456, 130), 56, 27), InstructionIcon("Instructions", coordinates(465, 280), 149, 25), highScoreIcon("High Score", coordinates(465, 430), 137, 31), 
-	Quit("Quit", coordinates(910, 540), 58, 29), end(false)
+	: level(NULL), 
+	playgameIcon("Play", coordinates(465, 130), 56, 27, coordinates(735,270)), 
+	InstructionIcon("Instructions", coordinates(465, 280), 149, 25, coordinates(735, 420)),
+	highScoreIcon("High Score", coordinates(465, 430), 137, 31, coordinates(735, 570)),
+	Quit("Quit", coordinates(910, 540), 58, 29, coordinates(1180, 680)), 
+	end(false)
 {
 	Texture texture_1;
 	texture_1.loadFromFile("./Images/button.png");
@@ -72,25 +76,73 @@ void Game::playGame()
 				hS.render();
 			}
 
-			if (playgameIcon.isClicked(e))
+			else if (playgameIcon.isClicked(e))
 			{
 				Gamewindow.close();
 				hS.getWindow().close();
 
 				iS.getWindow().close();
 
-				delete level;
+				level = new BeginnersGarden;
+				std::cout << "BEGINNER'S GARDEN\n";
+				if (level->start())
+				{
+					
+					delete level;
+					level = new ZombieOutskirts;
+					
+					std::cout << "ZOMBIE OUTSKIRTS\n";
+					
+					if (level->start())
+					{
+					
+						delete level;
+						level = new SunflowerFields;
 
+						std::cout << "SUNFLOWER FIELDS\n";
+						
+						if (level->start())
+						{
+						
+							delete level;
+							level = new FoggyForest;
 
-				// For Testing
-				if (progress % 2 == 0)
-					level = new BeginnersGarden;
-				else
-					level = new NightTimeSiege;
-				progress++;
-				// =======
+							std::cout << "FOGGY FOREST\n";
 
-				level->start();
+							if (level->start())
+							{
+							
+								delete level;
+								level = new NightTimeSiege;
+
+								std::cout << "FOGGY FOREST\n";
+
+								if (level->start())
+								{
+								
+									delete level;
+									level = new RoofTopRampage;
+								
+									std::cout << "ROOF TOP RAMPAGE\n";
+
+									if (level->start())
+									{
+									
+										delete level;
+										
+										std::cout << "YOU WON\n";
+									}
+
+								}
+						
+							}
+					
+						}
+
+					}
+					
+				}
+
 			}
 
 			if (!Gamewindow.isOpen() && end == false)

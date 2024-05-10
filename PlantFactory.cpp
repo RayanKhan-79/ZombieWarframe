@@ -1,5 +1,6 @@
 #include "PlantFactory.h"
-PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
+PlantFactory::PlantFactory(int plantsUnlocked) 
+    : numPlants(0) , plantsUnlocked(plantsUnlocked)
 {
     // Initialize all textures (even locked ones)
     seedTextures[0].loadFromFile("./Images/sunFlower_i.png");  // Sunflower
@@ -16,7 +17,7 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 
     for (int i = 0; i < plantsUnlocked; i++)
     {
-        seedPackets[i] = new SeedPackets(coordinates(10, (85 * i) + 50), true);
+        seedPackets[i] = new SeedPackets(coordinates(10, (85 * i) + 50), coordinates(140, (85 * i) + 130), true);
         seedPackets[i]->setTexture(seedTextures[i]);
     }
 }

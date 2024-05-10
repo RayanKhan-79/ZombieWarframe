@@ -93,6 +93,9 @@ bool ZombieFactory::spawnNextWave()
 	numOfZombies = 0;
 	numOfDancers = 0;
 	
+	if (numOfDancers == 0 && numOfZombies == 0)
+		waveCalled = false;
+
 	return true;
 
 }
@@ -103,17 +106,25 @@ void ZombieFactory::spawnWave()
 
 	spawnNextWave();
 
+	if (numOfDancers == 0 && numOfZombies == 0)
+	{
+		waveCount++;
+		std::cout << waveCount << '\n';
+	}
+
 	if (zombies == NULL) 
 	{
 
 		zombies = new Zombie*[zombieLimit];		
-		std::cout << "!";
+		waveCalled = true;
 	}
 
 	if (Dancers == NULL)
 	{
 		Dancers = new DancingZombie*[DancersLimit];
+		waveCalled = true;
 	}
+
 
 	
 	spawnZombie();
@@ -176,7 +187,7 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 			if (zombies[j]->getHealth() > 0)
 			{
 				zombies[j]->Move();
-				zombies[j]->Decrement_Health(50);
+				zombies[j]->Decrement_Health();
 				zombies[j]->Draw(window, deltaTime);
 			}
 
@@ -187,7 +198,7 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 			if (Dancers[j]->getHealth() > 0)
 			{
 				Dancers[j]->Move();
-				Dancers[j]->Decrement_Health(50);
+				Dancers[j]->Decrement_Health();
 				Dancers[j]->Draw(window, deltaTime);
 			}
 	
@@ -215,7 +226,7 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 				if (backupDancers[i][j]->getHealth() > 0)
 				{
 					backupDancers[i][j]->Move();
-					backupDancers[i][j]->Decrement_Health(50);
+					backupDancers[i][j]->Decrement_Health();
 					backupDancers[i][j]->Draw(window, deltaTime);
 				}
 			}

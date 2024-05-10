@@ -145,6 +145,7 @@
     <ClCompile Include="CherryBomb.cpp" />
     <ClCompile Include="coordinates.cpp" />
     <ClCompile Include="DancingZombie.cpp" />
+    <ClCompile Include="FoggyForest.cpp" />
     <ClCompile Include="FootballZombie.cpp" />
     <ClCompile Include="FumeShroom.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -161,13 +162,16 @@
     <ClCompile Include="PlantFactory.cpp" />
     <ClCompile Include="PlayGameScreen.cpp" />
     <ClCompile Include="Repeater.cpp" />
+    <ClCompile Include="RoofTopRampage.cpp" />
     <ClCompile Include="Screens.cpp" />
     <ClCompile Include="Sentry.cpp" />
     <ClCompile Include="SnowPea.cpp" />
     <ClCompile Include="Sunflower.cpp" />
+    <ClCompile Include="SunflowerFields.cpp" />
     <ClCompile Include="Walnut.cpp" />
     <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieFactory.cpp" />
+    <ClCompile Include="ZombieOutskirts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackUpDancer.h" />
@@ -176,6 +180,7 @@
     <ClInclude Include="CherryBomb.h" />
     <ClInclude Include="coordinates.h" />
     <ClInclude Include="DancingZombie.h" />
+    <ClInclude Include="FoggyForest.h" />
     <ClInclude Include="FootballZombie.h" />
     <ClInclude Include="FumeShroom.h" />
     <ClInclude Include="Game.h" />
@@ -191,13 +196,16 @@
     <ClInclude Include="PlantFactory.h" />
     <ClInclude Include="PlayGameScreen.h" />
     <ClInclude Include="Repeater.h" />
+    <ClInclude Include="RoofTopRampage.h" />
     <ClInclude Include="Screens.h" />
     <ClInclude Include="Sentry.h" />
     <ClInclude Include="SnowPea.h" />
     <ClInclude Include="Sunflower.h" />
+    <ClInclude Include="SunflowerFields.h" />
     <ClInclude Include="Walnut.h" />
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="ZombieFactory.h" />
+    <ClInclude Include="ZombieOutskirts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

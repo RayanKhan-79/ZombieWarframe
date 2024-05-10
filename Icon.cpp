@@ -6,7 +6,7 @@ void Icon::setTexture(Texture texture)
 	iconSprite.setTexture(icontexture);
 }
 
-Icon::Icon(coordinates pos) : pos(pos)
+Icon::Icon(coordinates pos, coordinates Area) : pos(pos), Area(Area)
 {
 	iconSprite.setPosition(pos.x, pos.y);
 }
@@ -18,7 +18,8 @@ void Icon::draw(RenderWindow& window)
 	window.draw(text);
 }
 
-Icon::Icon(std::string message, coordinates pos, int txt_width, int txt_height) : pos(pos)
+Icon::Icon(std::string message, coordinates pos, int txt_width, int txt_height, coordinates Area)
+	: pos(pos), Area(Area)
 {
 	Color green(1, 50, 32);
 	font.loadFromFile("font/Noland-Bold.otf");
@@ -36,7 +37,7 @@ bool Icon::isClicked(Event& e)
 	if (e.type != Event::MouseButtonReleased)
 		return false;
 
-	if (e.mouseButton.x > pos.x && e.mouseButton.x < pos.x + 270 && e.mouseButton.y > pos.y && e.mouseButton.y < pos.y + 140)
+	if (e.mouseButton.x > pos.x && e.mouseButton.x < Area.x && e.mouseButton.y > pos.y && e.mouseButton.y < Area.y)
 		return true;
 	
 

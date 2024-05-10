@@ -1,7 +1,12 @@
 #include "Levels.h"
 
-Levels::Levels()
-	: pauseIcon(coordinates(1030, 10)), pauseMenu(coordinates(325, 50))
+Levels::Levels(int plantsUnlocked)
+	: 
+	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)), 
+	pauseMenu(coordinates(325, 50)), 
+	killCount(0), 
+	maxZombies(10), 
+	pf(plantsUnlocked)
 {
 	Texture texture;
 	texture.loadFromFile("./Images/test2.png");
@@ -59,7 +64,19 @@ void Levels::collisionDetection()
 	}
 }
 
-void Levels::start()
+int Levels::winCondition()
+{
+	if (killCount >= maxZombies)
+		return 1;  // Player has won
+
+	if (lives <= 0)
+		return 2;  // Player has lost
+
+	else 
+		return 0;  // Neither won nor lost continue playing
+}
+
+bool Levels::start()
 {
 	srand(time(0));
 
@@ -126,11 +143,13 @@ void Levels::start()
 		{
 			if (event.type == Event::Closed)
 			{
+				return false;
 				window.close();
 			}
 
 			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
 			{
+				return true;
 				pauseMenu.paused = true;
 			}
 
@@ -233,6 +252,11 @@ void Levels::start()
 		//	z1->UpdateAnimation(deltaTime);
 		//}
 
+		if (winCondition() == 1)
+			return true;
+
+		if (winCondition() == 2)
+			return false;
 
 
 		window.setSize(sf::Vector2u(1200, 700));

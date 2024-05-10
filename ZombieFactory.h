@@ -22,7 +22,9 @@ class ZombieFactory
 	int numOfDancers;
 	int DancersLimit;
 	
-	Clock clock;
+	Clock spawnClock;
+	
+	bool waveCalled = false;
 
 
 
@@ -31,6 +33,8 @@ public:
 	ZombieFactory();
 
 	bool spawnNextWave();
+
+	void UpdateBackUpDancers();
 
 	bool isIntervalReached();
 

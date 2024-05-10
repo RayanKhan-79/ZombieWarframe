@@ -1,7 +1,7 @@
 #include "DancingZombie.h"
 
-DancingZombie::DancingZombie(float spawnInterval, int count, int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
-	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY), spawnInterval(5), count(count), backUpDancers(NULL), speed_y(speed)
+DancingZombie::DancingZombie(float spawnInterval, int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
+	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY), spawnInterval(spawnInterval), speed_y(speed)
 {
 	hitArea.x = Pos.x + 95;
 	hitArea.y = Pos.y + pixelsY;
@@ -12,94 +12,50 @@ DancingZombie::DancingZombie(float spawnInterval, int count, int health, int spe
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
-BackUpDancer** DancingZombie::getBackUp() 
-{ 
-	return backUpDancers; 
-}
 
-
-void DancingZombie::checkStatus()
-{
-	if (backUpDancers == NULL)
-		return;
-
-	for (int i = 0; i < count; i++)
-		if (backUpDancers[i]->getHealth() > 0)
-			return;
-
-	for (int i = 0; i < count; i++)
-	{
-		delete backUpDancers[i];
-		backUpDancers[i] = NULL;
-	}
-	delete[] backUpDancers;
-	backUpDancers = NULL;
-
-	clock.restart();
-}
-
-//void DancingZombie::SpawnBackUp()
+//void DancingZombie::checkStatus()
 //{
-//	checkStatus();
-//
-//	if (backUpDancers != NULL)
-//	{
+//	if (backUpDancers == NULL)
 //		return;
-//	}
 //
-//	if (clock.getElapsedTime().asSeconds() < spawnInterval)
+//	for (int i = 0; i < count; i++)
+//		if (backUpDancers[i]->getHealth() > 0)
+//			return;
+//
+//	for (int i = 0; i < count; i++)
 //	{
-//		return;
+//		delete backUpDancers[i];
+//		backUpDancers[i] = NULL;
 //	}
-//
-//
-//
-//	backUpDancers = new BackUpDancer * [4] {};
-//	backUpDancers[0] = new BackUpDancer(200, 1, 5, Pos.x + 95, Pos.y);  // East
-//	backUpDancers[1] = new BackUpDancer(200, 1, 5, Pos.x - 95, Pos.y);  // West
-//	
-//	if (Pos.y + 180 <= 118*4 + 85)
-//	{
-//		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y + 118);  // South
-//	}
-//	else
-//	{
-//		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
-//	}
-//	if (Pos.y + 180 >=  118*2 + 85)
-//	{
-//		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y - 118);  // North
-//	}
-//	else
-//	{
-//		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
-//	}
-//
-//
+//	delete[] backUpDancers;
+//	backUpDancers = NULL;
 //
 //	clock.restart();
-//
 //}
 
-void DancingZombie::checkAssignment(BackUpDancer**& backUp)
+
+
+//void DancingZombie::checkAssignment(BackUpDancer**& backUp)
+//{
+//	if (!backUp[0] || !backUp[1] || !backUp[2] || !backUp[3])
+//		return;
+//
+//	for (int i = 0; i < 4; i++)
+//		if (backUp[i]->getHealth() > 0)
+//			return;
+//
+//	for (int i = 0; i < 4; i++)
+//	{
+//		delete backUp[i];
+//		backUp[i] = NULL;
+//	}
+//
+//	clock.restart();
+//}
+
+void DancingZombie::SummonBackUp(BackUpDancer**& backUp)
 {
-	if (!backUp[0] || !backUp[1] || !backUp[2] || !backUp[3])
-		return;
-
-	for (int i = 0; i < 4; i++)
-		if (backUp[i]->getHealth() > 0)
-			return;
-
-	for (int i = 0; i < 4; i++)
-	{
-		delete backUp[i];
-		backUp[i] = NULL;
-	}
-}
-
-void DancingZombie::Assign(BackUpDancer**& backUp)
-{
-	checkAssignment(backUp);
+	//checkAssignment(backUp);
 
 	if (backUp[0] || backUp[1] || backUp[2] || backUp[3])
 		return;
@@ -126,6 +82,8 @@ void DancingZombie::Assign(BackUpDancer**& backUp)
 	{
 		backUp[3] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
 	}
+
+	std::cout << "Summon!\n";
 }
 
 
@@ -146,62 +104,24 @@ void DancingZombie::UpdateAnimation(float deltaTime)
 
 void DancingZombie::Move()
 {
-	////for (int i = 0; i < count; i++)
-	////{
-	////	if (backUpDancers != NULL)
-	////	backUpDancers[i]->Move();
-	////}
+
 
 	if (action == "attacking")
 		return;
 
-	//SpawnBackUp();
-	if (backUpDancers && clock.getElapsedTime().asSeconds() < 5)
-		return;
 
 	Pos.x -= speed;
 	hitArea.x -= speed;
 
-	if (/*Pos.y + 180 >= 118 * 1 + 85 &&*/ Pos.y + 180 <= 118 * 2 + 85)
+	if (Pos.y + 180 <= 118 * 2 + 85)
 		speed_y = speed;
 
-	if (/*Pos.y + 180 <= 118 * 5 + 85 &&*/ Pos.y + 180 >= 118 * 5 + 85)
+	if (Pos.y + 180 >= 118 * 5 + 85)
 		speed_y = -speed;
 
-	//if (Pos.y + 180 <= 118 * 5 + 85 && Pos.y + 180 >= 118 * 4 + 85)
-	//	speed_y = -speed_y;
 
 	Pos.y += speed_y;
 	hitArea.y += speed_y;
 
 }
 
-//void DancingZombie::Draw(RenderWindow& window, float deltaTime)
-//{
-//	if (health <= 0)
-//		return;
-//
-//	UpdateAnimation(deltaTime);
-//	sprite.setPosition(Pos.x, Pos.y);
-//	////for (int i = 0; i < count; i++)
-//	////	if (backUpDancers != NULL)
-//	////	{
-//	////		backUpDancers[i]->Draw(window, deltaTime);
-//	////	}
-//	window.draw(sprite);
-//}
-
-//DancingZombie::~DancingZombie()
-//{
-//	if (backUpDancers)
-//	{
-//		for (int i = 0; i < count; i++)
-//			if (backUpDancers[i])
-//			{
-//				delete backUpDancers[i];
-//				backUpDancers = NULL;
-//			}
-//		delete[] backUpDancers;
-//		backUpDancers = NULL;
-//	}
-//}

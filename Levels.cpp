@@ -1,5 +1,12 @@
 #include "Levels.h"
 
+Levels::Levels()
+	: pauseIcon(coordinates(1030, 10)), pauseMenu(coordinates(325, 50))
+{
+	Texture texture;
+	texture.loadFromFile("./Images/test2.png");
+	pauseIcon.setTexture(texture);
+}
 
 void Levels::collisionDetection()
 {
@@ -12,7 +19,7 @@ void Levels::collisionDetection()
 				
 				zf.getZombies()[i]->Attack(pf.getPlants()[j]);
 
-				std::cout << pf.getPlants()[j]->getHealth() << '\n';
+				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
 
@@ -26,7 +33,7 @@ void Levels::collisionDetection()
 			{
 				zf.getDancers()[i]->Attack(pf.getPlants()[j]);
 
-				std::cout << pf.getPlants()[j]->getHealth() << '\n';
+				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
 
@@ -40,7 +47,7 @@ void Levels::collisionDetection()
 				if (zf.getBackUp()[i][k] && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getPosition()))
 				{
 					zf.getBackUp()[i][k]->Attack(pf.getPlants()[j]);
-					std::cout << pf.getPlants()[j]->getHealth() << '\n';
+					//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 
 				}
 
@@ -201,6 +208,8 @@ void Levels::start()
 			//		}
 			//	
 			//	}
+
+
 			zf.spawnWave();
 			zf.DrawZombies(window, deltaTime);
 			collisionDetection();

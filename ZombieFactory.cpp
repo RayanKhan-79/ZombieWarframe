@@ -11,11 +11,40 @@ ZombieFactory::ZombieFactory()
 
 bool ZombieFactory::isIntervalReached()
 {
-	if (clock.getElapsedTime().asSeconds() < spawnInterval)
+	if (spawnClock.getElapsedTime().asSeconds() < spawnInterval)
 		return false;
 
-	clock.restart();
+	spawnClock.restart();
 	return true;
+}
+
+void ZombieFactory::UpdateBackUpDancers()
+{
+	
+	for (int i = 0; i < DancersLimit; i++)
+	{
+		if (backupDancers[i][0] == NULL)
+			continue;
+
+		bool dead = true;
+		for (int j = 0; j < 4; j++)
+		{
+			if (backupDancers[i][j]->getHealth() > 0)
+				dead = false;
+		}
+
+		if (dead)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				delete backupDancers[i][j];
+				backupDancers[i][j] = NULL;
+			}
+
+			if (Dancers[i])
+				Dancers[i]->resetTime();
+		}
+	}
 }
 
 bool ZombieFactory::spawnNextWave()
@@ -64,16 +93,21 @@ bool ZombieFactory::spawnNextWave()
 	numOfZombies = 0;
 	numOfDancers = 0;
 	
+	return true;
+
 }
 
 void ZombieFactory::spawnWave()
 {
+	UpdateBackUpDancers();
+
 	spawnNextWave();
 
 	if (zombies == NULL) 
 	{
 
 		zombies = new Zombie*[zombieLimit];		
+		std::cout << "!";
 	}
 
 	if (Dancers == NULL)
@@ -106,14 +140,17 @@ void ZombieFactory::spawnZombie()
 				{
 					case 0:
 						zombies[numOfZombies] = new Zombie;
+						std::cout << "Zombie\n";
 						break;
 
 					case 1:
 						zombies[numOfZombies] = new FootballZombie;
+						std::cout << "FZombie\n";
 						break;
 
 					case 2:
 						zombies[numOfZombies] = new BalloonZombie;
+						std::cout << "BZombie\n";
 						break;
 
 				}
@@ -124,7 +161,8 @@ void ZombieFactory::spawnZombie()
 		case 1:
 			if (numOfDancers < DancersLimit)
 			{
-				Dancers[numOfDancers] = new DancingZombie;
+				Dancers[numOfDancers] = new DancingZombie(5,600);
+				std::cout << "DZombie\n";
 				numOfDancers++;
 			}
 	}
@@ -135,21 +173,29 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 
 		for (int j = 0; j < numOfZombies; j++)
 		{
-
+			if (zombies[j]->getHealth() > 0)
+			{
 				zombies[j]->Move();
+				zombies[j]->Decrement_Health(50);
 				zombies[j]->Draw(window, deltaTime);
+			}
 
 		}
 
 		for (int j = 0; j < numOfDancers; j++)
 		{
-			
+			if (Dancers[j]->getHealth() > 0)
+			{
 				Dancers[j]->Move();
+				Dancers[j]->Decrement_Health(50);
 				Dancers[j]->Draw(window, deltaTime);
+			}
 	
-				std::cout << j << Dancers[j]->getHealth() << '\n';
+				//std::cout << Dancers[j]->getHitArea().x - 95 << " , ";
+				//std::cout << Dancers[j]->getHitArea().y - 118 << '\n';
+
 				if (Dancers[j]->getHealth() > 0)
-					Dancers[j]->Assign(backupDancers[j]);
+					Dancers[j]->SummonBackUp(backupDancers[j]);
 
 		}
 
@@ -166,8 +212,12 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 				if (backupDancers[i][j] == NULL)
 					continue; 
 
-				backupDancers[i][j]->Move();
-				backupDancers[i][j]->Draw(window, deltaTime);
+				if (backupDancers[i][j]->getHealth() > 0)
+				{
+					backupDancers[i][j]->Move();
+					backupDancers[i][j]->Decrement_Health(50);
+					backupDancers[i][j]->Draw(window, deltaTime);
+				}
 			}
 		}
 

@@ -2,7 +2,12 @@
 
 
 ZombieFactory::ZombieFactory()
-	: spawnInterval(3), num_Of_Zombie(0), zombie_Limit(1), zombies(NULL) {}
+	: spawnInterval(3), numOfZombies(0), zombieLimit(4), numOfDancers(0), DancersLimit(1), zombies(NULL), Dancers(NULL) 
+{
+	backupDancers = new BackUpDancer**[DancersLimit] {};
+	for (int i = 0; i < DancersLimit; i++)
+		backupDancers[i] = new BackUpDancer*[4]{};
+}
 
 bool ZombieFactory::isIntervalReached()
 {
@@ -16,19 +21,49 @@ bool ZombieFactory::isIntervalReached()
 bool ZombieFactory::spawnNextWave()
 {
 	
-	for (int i = 0; i < num_Of_Zombie; i++)
+	for (int i = 0; i < numOfZombies; i++)
 		if (zombies[i]->getHealth() > 0)
 			return false;
 
-	for (int i = 0; i < num_Of_Zombie; i++)
+	for (int i = 0; i < numOfDancers; i++)
+		if (Dancers[i]->getHealth() > 0)
+			return false;
+
+	for (int i = 0; i < numOfDancers; i++)
+		for (int j = 0; j < 4; j++)
+			if (backupDancers[i][j] && backupDancers[i][j]->getHealth() > 0)
+				return false;
+
+	for (int i = 0; i < numOfZombies; i++)
 	{
 		delete zombies[i];
 		zombies[i] = NULL;
 	}
-	delete[] zombies;
-	zombies = NULL;
-	num_Of_Zombie = 0;
 
+	for (int i = 0; i < numOfDancers; i++)
+	{
+		delete Dancers[i];
+		Dancers[i] = NULL;
+	}
+
+	for (int i = 0; i < numOfDancers; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			delete backupDancers[i][j];
+			backupDancers[i][j] = NULL;
+		}
+	}
+
+	delete[] zombies;
+	delete[] Dancers;
+	
+	zombies = NULL;
+	Dancers = NULL;
+	
+	numOfZombies = 0;
+	numOfDancers = 0;
+	
 }
 
 void ZombieFactory::spawnWave()
@@ -38,8 +73,12 @@ void ZombieFactory::spawnWave()
 	if (zombies == NULL) 
 	{
 
+		zombies = new Zombie*[zombieLimit];		
+	}
 
-		zombies = new Zombie*[zombie_Limit];		
+	if (Dancers == NULL)
+	{
+		Dancers = new DancingZombie*[DancersLimit];
 	}
 
 	
@@ -51,48 +90,107 @@ void ZombieFactory::spawnZombie()
 
 	if (!isIntervalReached())
 		return;
+	
+	/*if (numOfDancers >= DancersLimit && numOfZombies >= zombieLimit)
+		return;*/
 
-	if (num_Of_Zombie >= zombie_Limit)
-		return;
+	switch (rand()%2)
+	{
+		case 0:
 
-	//switch (rand() % 3)
-	//{
-	//	case 0:
-	//		zombies[num_Of_Zombie] = new Zombie();
-	//		break;
+			if (numOfZombies < zombieLimit)
+			{
 
-	//	case 1:
-	//		zombies[num_Of_Zombie] = new FootballZombie;
-	//		break;
 
-		//case 2:
-			zombies[num_Of_Zombie] = new DancingZombie(10,4,200,4);
-			//break;
+				switch (rand() % 3)
+				{
+					case 0:
+						zombies[numOfZombies] = new Zombie;
+						break;
 
-	//	case 3:
-	//		zombies[num_Of_Zombie] = new BalloonZombie;
-	//		break;
+					case 1:
+						zombies[numOfZombies] = new FootballZombie;
+						break;
 
-	//}
-	num_Of_Zombie++;
+					case 2:
+						zombies[numOfZombies] = new BalloonZombie;
+						break;
+
+				}
+				numOfZombies++;
+				return;
+			}
+
+		case 1:
+			if (numOfDancers < DancersLimit)
+			{
+				Dancers[numOfDancers] = new DancingZombie;
+				numOfDancers++;
+			}
+	}
 }
 
 void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 {
 
-		for (int j = 0; j < num_Of_Zombie; j++)
+		for (int j = 0; j < numOfZombies; j++)
 		{
 
 				zombies[j]->Move();
 				zombies[j]->Draw(window, deltaTime);
 
 		}
+
+		for (int j = 0; j < numOfDancers; j++)
+		{
+			
+				Dancers[j]->Move();
+				Dancers[j]->Draw(window, deltaTime);
+	
+				std::cout << j << Dancers[j]->getHealth() << '\n';
+				if (Dancers[j]->getHealth() > 0)
+					Dancers[j]->Assign(backupDancers[j]);
+
+		}
+
+		if (backupDancers == NULL)
+			return;
+
+		for (int i = 0; i < numOfDancers; i++)
+		{
+			if (backupDancers[i] == NULL)
+				continue;
+		
+			for (int j = 0; j < 4; j++)
+			{
+				if (backupDancers[i][j] == NULL)
+					continue; 
+
+				backupDancers[i][j]->Move();
+				backupDancers[i][j]->Draw(window, deltaTime);
+			}
+		}
+
+
 }
 
 ZombieFactory::~ZombieFactory()
 {
-	for (int i = 0; i < num_Of_Zombie; i++)
+	for (int i = 0; i < numOfDancers; i++)
+	{
+		for (int j = 0; j < 4; j++)
+			delete backupDancers[i][j];
+		delete[] backupDancers[i];
+	}
+	delete backupDancers;
+
+
+	for (int i = 0; i < numOfZombies; i++)
 		delete zombies[i];
 		
+	for (int i = 0; i < numOfDancers; i++)
+		delete Dancers[i];
+
 	delete[] zombies;
+	delete[] Dancers;
 }

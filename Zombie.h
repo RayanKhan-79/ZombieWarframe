@@ -28,7 +28,6 @@ protected:
 
 public:
 	std::string action;
-	std::string name = "default";
 
 public:
 	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(180), int=180, int=180);
@@ -36,15 +35,17 @@ public:
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
 	virtual void Attack(Plant*);
+
 	void Collision(Bullet*);
-
-
 
 	// Getters & Setters
 	int getHealth() const;
 	coordinates getPosition() const { return Pos; }
 	coordinates getHitArea() const { return hitArea; }
 
-
+	void Decrement_Health(int amount = 2)
+	{
+		health -= amount;
+	}
 };
 

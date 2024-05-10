@@ -11,10 +11,17 @@ class ZombieFactory
 {
 	float spawnInterval;
 
-	int num_Of_Zombie;
-	int zombie_Limit;
+	int numOfZombies;
+	int zombieLimit;
 
 	Zombie** zombies;
+	DancingZombie** Dancers;
+
+	BackUpDancer*** backupDancers;
+	
+	int numOfDancers;
+	int DancersLimit;
+	
 	Clock clock;
 
 
@@ -22,6 +29,7 @@ class ZombieFactory
 
 public:
 	ZombieFactory();
+
 	bool spawnNextWave();
 
 	bool isIntervalReached();
@@ -34,7 +42,13 @@ public:
 
 	Zombie** getZombies() { return zombies; }
 
-	int getNumberOfZombies() { return num_Of_Zombie; }
+	DancingZombie** getDancers() { return Dancers; }
+
+	BackUpDancer*** getBackUp() { return backupDancers; }
+
+	int getNumberOfDancers() { return numOfDancers; }
+
+	int getNumberOfZombies() { return numOfZombies; }
 
 
 	~ZombieFactory();

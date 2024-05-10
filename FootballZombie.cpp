@@ -46,7 +46,6 @@ void FootballZombie::Move()
 
 	Pos.x -= speed;
 	hitArea.x -= speed;
-	//health -= 3;
 
 	int random = rand() % 50;
 	
@@ -62,5 +61,5 @@ void FootballZombie::Move()
     	hitArea.y -= 118;
 	}
 
-	sprite.setPosition(Pos.x, Pos.y);
+	//sprite.setPosition(Pos.x, Pos.y);
 }

@@ -1,5 +1,57 @@
 #include "Levels.h"
 
+
+void Levels::collisionDetection()
+{
+	for (int j = 0; j < pf.getNumPlants(); j++)
+	{
+		for (int i = 0; i < zf.getNumberOfZombies(); i++)
+		{
+			if (approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			{
+				
+				zf.getZombies()[i]->Attack(pf.getPlants()[j]);
+
+				std::cout << pf.getPlants()[j]->getHealth() << '\n';
+			}
+
+
+
+
+		}
+
+		for (int i = 0; i < zf.getNumberOfDancers(); i++)
+		{
+			if (approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			{
+				zf.getDancers()[i]->Attack(pf.getPlants()[j]);
+
+				std::cout << pf.getPlants()[j]->getHealth() << '\n';
+			}
+
+
+
+
+		}
+
+		for (int i = 0; i < zf.getNumberOfDancers(); i++)
+			for (int k = 0; k < 4; k++)
+			{
+				if (zf.getBackUp()[i][k] && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getPosition()))
+				{
+					zf.getBackUp()[i][k]->Attack(pf.getPlants()[j]);
+					std::cout << pf.getPlants()[j]->getHealth() << '\n';
+
+				}
+
+
+
+			}
+
+
+	}
+}
+
 void Levels::start()
 {
 	srand(time(0));
@@ -98,7 +150,6 @@ void Levels::start()
 
 
 
-		//Create a background
 
 		pauseIcon.draw(window);
 
@@ -120,39 +171,39 @@ void Levels::start()
 			pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
 			
-			for (int i = 0; i < 5; i++)
-			{
-				z1[i]->Move();
-				z1[i]->Draw(window, deltaTime);
-			}
+			//for (int i = 0; i < 5; i++)
+			//{
+			//	z1[i]->Move();
+			//	z1[i]->Draw(window, deltaTime);
+			//}
 
-			for (int i = 0; i < 5; i++)
-				for (int j = 0; j < pf.getNumPlants(); j++)
-				{
-					if (approxMatch(z1[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
-					{
-						//z1[i] ->action = "attacking";
-						//z1[i]->Attack(pf.getPlants()[j]);
+			//for (int i = 0; i < 5; i++)
+			//	for (int j = 0; j < pf.getNumPlants(); j++)
+			//	{
+			//		if (approxMatch(z1[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			//		{
+			//			//z1[i] ->action = "attacking";
+			//			//z1[i]->Attack(pf.getPlants()[j]);
 
-						//std::cout << pf.getPlants()[j]->getHealth() << '\n';
+			//			//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 
-					}
-					if (z1[i]->getBackUp())
-					{
-						BackUpDancer** back = z1[i]->getBackUp();
-						for (int k = 0; k < 4; k++)
-							if (approxMatch(back[k]->getHitArea(), pf.getPlants()[j]->getPosition()))
-							{
-								back[k]->action = "attacking";
-								back[k]->Attack(pf.getPlants()[j]);
-								std::cout << pf.getPlants()[j]->getHealth() << '\n';
-							}
-					}
-				
-				}
-			//zf.spawnWave();
-			//zf.DrawZombies(window, deltaTime);
-			//collisionDetection();
+			//		}
+			//		if (z1[i]->getBackUp())
+			//		{
+			//			BackUpDancer** back = z1[i]->getBackUp();
+			//			for (int k = 0; k < 4; k++)
+			//				if (approxMatch(back[k]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			//				{
+			//					back[k]->action = "attacking";
+			//					back[k]->Attack(pf.getPlants()[j]);
+			//					std::cout << pf.getPlants()[j]->getHealth() << '\n';
+			//				}
+			//		}
+			//	
+			//	}
+			zf.spawnWave();
+			zf.DrawZombies(window, deltaTime);
+			collisionDetection();
 		}
 
 		else if (pauseMenu.paused == true)
@@ -181,3 +232,20 @@ void Levels::start()
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+//////std::cout << "px: " << zf.getZombies()[i]->getPosition().x << "  hx: " << zf.getZombies()[i]->getHitArea().x << '\n';
+//////std::cout << "py: " << zf.getZombies()[i]->getPosition().y + 180 - 118 << "  hy: " << zf.getZombies()[i]->getHitArea().y << '\n';
+//////std::cout << "Plant:\n";
+//////std::cout << "px: " << pf.getPlants()[i]->getPosition().x << "  hx: " << pf.getPlants()[i]->getPosition().x + 95 << '\n';
+//////std::cout << "py: " << pf.getPlants()[i]->getPosition().y + 145 - 118 << "  hy: " << pf.getPlants()[i]->getPosition().y + 145 << '\n';
+//system("pause");

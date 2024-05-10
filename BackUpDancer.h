@@ -10,7 +10,7 @@ public:
 	void Draw(RenderWindow&, float deltaTime);
 	void SpawnAnimation(float deltaTime);
 	void UpdateAnimation(float deltaTime);
-	void DeathAnimation(float deltaTime);
+	//void DeathAnimation(float deltaTime);
 	void Move();
 };
 

@@ -13,8 +13,11 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int
 	
 }
 
+
+
 void Zombie::Attack(Plant* plant)
 {
+	action = "attacking";
 	plant->mark();
 	plant->getHealth() -= damage;
 	if (health <= 0 || plant->getHealth() <= 0)
@@ -30,6 +33,7 @@ void Zombie::Draw(RenderWindow& window, float deltaTime)
 	if (health > 0)
 	{
 		UpdateAnimation(deltaTime);
+		sprite.setPosition(Pos.x, Pos.y);
 		window.draw(sprite);
 	}
 }
@@ -55,8 +59,6 @@ void Zombie::Move()
 
 	Pos.x -= speed;
 	hitArea.x -= speed;
-	//health -= 2;
-	sprite.setPosition(Pos.x, Pos.y);
 }
 
 

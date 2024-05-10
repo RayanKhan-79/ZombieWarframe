@@ -5,7 +5,6 @@ DancingZombie::DancingZombie(float spawnInterval, int count, int health, int spe
 {
 	hitArea.x = Pos.x + 95;
 	hitArea.y = Pos.y + pixelsY;
-	name = "dancer";
 	texture.loadFromFile("./Images/11.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
@@ -13,25 +12,11 @@ DancingZombie::DancingZombie(float spawnInterval, int count, int health, int spe
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
-/*
-void DancingZombie::Attack(Plant* plant)
-{
-	plant->mark();
-	plant->getHealth() -= damage;
-	if (health <= 0 || plant->getHealth() <= 0)
-	{
-		action = "moving";
-		return;
-	}
-	//if (backUpDancers)
-	//{
-	//	for (int i = 0; i < count; i++)
-	//	{
-	//		backUpDancers[i]->Attack(plant)
-	//	}
-	//}
+BackUpDancer** DancingZombie::getBackUp() 
+{ 
+	return backUpDancers; 
 }
-*/
+
 
 void DancingZombie::checkStatus()
 {
@@ -53,48 +38,97 @@ void DancingZombie::checkStatus()
 	clock.restart();
 }
 
-void DancingZombie::SpawnBackUp()
-{
-	checkStatus();
+//void DancingZombie::SpawnBackUp()
+//{
+//	checkStatus();
+//
+//	if (backUpDancers != NULL)
+//	{
+//		return;
+//	}
+//
+//	if (clock.getElapsedTime().asSeconds() < spawnInterval)
+//	{
+//		return;
+//	}
+//
+//
+//
+//	backUpDancers = new BackUpDancer * [4] {};
+//	backUpDancers[0] = new BackUpDancer(200, 1, 5, Pos.x + 95, Pos.y);  // East
+//	backUpDancers[1] = new BackUpDancer(200, 1, 5, Pos.x - 95, Pos.y);  // West
+//	
+//	if (Pos.y + 180 <= 118*4 + 85)
+//	{
+//		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y + 118);  // South
+//	}
+//	else
+//	{
+//		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
+//	}
+//	if (Pos.y + 180 >=  118*2 + 85)
+//	{
+//		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y - 118);  // North
+//	}
+//	else
+//	{
+//		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
+//	}
+//
+//
+//
+//	clock.restart();
+//
+//}
 
-	if (backUpDancers != NULL)
-	{
+void DancingZombie::checkAssignment(BackUpDancer**& backUp)
+{
+	if (!backUp[0] || !backUp[1] || !backUp[2] || !backUp[3])
 		return;
+
+	for (int i = 0; i < 4; i++)
+		if (backUp[i]->getHealth() > 0)
+			return;
+
+	for (int i = 0; i < 4; i++)
+	{
+		delete backUp[i];
+		backUp[i] = NULL;
 	}
+}
+
+void DancingZombie::Assign(BackUpDancer**& backUp)
+{
+	checkAssignment(backUp);
+
+	if (backUp[0] || backUp[1] || backUp[2] || backUp[3])
+		return;
 
 	if (clock.getElapsedTime().asSeconds() < spawnInterval)
-	{
 		return;
-	}
 
-
-
-	backUpDancers = new BackUpDancer * [4] {};
-	backUpDancers[0] = new BackUpDancer(200, 1, 5, Pos.x + 95, Pos.y);  // East
-	backUpDancers[1] = new BackUpDancer(200, 1, 5, Pos.x - 95, Pos.y);  // West
-	
+	backUp[0] = new BackUpDancer(200, 1, 5, Pos.x + 95, Pos.y);  // East
+	backUp[1] = new BackUpDancer(200, 1, 5, Pos.x - 95, Pos.y);  // West
+		
 	if (Pos.y + 180 <= 118*4 + 85)
 	{
-		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y + 118);  // South
+		backUp[2] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y + 118);  // South
 	}
 	else
 	{
-		backUpDancers[2] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
+		backUp[2] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
 	}
 	if (Pos.y + 180 >=  118*2 + 85)
 	{
-		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y - 118);  // North
+		backUp[3] = new BackUpDancer(200, 1, 5, Pos.x, Pos.y - 118);  // North
 	}
 	else
 	{
-		backUpDancers[3] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
+		backUp[3] = new BackUpDancer(200, 1, 5, Pos.x - 47, Pos.y);
 	}
-
-
-
-	clock.restart();
-
 }
+
+
 void DancingZombie::UpdateAnimation(float deltaTime)
 {
 	Total_Animation_Time += deltaTime;
@@ -112,10 +146,16 @@ void DancingZombie::UpdateAnimation(float deltaTime)
 
 void DancingZombie::Move()
 {
+	////for (int i = 0; i < count; i++)
+	////{
+	////	if (backUpDancers != NULL)
+	////	backUpDancers[i]->Move();
+	////}
+
 	if (action == "attacking")
 		return;
 
-	SpawnBackUp();
+	//SpawnBackUp();
 	if (backUpDancers && clock.getElapsedTime().asSeconds() < 5)
 		return;
 
@@ -134,37 +174,34 @@ void DancingZombie::Move()
 	Pos.y += speed_y;
 	hitArea.y += speed_y;
 
-	//health -= 3;
-	for (int i = 0; i < count; i++)
-	{
-		if (backUpDancers != NULL)
-		backUpDancers[i]->Move();
-	}
 }
 
-void DancingZombie::Draw(RenderWindow& window, float deltaTime)
-{
-	UpdateAnimation(deltaTime);
-	sprite.setPosition(Pos.x, Pos.y);
-	for (int i = 0; i < count; i++)
-		if (backUpDancers != NULL)
-		{
-			backUpDancers[i]->Draw(window, deltaTime);
-		}
-	window.draw(sprite);
-}
+//void DancingZombie::Draw(RenderWindow& window, float deltaTime)
+//{
+//	if (health <= 0)
+//		return;
+//
+//	UpdateAnimation(deltaTime);
+//	sprite.setPosition(Pos.x, Pos.y);
+//	////for (int i = 0; i < count; i++)
+//	////	if (backUpDancers != NULL)
+//	////	{
+//	////		backUpDancers[i]->Draw(window, deltaTime);
+//	////	}
+//	window.draw(sprite);
+//}
 
-DancingZombie::~DancingZombie()
-{
-	if (backUpDancers)
-	{
-		for (int i = 0; i < count; i++)
-			if (backUpDancers[i])
-			{
-				delete backUpDancers[i];
-				backUpDancers = NULL;
-			}
-		delete[] backUpDancers;
-		backUpDancers = NULL;
-	}
-}
+//DancingZombie::~DancingZombie()
+//{
+//	if (backUpDancers)
+//	{
+//		for (int i = 0; i < count; i++)
+//			if (backUpDancers[i])
+//			{
+//				delete backUpDancers[i];
+//				backUpDancers = NULL;
+//			}
+//		delete[] backUpDancers;
+//		backUpDancers = NULL;
+//	}
+//}

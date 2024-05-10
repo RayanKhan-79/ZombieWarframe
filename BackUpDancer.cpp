@@ -20,11 +20,7 @@ void BackUpDancer::Draw(RenderWindow& window, float deltaTime)
 		texture.loadFromFile("./Images/04.png");
 	}
 
-	if (health <= 0)
-	{
-		texture.loadFromFile("./Images/01.png");
-	}
-
+	sprite.setPosition(Pos.x, Pos.y);
 	window.draw(sprite);
 }
 
@@ -36,10 +32,10 @@ void BackUpDancer::Move()
 	if (!spawned || health <= 0)
 		return;
 
-	if (/*Pos.y + 180 >= 118 * 1 + 85 &&*/ Pos.y + 180 <= 118 * 2 + 85)
+	if (Pos.y + 180 <= 118 * 2 + 85)
 		speed_y = speed;
 
-	if (/*Pos.y + 180 <= 118 * 5 + 85 &&*/ Pos.y + 180 >= 118 * 5 + 85)
+	if (Pos.y + 180 >= 118 * 5 + 85)
 		speed_y = -speed;
 
 
@@ -49,8 +45,6 @@ void BackUpDancer::Move()
 	Pos.y += speed_y;
 	hitArea.y += speed_y;
 
-	//health -= 2;
-	sprite.setPosition(Pos.x, Pos.y);
 }
 
 void BackUpDancer::SpawnAnimation(float deltaTime)

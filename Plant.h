@@ -8,6 +8,7 @@ class Plant
 protected:
 	int health;
 	coordinates Pos;
+	coordinates mid;
 	Image image;
 	Texture texture;
 	Sprite sprite;
@@ -20,6 +21,7 @@ public:
 	virtual void UpdateAnimation(float interval);
 	bool isClick();
 	coordinates getPosition() { return Pos; }
+	coordinates getHitArea() { return mid; }
 	int& getHealth() { return health; }
 	void mark() 
 	{

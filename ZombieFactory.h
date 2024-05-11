@@ -24,21 +24,24 @@ class ZombieFactory
 	
 	Clock spawnClock;
 	
+	int zombiesUnlocked;
+
 	bool waveCalled = false;
-	int waveCount = 0;
+	int waveCount;
+	int waveLimit;
 
 
 
 public:
-	ZombieFactory();
+	ZombieFactory(int,int,int,int=3);
 
-	bool spawnNextWave();
+	bool spawnNextWave(int&);
 
 	void UpdateBackUpDancers();
 
 	bool isIntervalReached();
 
-	void spawnWave();
+	void spawnWave(int&);
 
 	void spawnZombie();
 
@@ -54,7 +57,10 @@ public:
 
 	int getNumberOfZombies() { return numOfZombies; }
 
-
+	bool isWaveLimitReached()
+	{
+		return (waveCount >= waveLimit);
+	}
 	~ZombieFactory();
 };
 

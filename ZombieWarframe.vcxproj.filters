@@ -114,6 +114,9 @@
     <ClCompile Include="RoofTopRampage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Movers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Zombie.h">
@@ -210,6 +213,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RoofTopRampage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Movers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

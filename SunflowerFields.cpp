@@ -9,7 +9,7 @@ void SunflowerFields::createBack(RenderWindow& window)
 }
 
 SunflowerFields::SunflowerFields()
-	: Levels(4)
+	: Levels(4,3,10,3)
 {
 
 }

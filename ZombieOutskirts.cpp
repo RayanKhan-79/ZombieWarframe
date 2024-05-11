@@ -9,7 +9,7 @@ void ZombieOutskirts::createBack(RenderWindow& window)
 }
 
 ZombieOutskirts::ZombieOutskirts()
-	: Levels(3)
+	: Levels(3,3,8,2)
 {
 
 }

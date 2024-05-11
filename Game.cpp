@@ -9,12 +9,12 @@ Game::Game()
 	Quit("Quit", coordinates(910, 540), 58, 29, coordinates(1180, 680)), 
 	end(false)
 {
-	Texture texture_1;
-	texture_1.loadFromFile("./Images/button.png");
-	playgameIcon.setTexture(texture_1);
-	InstructionIcon.setTexture(texture_1);
-	highScoreIcon.setTexture(texture_1);
-	Quit.setTexture(texture_1);
+	Texture buttonTexture;
+	buttonTexture.loadFromFile("./Images/button.png");
+	playgameIcon.setTexture(buttonTexture);
+	InstructionIcon.setTexture(buttonTexture);
+	highScoreIcon.setTexture(buttonTexture);
+	Quit.setTexture(buttonTexture);
 
 	mainTexture.loadFromFile("./Images/main_back.png");
 	MainMenu.setTexture(mainTexture);
@@ -76,7 +76,7 @@ void Game::playGame()
 				hS.render();
 			}
 
-			else if (playgameIcon.isClicked(e))
+			if (playgameIcon.isClicked(e))
 			{
 				Gamewindow.close();
 				hS.getWindow().close();

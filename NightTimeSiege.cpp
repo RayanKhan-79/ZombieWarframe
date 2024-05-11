@@ -10,7 +10,7 @@ void NightTimeSiege::createBack(RenderWindow& window)
 }
 
 NightTimeSiege::NightTimeSiege()
-	: Levels(6)
+	: Levels(6, 3, 16, 3)
 {
 
 }

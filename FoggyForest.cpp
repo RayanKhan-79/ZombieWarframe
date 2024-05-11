@@ -1,7 +1,7 @@
 #include "FoggyForest.h"
 
 FoggyForest::FoggyForest()
-	: Levels(5)
+	: Levels(5, 3, 12, 3)
 {
 
 }

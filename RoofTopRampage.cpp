@@ -10,7 +10,7 @@ void RoofTopRampage::createBack(RenderWindow& window)
 }
 
 RoofTopRampage::RoofTopRampage()
-	: Levels(7)
+	: Levels(7, 3, 20, 3)
 {
 
 }

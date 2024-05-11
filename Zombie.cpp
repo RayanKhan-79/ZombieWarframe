@@ -62,7 +62,7 @@ void Zombie::Move()
 }
 
 
-int Zombie::getHealth() const
+int& Zombie::getHealth() 
 {
 	return health;
 }

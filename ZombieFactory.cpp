@@ -1,8 +1,17 @@
 #include "ZombieFactory.h"
 
 
-ZombieFactory::ZombieFactory()
-	: spawnInterval(3), numOfZombies(0), zombieLimit(4), numOfDancers(0), DancersLimit(1), zombies(NULL), Dancers(NULL) 
+ZombieFactory::ZombieFactory(int zombieLimit, int DancersLimit, int zombiesUnlocked, int waveLimit)
+	: spawnInterval(0), 
+	numOfZombies(0), 
+	zombieLimit(zombieLimit), 
+	numOfDancers(0), 
+	DancersLimit(DancersLimit), 
+	waveCount(0),
+	waveLimit(waveLimit),
+	zombies(NULL), 
+	Dancers(NULL), 
+	zombiesUnlocked(zombiesUnlocked)
 {
 	backupDancers = new BackUpDancer**[DancersLimit] {};
 	for (int i = 0; i < DancersLimit; i++)
@@ -47,9 +56,13 @@ void ZombieFactory::UpdateBackUpDancers()
 	}
 }
 
-bool ZombieFactory::spawnNextWave()
+bool ZombieFactory::spawnNextWave(int& kills)
 {
+	// All zombies haven't been spawned yet
+	if (numOfZombies != zombieLimit || numOfDancers != DancersLimit)
+		return false;
 	
+	// Do not call next wave if even a single zombie is still alive
 	for (int i = 0; i < numOfZombies; i++)
 		if (zombies[i]->getHealth() > 0)
 			return false;
@@ -62,17 +75,22 @@ bool ZombieFactory::spawnNextWave()
 		for (int j = 0; j < 4; j++)
 			if (backupDancers[i][j] && backupDancers[i][j]->getHealth() > 0)
 				return false;
-
+	
+	// Deallocate memory to allow use in the next wave
 	for (int i = 0; i < numOfZombies; i++)
 	{
 		delete zombies[i];
 		zombies[i] = NULL;
+		kills++;
+		std::cout << "kills: " << kills << '\n';
 	}
 
 	for (int i = 0; i < numOfDancers; i++)
 	{
 		delete Dancers[i];
 		Dancers[i] = NULL;
+		kills++;
+		std::cout << "kills: " << kills << '\n';
 	}
 
 	for (int i = 0; i < numOfDancers; i++)
@@ -81,6 +99,8 @@ bool ZombieFactory::spawnNextWave()
 		{
 			delete backupDancers[i][j];
 			backupDancers[i][j] = NULL;
+			kills++;
+			std::cout << "kills: " << kills << '\n';
 		}
 	}
 
@@ -90,27 +110,24 @@ bool ZombieFactory::spawnNextWave()
 	zombies = NULL;
 	Dancers = NULL;
 	
+	// set counters to 0
 	numOfZombies = 0;
 	numOfDancers = 0;
 	
-	if (numOfDancers == 0 && numOfZombies == 0)
-		waveCalled = false;
+	// keeping track of the number of waves called so far
+	waveCount++;
+	std::cout << waveCount + 1 << '\n';
 
 	return true;
 
 }
 
-void ZombieFactory::spawnWave()
+void ZombieFactory::spawnWave(int& kills)
 {
 	UpdateBackUpDancers();
 
-	spawnNextWave();
+	spawnNextWave(kills);
 
-	if (numOfDancers == 0 && numOfZombies == 0)
-	{
-		waveCount++;
-		std::cout << waveCount << '\n';
-	}
 
 	if (zombies == NULL) 
 	{
@@ -136,8 +153,7 @@ void ZombieFactory::spawnZombie()
 	if (!isIntervalReached())
 		return;
 	
-	/*if (numOfDancers >= DancersLimit && numOfZombies >= zombieLimit)
-		return;*/
+
 
 	switch (rand()%2)
 	{
@@ -145,25 +161,32 @@ void ZombieFactory::spawnZombie()
 
 			if (numOfZombies < zombieLimit)
 			{
-
-
-				switch (rand() % 3)
+				if (zombiesUnlocked == 1)
 				{
-					case 0:
-						zombies[numOfZombies] = new Zombie;
-						std::cout << "Zombie\n";
-						break;
+					zombies[numOfZombies] = new Zombie;
+					std::cout << "Zombie\n";
+				}
 
-					case 1:
-						zombies[numOfZombies] = new FootballZombie;
-						std::cout << "FZombie\n";
-						break;
+				else
+				{
+					switch (rand() % 3)
+					{
+						case 0:
+							zombies[numOfZombies] = new Zombie;
+							std::cout << "Zombie\n";
+							break;
 
-					case 2:
-						zombies[numOfZombies] = new BalloonZombie;
-						std::cout << "BZombie\n";
-						break;
+						case 1:
+							zombies[numOfZombies] = new FootballZombie;
+							std::cout << "FZombie\n";
+							break;
 
+						case 2:
+							zombies[numOfZombies] = new BalloonZombie;
+							std::cout << "BZombie\n";
+							break;
+
+					}
 				}
 				numOfZombies++;
 				return;

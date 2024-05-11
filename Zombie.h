@@ -30,7 +30,7 @@ public:
 	std::string action;
 
 public:
-	Zombie(int=200, int=1, int=5, int=1000, int=randGrid(180), int=180, int=180);
+	Zombie(int=200, int=8, int=5, int=600, int=randGrid(180), int=180, int=180);
 	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
@@ -39,13 +39,19 @@ public:
 	void Collision(Bullet*);
 
 	// Getters & Setters
-	int getHealth() const;
+	int& getHealth();
 	coordinates getPosition() const { return Pos; }
 	coordinates getHitArea() const { return hitArea; }
 
-	void Decrement_Health(int amount = 2)
+	void Decrement_Health(int amount = 0)
 	{
 		health -= amount;
+	}
+
+	void mark()
+	{
+		Color c(0, 0, 255);
+		sprite.setColor(c);
 	}
 };
 

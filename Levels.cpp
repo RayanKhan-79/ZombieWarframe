@@ -1,16 +1,68 @@
 #include "Levels.h"
 
-Levels::Levels(int plantsUnlocked)
+Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers)
 	: 
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)), 
 	pauseMenu(coordinates(325, 50)), 
-	killCount(0), 
-	maxZombies(10), 
-	pf(plantsUnlocked)
+	killCount(0),  
+	pf(plantsUnlocked),
+	zf(maxZombies,maxDancers,zombiesUnlocked)
+	
 {
+
+	for (int i = 0; i < 5; i++)
+		movers[i] = new Movers(coordinates(215, 85 + 118 * (i + 1) - 70));
+
 	Texture texture;
 	texture.loadFromFile("./Images/test2.png");
 	pauseIcon.setTexture(texture);
+}
+
+void Levels::drawMovers(RenderWindow& window)
+{
+	for (int i = 0; i < 5; i++)
+		movers[i]->draw(window);
+}
+
+void Levels::MoveMovers()
+{
+	for (int i = 0; i < 5; i++)
+		movers[i]->Move();
+}
+
+void Levels::TriggerMovers()
+{
+	for (int j = 0; j < 5; j++)
+	{
+		for (int i = 0; i < zf.getNumberOfZombies(); i++)
+		{
+			if (approxMatch(zf.getZombies()[i]->getHitArea(), movers[j]->getmid()))
+			{
+				movers[j]->mark(zf.getZombies()[i]);
+				zf.getZombies()[i]->mark();
+			}
+		}
+
+		for (int i = 0; i < zf.getNumberOfDancers(); i++)
+		{
+			if (approxMatch(zf.getDancers()[i]->getHitArea(), movers[j]->getmid()))
+			{
+				movers[j]->mark(zf.getDancers()[i]);
+				zf.getDancers()[i]->mark();
+			}
+		}
+		for (int i = 0; i < zf.getNumberOfDancers(); i++)
+		{
+			for (int k = 0; k < 4; k++)
+			{
+				if (zf.getBackUp()[i][k] && approxMatch(zf.getBackUp()[i][k]->getHitArea(), movers[j]->getmid()))
+				{
+					movers[j]->mark(zf.getBackUp()[i][k]);
+					zf.getBackUp()[i][k]->mark();
+				}
+			}
+		}
+	}
 }
 
 void Levels::collisionDetection()
@@ -19,7 +71,7 @@ void Levels::collisionDetection()
 	{
 		for (int i = 0; i < zf.getNumberOfZombies(); i++)
 		{
-			if (approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			if (approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getHitArea()))
 			{
 				
 				zf.getZombies()[i]->Attack(pf.getPlants()[j]);
@@ -34,7 +86,7 @@ void Levels::collisionDetection()
 
 		for (int i = 0; i < zf.getNumberOfDancers(); i++)
 		{
-			if (approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getPosition()))
+			if (approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getHitArea()))
 			{
 				zf.getDancers()[i]->Attack(pf.getPlants()[j]);
 
@@ -49,7 +101,7 @@ void Levels::collisionDetection()
 		for (int i = 0; i < zf.getNumberOfDancers(); i++)
 			for (int k = 0; k < 4; k++)
 			{
-				if (zf.getBackUp()[i][k] && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getPosition()))
+				if (zf.getBackUp()[i][k] && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getHitArea()))
 				{
 					zf.getBackUp()[i][k]->Attack(pf.getPlants()[j]);
 					//std::cout << pf.getPlants()[j]->getHealth() << '\n';
@@ -66,7 +118,7 @@ void Levels::collisionDetection()
 
 int Levels::winCondition()
 {
-	if (killCount >= maxZombies)
+	if (zf.isWaveLimitReached())
 		return 1;  // Player has won
 
 	if (lives <= 0)
@@ -229,17 +281,21 @@ bool Levels::start()
 			//	}
 
 
-			zf.spawnWave();
+			zf.spawnWave(killCount);
 			zf.DrawZombies(window, deltaTime);
 			collisionDetection();
+			TriggerMovers();
+			MoveMovers();
 		}
 
 		else if (pauseMenu.paused == true)
 		{
 			pauseMenu.draw(window);
+
 		}
 		
 		pf.DrawIcons(window);
+		drawMovers(window);
 		//pf.DrawPlants(window, deltaTime);
 		//zf.spawnWave();
 		//zf.DrawZombies(window, deltaTime);

@@ -11,8 +11,8 @@ bool approxMatch(const coordinates& hit_1, const coordinates& pos_2)
 	(
 		pos_2.x >= hit_1.x - 95 &&
 		pos_2.x <= hit_1.x &&
-		pos_2.y + 73 >= hit_1.y - 118 &&
-		pos_2.y + 73 <= hit_1.y
+		pos_2.y >= hit_1.y - 118 &&
+		pos_2.y <= hit_1.y
 	)
 	{
 		return true;

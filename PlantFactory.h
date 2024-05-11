@@ -1,6 +1,9 @@
 #include "Plant.h"
 #include "Icon.h"
-
+#include "Sunflower.h"
+#include "PeaShooter.h"
+#include "Walnut.h"
+#include "CherryBomb.h"
 
 
 class SeedPackets : public Icon  // Create a seperate file for this
@@ -22,7 +25,6 @@ protected:
     int SpriteWidth;
     int SpriteHeight;
 public:
-    PlantFactory();
     PlantFactory(int plantsUnlocked);
 
     void DrawPlants(RenderWindow& window, float deltaTime);

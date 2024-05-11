@@ -1,13 +1,6 @@
 #include "PlantFactory.h"
-PlantFactory::PlantFactory(int plantsUnlocked)
-    : numPlants(0), plantsUnlocked(plantsUnlocked)
-{}
-#include "Sunflower.h"
-#include "PeaShooter.h"
-#include "Walnut.h"
-#include "CherryBomb.h"
 
-PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
+PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(plantsUnlocked)
 {
     // Initialize all textures (even locked ones)
     seedTextures[0].loadFromFile("./Images/Sunflower_SD.png");  // Sunflower

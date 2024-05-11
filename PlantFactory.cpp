@@ -1,4 +1,6 @@
 #include "PlantFactory.h"
+PlantFactory::PlantFactory(int plantsUnlocked) 
+    : numPlants(0) , plantsUnlocked(plantsUnlocked)
 #include "Sunflower.h"
 #include "PeaShooter.h"
 #include "Walnut.h"
@@ -30,7 +32,7 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 
     for (int i = 0; i < plantsUnlocked; i++)
     {
-        seedPackets[i] = new SeedPackets(coordinates(10, (85 * i) + 50), true);
+        seedPackets[i] = new SeedPackets(coordinates(10, (85 * i) + 50), coordinates(140, (85 * i) + 130), true);
         seedPackets[i]->setTexture(seedTextures[i]);
     }
 }
@@ -55,14 +57,15 @@ void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
         plants[i]->Draw(window, deltaTime);
     }
 }
+
 void PlantFactory::spawnSunflowerRandomly(int numRows, int numCols)
 {
-    if (numPlants < 20)
+    if (numPlants < 10)
     {
         int randomRow = rand() % numRows;
         int randomCol = rand() % numCols;
 
-        plants[numPlants] = new Plant(randomCol * 95 + 300, randGrid(138), 1000);
+        plants[numPlants] = new Plant(randomCol * 95 + 300, randGrid(138), 300);
         numPlants++;
     }
 }

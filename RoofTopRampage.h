@@ -1,11 +1,12 @@
 #pragma once
 #include "Levels.h"
-
-class NightTimeSiege : public Levels
+class RoofTopRampage : public Levels
 {
 
+
+
 public:
-	NightTimeSiege();
+	RoofTopRampage();
 	virtual void createBack(RenderWindow& window);
 };
 

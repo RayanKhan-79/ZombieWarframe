@@ -4,11 +4,8 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int
 	: Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY),
 	hitArea(x + 95, y + pixelsY), action("moving")
 {
-	//switchTime = 0.15;
-	//image.loadFromFile("./Images/zanimation2.png");
-	//image.loadFromFile("./Images/zombie.png");
 
-	//texture.loadFromImage(image);
+
 	texture.loadFromFile("./Images/zombie.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
@@ -16,8 +13,11 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int
 	
 }
 
+
+
 void Zombie::Attack(Plant* plant)
 {
+	action = "attacking";
 	plant->mark();
 	plant->getHealth() -= damage;
 	if (health <= 0 || plant->getHealth() <= 0)
@@ -33,6 +33,7 @@ void Zombie::Draw(RenderWindow& window, float deltaTime)
 	if (health > 0)
 	{
 		UpdateAnimation(deltaTime);
+		sprite.setPosition(Pos.x, Pos.y);
 		window.draw(sprite);
 	}
 }
@@ -58,12 +59,10 @@ void Zombie::Move()
 
 	Pos.x -= speed;
 	hitArea.x -= speed;
-	//health -= 2;
-	sprite.setPosition(Pos.x, Pos.y);
 }
 
 
-int Zombie::getHealth() const
+int& Zombie::getHealth() 
 {
 	return health;
 }

@@ -25,9 +25,8 @@ protected:
 	Sprite sprite;
 	coordinates Pos;
 	coordinates hitArea;
-
-public:
 	std::string action;
+
 
 public:
 	Zombie(int=200, int=8, int=5, int=600, int=randGrid(180), int=180, int=180);

@@ -22,14 +22,13 @@ protected:
     int SpriteWidth;
     int SpriteHeight;
 public:
-
+    PlantFactory();
     PlantFactory(int plantsUnlocked);
 
     void DrawPlants(RenderWindow& window, float deltaTime);
 
     void spawnSunflowerRandomly(int numRows, int numCols);
     void DrawIcons(); // Draw all icons
-    void spawnSunflowerRandomly(int numRows, int numCols);
 
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }

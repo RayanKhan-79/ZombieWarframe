@@ -1,6 +1,7 @@
 #include "PlantFactory.h"
-PlantFactory::PlantFactory(int plantsUnlocked) 
-    : numPlants(0) , plantsUnlocked(plantsUnlocked)
+PlantFactory::PlantFactory(int plantsUnlocked)
+    : numPlants(0), plantsUnlocked(plantsUnlocked)
+{}
 #include "Sunflower.h"
 #include "PeaShooter.h"
 #include "Walnut.h"
@@ -18,13 +19,13 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
     seedTextures[6].loadFromFile("./Images/Fumeshroom_SD.png");  // fumeShroom
    
 
-    seedPackets = new SeedPackets * [plantsUnlocked] {};
+    //seedPackets = new SeedPackets * [plantsUnlocked] {};
 
-    for (int i = 0; i < plantsUnlocked; i++)
-    {
-        seedPackets[i] = new SeedPackets(coordinates(10, (83 * i) + 83), true);
-        seedPackets[i]->setTexture(seedTextures[i]);
-    }
+    //for (int i = 0; i < plantsUnlocked; i++)
+    //{
+    //    seedPackets[i] = new SeedPackets(coordinates(10, (83 * i) + 83), true);
+    //    seedPackets[i]->setTexture(seedTextures[i]);
+    //}
 
 
 

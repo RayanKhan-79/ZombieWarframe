@@ -14,7 +14,7 @@ protected:
 	coordinates Area;
 
 public:
-
+	Icon();
 	Icon(coordinates, coordinates);
 
 	void setTexture(Texture);

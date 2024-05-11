@@ -169,6 +169,7 @@
     <ClCompile Include="Sentry.cpp" />
     <ClCompile Include="ShootingPlants.cpp" />
     <ClCompile Include="SnowPea.cpp" />
+    <ClCompile Include="Sun.cpp" />
     <ClCompile Include="Sunflower.cpp" />
     <ClCompile Include="SunflowerFields.cpp" />
     <ClCompile Include="Walnut.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Sentry.h" />
     <ClInclude Include="ShootingPlants.h" />
     <ClInclude Include="SnowPea.h" />
+    <ClInclude Include="Sun.h" />
     <ClInclude Include="Sunflower.h" />
     <ClInclude Include="SunflowerFields.h" />
     <ClInclude Include="Walnut.h" />

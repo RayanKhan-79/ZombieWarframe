@@ -1,5 +1,5 @@
 #include "Levels.h"
-
+#include "Sun.h"
 Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers)
 	:
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
@@ -197,6 +197,13 @@ bool Levels::start()
 	/*Sentry* sentry[3];
 	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));*/
 
+	sf::Font font;
+	if (!font.loadFromFile("arial.ttf")) {
+		// Handle font loading error
+	}
+
+	Sun sun(10);
+
 	float deltaTime;
 	while (window.isOpen())
 	{
@@ -287,8 +294,21 @@ bool Levels::start()
 				}
 			}
 
+		//Sun implementation
+			while (window.pollEvent(event)) {
+				if (event.type == sf::Event::Closed) {
+					window.close();
+				}
+				// Pass the event to Sun's isClick function
+				sun.isClick(event);
+			}
 
+			sun.UpdateAnimation(deltaTime,0.25);
 
+			window.draw(sun.getSprite());
+
+			// Draw the score
+			sun.scoreDisplay(window, font);
 
 
 			if (event.type == Event::MouseButtonReleased)

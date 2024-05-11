@@ -1,11 +1,10 @@
 #pragma once
 #include "Levels.h"
-
-class NightTimeSiege : public Levels
+class FoggyForest : public Levels
 {
 
 public:
-	NightTimeSiege();
+	FoggyForest();
 	virtual void createBack(RenderWindow& window);
 };
 

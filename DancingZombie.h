@@ -4,20 +4,26 @@
 
 class DancingZombie : public Zombie
 {
-	BackUpDancer** backUpDancers;
-	int count;
 	int speed_y;
 	float spawnInterval;
 	Clock clock;
 
+
+
 public:
-	DancingZombie(float = 10, int = 4, int = 200, int = 1, int = 5, int = 1000, int = randGrid(180));
-	void SpawnBackUp();
+	DancingZombie(float = 5, int = 200, int = 3, int = 5, int = 1000, int = randGrid(180), int = 125, int = 180);
 	void UpdateAnimation(float deltaTime);
-	void Draw(RenderWindow&, float);
-	void checkStatus();
+	//void Draw(RenderWindow&, float);
+	void SummonBackUp(BackUpDancer**& backUp);
+	void resetTime()
+	{
+		clock.restart();
+	}
+	//void checkAssignment(BackUpDancer**& backUp);
+	//virtual void Attack(Plant*);
+	//void checkStatus();
 	void Move();
-	~DancingZombie();
+
 
 };
 

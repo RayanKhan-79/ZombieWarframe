@@ -11,22 +11,37 @@ class ZombieFactory
 {
 	float spawnInterval;
 
-	int num_Of_Zombie;
-	int zombie_Limit;
+	int numOfZombies;
+	int zombieLimit;
 
 	Zombie** zombies;
-	Clock clock;
+	DancingZombie** Dancers;
 
+	BackUpDancer*** backupDancers;
+	
+	int numOfDancers;
+	int DancersLimit;
+	
+	Clock spawnClock;
+	
+	int zombiesUnlocked;
+
+	bool waveCalled = false;
+	int waveCount;
+	int waveLimit;
 
 
 
 public:
-	ZombieFactory();
-	bool spawnNextWave();
+	ZombieFactory(int,int,int,int=3);
+
+	bool spawnNextWave(int&);
+
+	void UpdateBackUpDancers();
 
 	bool isIntervalReached();
 
-	void spawnWave();
+	void spawnWave(int&);
 
 	void DrawZombies(RenderWindow& window, float deltaTime);
 
@@ -34,7 +49,17 @@ public:
 
 	Zombie** getZombies() { return zombies; }
 
-	int getNumberOfZombies() { return num_Of_Zombie; }
+	DancingZombie** getDancers() { return Dancers; }
 
+	BackUpDancer*** getBackUp() { return backupDancers; }
+
+	int getNumberOfDancers() { return numOfDancers; }
+
+	int getNumberOfZombies() { return numOfZombies; }
+
+	bool isWaveLimitReached()
+	{
+		return (waveCount >= waveLimit);
+	}
 	~ZombieFactory();
 };

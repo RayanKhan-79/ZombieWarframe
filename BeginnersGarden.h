@@ -4,6 +4,7 @@ class BeginnersGarden : public Levels
 {
 
 public:
+	BeginnersGarden();
 	virtual void createBack(RenderWindow& window);
 };
 

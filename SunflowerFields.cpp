@@ -1,6 +1,6 @@
-#include "BeginnersGarden.h"
+#include "SunflowerFields.h"
 
-void BeginnersGarden::createBack(RenderWindow& window)
+void SunflowerFields::createBack(RenderWindow& window)
 {
 	background_Texture.loadFromFile("./Images/lvl_1_w_back.png");
 	background_Sprite.setTexture(background_Texture);
@@ -8,9 +8,8 @@ void BeginnersGarden::createBack(RenderWindow& window)
 	window.draw(background_Sprite);
 }
 
-BeginnersGarden::BeginnersGarden()
-	: Levels(2,1,8,0)
-	
+SunflowerFields::SunflowerFields()
+	: Levels(4,3,10,3)
 {
-	
+
 }

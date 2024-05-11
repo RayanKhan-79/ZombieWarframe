@@ -1,6 +1,6 @@
-#include "BeginnersGarden.h"
+#include "ZombieOutskirts.h"
 
-void BeginnersGarden::createBack(RenderWindow& window)
+void ZombieOutskirts::createBack(RenderWindow& window)
 {
 	background_Texture.loadFromFile("./Images/lvl_1_w_back.png");
 	background_Sprite.setTexture(background_Texture);
@@ -8,9 +8,8 @@ void BeginnersGarden::createBack(RenderWindow& window)
 	window.draw(background_Sprite);
 }
 
-BeginnersGarden::BeginnersGarden()
-	: Levels(2,1,8,0)
-	
+ZombieOutskirts::ZombieOutskirts()
+	: Levels(3,3,8,2)
 {
-	
+
 }

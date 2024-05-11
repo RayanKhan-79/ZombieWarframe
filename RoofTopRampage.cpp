@@ -1,6 +1,6 @@
-#include "NightTimeSiege.h"
+#include "RoofTopRampage.h"
 
-void NightTimeSiege::createBack(RenderWindow& window)
+void RoofTopRampage::createBack(RenderWindow& window)
 {
 
 	background_Texture.loadFromFile("./Images/lvl_2_w_back.png");
@@ -9,8 +9,8 @@ void NightTimeSiege::createBack(RenderWindow& window)
 	window.draw(background_Sprite);
 }
 
-NightTimeSiege::NightTimeSiege()
-	: Levels(6, 3, 16, 3)
+RoofTopRampage::RoofTopRampage()
+	: Levels(7, 3, 20, 3)
 {
 
 }

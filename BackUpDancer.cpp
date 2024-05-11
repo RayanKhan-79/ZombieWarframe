@@ -1,9 +1,10 @@
 #include "BackUpDancer.h"
 
-BackUpDancer::BackUpDancer(int health, int speed, int damage, int x, int y)
-	: Zombie(health, speed, damage, x, y), speed_y(speed)
+BackUpDancer::BackUpDancer(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
+	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY), speed_y(speed)
 {
-
+	hitArea.x = Pos.x + 95;
+	hitArea.y = Pos.y + pixelsY;
 }
 
 void BackUpDancer::Draw(RenderWindow& window, float deltaTime)
@@ -19,31 +20,31 @@ void BackUpDancer::Draw(RenderWindow& window, float deltaTime)
 		texture.loadFromFile("./Images/04.png");
 	}
 
-	if (health <= 0)
-	{
-		texture.loadFromFile("./Images/01.png");
-	}
-
+	sprite.setPosition(Pos.x, Pos.y);
 	window.draw(sprite);
 }
 
 void BackUpDancer::Move()
 {
+	if (action == "attacking")
+		return;
+
 	if (!spawned || health <= 0)
 		return;
 
-	if (/*Pos.y + 180 >= 118 * 1 + 85 &&*/ Pos.y + 180 <= 118 * 2 + 85)
+	if (Pos.y + 180 <= 118 * 2 + 85)
 		speed_y = speed;
 
-	if (/*Pos.y + 180 <= 118 * 5 + 85 &&*/ Pos.y + 180 >= 118 * 5 + 85)
+	if (Pos.y + 180 >= 118 * 5 + 85)
 		speed_y = -speed;
 
 
 	Pos.x -= speed;
-	Pos.y += speed_y;
+	hitArea.x -= speed;
 
-	//health -= 2;
-	sprite.setPosition(Pos.x, Pos.y);
+	Pos.y += speed_y;
+	hitArea.y += speed_y;
+
 }
 
 void BackUpDancer::SpawnAnimation(float deltaTime)
@@ -61,7 +62,7 @@ void BackUpDancer::SpawnAnimation(float deltaTime)
 		if (offset > 9)
 		{
 			texture.loadFromFile("./Images/03.png");
-			sprite.setTextureRect(IntRect(offset * 125, 0, 125, 180));
+			sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 
 			spawned = true;
 			offset = 0;
@@ -84,6 +85,6 @@ void BackUpDancer::UpdateAnimation(float deltaTime)
 		if (offset > 3)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 125, 0, 125, 180));
+	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 }
 

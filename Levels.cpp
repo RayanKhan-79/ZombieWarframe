@@ -111,7 +111,14 @@ void Levels::collisionDetection()
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
-
+			if (pf.getPlants()[j]->getBullet() != NULL && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			{
+				if (zf.getDancers()[i]->getHealth() > 0)
+				{
+					zf.getDancers()[i]->mark();
+					zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet());
+				}
+			}
 
 
 		}
@@ -126,7 +133,14 @@ void Levels::collisionDetection()
 
 				}
 
-
+				if (pf.getPlants()[j]->getBullet() != NULL && zf.getBackUp()[i][k] != NULL && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+				{
+					if (zf.getBackUp()[i][k]->getHealth() > 0)
+					{
+						zf.getBackUp()[i][k]->mark();
+						zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet());
+					}
+				}
 
 			}
 

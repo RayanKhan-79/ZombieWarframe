@@ -36,8 +36,8 @@ PlantFactory::PlantFactory() : numPlants(0) , plantsUnlocked(8)
 }
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
-    if (numPlants < 10) {
-        plants[numPlants] = new CherryBomb(x, y, 10); 
+    if (numPlants < 50) {
+        plants[numPlants] = new Sunflower(x, y, 100); 
         numPlants++;
     }
 }

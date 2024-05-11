@@ -1,12 +1,16 @@
 #include "Sunflower.h"
 Sunflower::Sunflower() :Plant()
 {
+	spriteHeight = 135;
+	spriteWidth = 101;
 }
 Sunflower::Sunflower(int x, int y, int health) :Plant(x,y,health)
 {
+	spriteHeight = 135;
+	spriteWidth = 101;
 	texture.loadFromFile("./Images/Sunflower.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 101, 0, 101, 135));
+	sprite.setTextureRect(IntRect(offset * spriteWidth, 0, spriteWidth, spriteHeight));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 void Sunflower::UpdateAnimation(float deltaTime) {
@@ -19,7 +23,7 @@ void Sunflower::UpdateAnimation(float deltaTime) {
 		if (offset == 6)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 101, 0, 101, 135));
+	sprite.setTextureRect(IntRect(offset * spriteWidth, 0, spriteWidth, spriteHeight));
 }
 
 

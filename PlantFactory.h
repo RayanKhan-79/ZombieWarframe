@@ -17,8 +17,10 @@ protected:
     SeedPackets** seedPackets = NULL;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
-    Plant* plants[10]{};
+    Plant* plants[50]{};
     int numPlants;
+    int SpriteWidth;
+    int SpriteHeight;
 public:
     PlantFactory();
 
@@ -28,6 +30,8 @@ public:
 
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }
+    int getSpriteWidth() { return SpriteWidth; }
+    int getSpriteHeight() { return SpriteHeight; }
     void DrawIcons(RenderWindow& window); // Draw all icons
 
     //testing

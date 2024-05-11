@@ -165,6 +165,7 @@
     <ClCompile Include="Repeater.cpp" />
     <ClCompile Include="RoofTopRampage.cpp" />
     <ClCompile Include="Screens.cpp" />
+    <ClCompile Include="SeedPackets.cpp" />
     <ClCompile Include="Sentry.cpp" />
     <ClCompile Include="SnowPea.cpp" />
     <ClCompile Include="Sunflower.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Repeater.h" />
     <ClInclude Include="RoofTopRampage.h" />
     <ClInclude Include="Screens.h" />
+    <ClInclude Include="SeedPackets.h" />
     <ClInclude Include="Sentry.h" />
     <ClInclude Include="SnowPea.h" />
     <ClInclude Include="Sunflower.h" />

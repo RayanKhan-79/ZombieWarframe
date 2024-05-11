@@ -8,7 +8,7 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	killCount(0),
 	pf(plantsUnlocked),
 	zf(maxZombies, maxDancers, zombiesUnlocked),
-	sunGenerator(4)
+	sunGenerator(10)
 	
 	
 {
@@ -228,23 +228,23 @@ bool Levels::start()
 				window.close();
 			}
 
-			else if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
+			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
 			{
 				pauseMenu.paused = true;
 			}
 
-			else if (SkipLevel.isClicked(event))
+			if (SkipLevel.isClicked(event))
 			{
 				return true;
 			}
 
-			else if (pauseMenu.resumeIsClicked(event))
+			if (pauseMenu.resumeIsClicked(event))
 			{
 				pauseMenu.paused = false;
 			}
 
 
-			else if (sunGenerator.Update(event))
+			if (sunGenerator.Update(event))
 			{
 				std::cout << "S\n";
 				scoreBoard.IncrementScore(25);

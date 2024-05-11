@@ -1,24 +1,25 @@
 #pragma once
 #include "Icon.h"
-#include "coordinates.h"
-class Sun
+class Sun : public Icon
 {
-private:
-	int score;
-	int interval;
-	int health;
-	float Total_Animation_Time;
-	int offset;
-	coordinates Pos;
-	Texture texture;
-	Sprite sprite;
+
+	
 public:
-	Sun();
-	Sun(float interval);
-	void UpdateAnimation(float deltaTime, float switchTime);
-	void spawnSun();
-	void scoreDisplay(sf::RenderWindow& window, sf::Font& font);
-	void isClick(sf::Event& event);
-	Sprite getSprite() { return sprite;  }
+	Sun(coordinates pos) 
+		: Icon(pos, coordinates(pos.x + 100, pos.y + 100))
+	{
+		icontexture.loadFromFile("./Images/Sun.png");
+		iconSprite.setTexture(icontexture);
+		iconSprite.setTextureRect(IntRect(0, 0, 100, 100));
+	}
+
+	void Move()
+	{
+		
+		pos.y += 2;
+		Area.y += 2;
+		iconSprite.setPosition(pos.x, pos.y);
+	}
+
 };
 

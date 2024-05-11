@@ -4,6 +4,8 @@
 #include"PlantFactory.h"
 #include"PauseMenu.h"
 #include"Movers.h"
+#include"ScoreBoard.h"
+#include "GenSun.h"
 //#include"Sentry.h"
 
 class Levels
@@ -16,6 +18,7 @@ protected:
 	Texture background_Texture;
 	Sprite background_Sprite;
 	PauseMenu pauseMenu;
+	ScoreBoard scoreBoard;
 	//Music backGroundMusic
 
 	//Bullet** projectiles;
@@ -23,7 +26,7 @@ protected:
 	Movers* movers[5];
 	ZombieFactory zf;
 	PlantFactory pf;
-
+	GenSun sunGenerator;
 	int lives = 3;
 	int killCount;
 	//int plantsUnlocked;

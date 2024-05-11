@@ -1,13 +1,15 @@
 #include "Levels.h"
-#include "Sun.h"
+
 Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers)
 	:
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
 	SkipLevel(coordinates(1030, 60), coordinates(1180, 100)),
-	pauseMenu(coordinates(325, 50)), 
-	killCount(0),  
+	pauseMenu(coordinates(325, 50)),
+	killCount(0),
 	pf(plantsUnlocked),
-	zf(maxZombies,maxDancers,zombiesUnlocked)
+	zf(maxZombies, maxDancers, zombiesUnlocked),
+	sunGenerator(4)
+	
 	
 {
 
@@ -189,20 +191,16 @@ bool Levels::start()
 	Clock time;
 	window.setFramerateLimit(20);
 
-	DancingZombie* z1[5]{};
-	for (int i = 0; i < 5; i++)
-		z1[i] = new DancingZombie(5, 4, 200, 4);
+	//DancingZombie* z1[5]{};
+	//for (int i = 0; i < 5; i++)
+	//	z1[i] = new DancingZombie(5, 4, 200, 4);
 	//ZombieFactory zf;
 	
 	/*Sentry* sentry[3];
 	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));*/
 
-	sf::Font font;
-	if (!font.loadFromFile("arial.ttf")) {
-		// Handle font loading error
-	}
-
-	Sun sun(10);
+	
+	
 
 	float deltaTime;
 	while (window.isOpen())
@@ -230,24 +228,29 @@ bool Levels::start()
 				window.close();
 			}
 
-			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
+			else if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
 			{
 				pauseMenu.paused = true;
 			}
 
-			if (SkipLevel.isClicked(event))
+			else if (SkipLevel.isClicked(event))
 			{
 				return true;
 			}
 
-			if (pauseMenu.resumeIsClicked(event))
+			else if (pauseMenu.resumeIsClicked(event))
 			{
 				pauseMenu.paused = false;
 			}
 
 
+			else if (sunGenerator.Update(event))
+			{
+				std::cout << "S\n";
+				scoreBoard.IncrementScore(25);
+			}
 
-			if (event.type == Event::MouseButtonReleased)
+			else if (event.type == Event::MouseButtonReleased)
 			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
@@ -295,29 +298,30 @@ bool Levels::start()
 			}
 
 		//Sun implementation
-			while (window.pollEvent(event)) {
-				if (event.type == sf::Event::Closed) {
-					window.close();
-				}
-				// Pass the event to Sun's isClick function
-				sun.isClick(event);
-			}
+		//	while (window.pollEvent(event)) {
+		//		if (event.type == sf::Event::Closed) {
+		//			window.close();
+		//		}
+		//		// Pass the event to Sun's isClick function
+		//		sun.isClick(event);
+		//	}
 
-			sun.UpdateAnimation(deltaTime,0.25);
+		//	sun.UpdateAnimation(deltaTime,0.25);
 
-			window.draw(sun.getSprite());
+		//	window.draw(sun.getSprite());
 
-			// Draw the score
-			sun.scoreDisplay(window, font);
+		//	// Draw the score
+		//	sun.scoreDisplay(window, font);
 
 
-			if (event.type == Event::MouseButtonReleased)
-				std::cout << "Game --> x: " << Mouse::getPosition(window).x << " y: " << Mouse::getPosition(window).y << "\n";
+		//	if (event.type == Event::MouseButtonReleased)
+		//		std::cout << "Game --> x: " << Mouse::getPosition(window).x << " y: " << Mouse::getPosition(window).y << "\n";
 		}
 
 
 
 
+		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);
 		//if (z1 == NULL)
@@ -337,7 +341,11 @@ bool Levels::start()
 		{
 			//pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
-			
+
+			sunGenerator.spawnSun();
+			sunGenerator.moveSun(window);
+			//sun.draw(window);
+			//sun.Move();
 			//for (int i = 0; i < 5; i++)
 			//{
 			//	z1[i]->Move();

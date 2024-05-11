@@ -29,7 +29,7 @@ protected:
 
 
 public:
-	Zombie(int=200, int=8, int=5, int=600, int=randGrid(180), int=180, int=180);
+	Zombie(int=200, int=8, int=5, int=1000, int=randGrid(180), int=180, int=180);
 	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);

@@ -32,6 +32,7 @@ protected:
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
 	void collisionDetection();
+	void BulletCollisions();
 	virtual void createBack(RenderWindow& window) = 0;
 	bool start();
 	void drawMovers(RenderWindow& window);

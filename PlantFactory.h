@@ -5,7 +5,7 @@
 #include "Walnut.h"
 #include "CherryBomb.h"
 #include "SeedPackets.h"
-
+#include "Sentry.h"
 
 
 class PlantFactory
@@ -14,24 +14,42 @@ protected:
     SeedPackets** seedPackets = NULL;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
+
+
     Plant* plants[50]{};
     int numPlants;
-    int SpriteWidth;
-    int SpriteHeight;
+
+
+
+
+
+
+    //int SpriteWidth;
+    //int SpriteHeight;
+
 public:
     PlantFactory(int plantsUnlocked);
 
     void DrawPlants(RenderWindow& window, float deltaTime);
 
-    void spawnSunflowerRandomly(int numRows, int numCols);
-    void DrawIcons(); // Draw all icons
+    void spawnSunflowerAtPosition(int x, int y);
 
-    int getNumPlants() const { return numPlants; }
-    Plant* const* getPlants() const { return plants; }
-    int getSpriteWidth() { return SpriteWidth; }
-    int getSpriteHeight() { return SpriteHeight; }
-    void DrawIcons(RenderWindow& window); // Draw all icons
+    void MoveProjectiles();
+    
+    void DrawProjectiles(RenderWindow&);
+
+    void DeleteProjectiles();
+
+    void Shoot();
 
     //testing
-    void spawnSunflowerAtPosition(int x, int y);
+    void spawnSunflowerRandomly(int numRows, int numCols);
+    void DrawIcons(RenderWindow& window); // Draw all icons
+ 
+    
+    
+    int getNumPlants() const { return numPlants; }
+    Plant* const* getPlants() const { return plants; }
+    //int getSpriteWidth() { return SpriteWidth; }
+    //int getSpriteHeight() { return SpriteHeight; }
 };

@@ -34,6 +34,13 @@ void Levels::MoveMovers()
 		movers[i]->Move();
 }
 
+
+void Levels::BulletCollisions()
+{
+
+}
+
+
 void Levels::TriggerMovers()
 {
 	for (int j = 0; j < 5; j++)
@@ -83,7 +90,14 @@ void Levels::collisionDetection()
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
-
+			if (pf.getPlants()[j]->getBullet() != NULL &&  approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			{
+				if (zf.getZombies()[i]->getHealth() > 0)
+				{
+					zf.getZombies()[i]->mark();
+					zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet());
+				}
+			}
 
 
 		}
@@ -318,6 +332,11 @@ bool Levels::start()
 			//pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
 			
+			pf.Shoot();
+			pf.DrawProjectiles(window);
+			pf.MoveProjectiles();
+
+			//pf.DeleteProjectiles();
 			//for (int i = 0; i < 5; i++)
 			//{
 			//	z1[i]->Move();

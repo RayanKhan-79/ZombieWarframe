@@ -30,7 +30,6 @@ public:
 
 	void draw(sf::RenderWindow& window)
 	{
-		Move();
 		bullet.setPosition(pos.x, pos.y);
 		window.draw(bullet);
 		//std::cout << "Sentry--> Bx: " << pos.x << " By: " << pos.y << "\n";

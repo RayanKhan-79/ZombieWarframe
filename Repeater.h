@@ -2,8 +2,9 @@
 #include "ShootingPlants.h"
 class Repeater : public ShootingPlants
 {
-	Repeater() { }
+
+public:
 	Repeater(int x, int y, int health);
-	void UpdateAnimation(float interval);
+	//void UpdateAnimation(float interval);
 };
 

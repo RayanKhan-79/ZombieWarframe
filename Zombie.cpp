@@ -67,27 +67,27 @@ int& Zombie::getHealth()
 	return health;
 }
 
-void Zombie::Collision(Bullet* bullet)
+void Zombie::getShotAt(Bullet* bullet)
 {
-	if (!bullet)
-	{
-		std::cout << "NULL\n";
-		return;
-	}
+	//if (!bullet)
+	//{
+	//	std::cout << "NULL\n";
+	//	return;
+	//}
 
 	// hit area
-	int h_y = Pos.y + pixelsY;
-	int h_x = Pos.x + pixelsX/2;
+	//int h_y = Pos.y + pixelsY;
+	//int h_x = Pos.x + pixelsX/2;
 
 	// [h_y --- h_y - 118]
 	// [h_x --- h_x + 95]
-	if (bullet->getCoordinates().y <= h_y && bullet->getCoordinates().y >= h_y - 118 &&
-		bullet->getCoordinates().x >= h_x && bullet->getCoordinates().x <= h_x + 95)
-	{
-		std::cout << "Collided!!\n";
-		health -= 10;
-		bullet->setCollisonStatus(true);
+	//if (bullet->getCoordinates().y <= h_y && bullet->getCoordinates().y >= h_y - 118 &&
+	//	bullet->getCoordinates().x >= h_x && bullet->getCoordinates().x <= h_x + 95)
+	//{
+		
+	health -= 10;
+	bullet->setCollisonStatus(true);
 	
-	}
+	//}
 }
 

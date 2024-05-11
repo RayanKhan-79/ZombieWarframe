@@ -1,7 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"coordinates.h"
-
+#include"Sentry.h"
 using namespace sf;
 class Plant
 {
@@ -24,6 +24,7 @@ public:
 	Plant();
 	virtual void Draw(RenderWindow& window, float deltaTime);
 	virtual void UpdateAnimation(float interval);
+	virtual void Shoot() { std::cout << "Plant\n"; }
 	bool isClick();
 	coordinates getPosition() { return Pos; }
 	coordinates getHitArea() { return mid; }
@@ -32,6 +33,11 @@ public:
 	{
 		Color c(255, 0, 0);
 		sprite.setColor(c);
+	}
+	virtual Bullet* getBullet()
+	{
+		Bullet* ignore(NULL);
+		return ignore;
 	}
 };
 

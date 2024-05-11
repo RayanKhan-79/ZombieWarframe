@@ -35,7 +35,7 @@ public:
 	virtual void UpdateAnimation(float interval);
 	virtual void Attack(Plant*);
 
-	void Collision(Bullet*);
+	void getShotAt(Bullet*);
 
 	// Getters & Setters
 	int& getHealth();

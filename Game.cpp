@@ -134,7 +134,7 @@ void Game::playGame()
 									{
 									
 										delete level;
-										
+										level = NULL;
 										std::cout << "YOU WON\n";
 									}
 
@@ -170,6 +170,9 @@ void Game::playGame()
 
 Game::~Game()
 {
-	delete level;
-	level = NULL;
+	if (level != NULL)
+	{
+		delete level;
+		level = NULL;
+	}
 }

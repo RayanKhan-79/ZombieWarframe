@@ -2,7 +2,7 @@
 
 
 ZombieFactory::ZombieFactory(int zombieLimit, int DancersLimit, int zombiesUnlocked, int waveLimit)
-	: spawnInterval(1), 
+	: spawnInterval(2), 
 	numOfZombies(0), 
 	zombieLimit(zombieLimit), 
 	numOfDancers(0), 

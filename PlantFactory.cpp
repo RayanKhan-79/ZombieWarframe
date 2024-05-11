@@ -1,16 +1,25 @@
 #include "PlantFactory.h"
-PlantFactory::PlantFactory(int plantsUnlocked) 
-    : numPlants(0) , plantsUnlocked(plantsUnlocked)
+
+PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(plantsUnlocked)
 {
     // Initialize all textures (even locked ones)
-    seedTextures[0].loadFromFile("./Images/sunFlower_i.png");  // Sunflower
-    seedTextures[1].loadFromFile("./Images/peaShooter_i.png");  // Peashooter
-    seedTextures[2].loadFromFile("./Images/wallNut_i.png");  // whaterver is unlocked in the next level
-    seedTextures[3].loadFromFile("./Images/cherryBomb_i.png");  // Peashooter
-    seedTextures[4].loadFromFile("./Images/rePeater_i.png");  // Sunflower
-    seedTextures[5].loadFromFile("./Images/snowPea_i.png");  // whaterver is unlocked in the next level
-    seedTextures[6].loadFromFile("./Images/fumeShroom_i.png");  // Sunflower
+    seedTextures[0].loadFromFile("./Images/Sunflower_i.png");  // Sunflower
+    seedTextures[1].loadFromFile("./Images/Peashooter_i.png");  // Peashooter
+    seedTextures[2].loadFromFile("./Images/Wallnut_i.png");  // Walnut
+    seedTextures[3].loadFromFile("./Images/Cherrybomb_i.png");  // CherryBomb
+    seedTextures[4].loadFromFile("./Images/Repeater_i.png");  // Repeater
+    seedTextures[5].loadFromFile("./Images/Snowpea_i.png");  // Snowpea
+    seedTextures[6].loadFromFile("./Images/Fumeshroom_i.png");  // fumeShroom
    
+
+    //seedPackets = new SeedPackets * [plantsUnlocked] {};
+
+    //for (int i = 0; i < plantsUnlocked; i++)
+    //{
+    //    seedPackets[i] = new SeedPackets(coordinates(10, (83 * i) + 83), true);
+    //    seedPackets[i]->setTexture(seedTextures[i]);
+    //}
+
 
 
     seedPackets = new SeedPackets * [plantsUnlocked] {};
@@ -23,8 +32,9 @@ PlantFactory::PlantFactory(int plantsUnlocked)
 }
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
-    if (numPlants < 10) {
-        plants[numPlants] = new Plant(x, y, 100); 
+
+    if (numPlants < 50) {
+        plants[numPlants] = new Sunflower(x, y, 100); 
         numPlants++;
     }
 }

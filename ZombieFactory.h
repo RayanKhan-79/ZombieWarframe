@@ -43,9 +43,9 @@ public:
 
 	void spawnWave(int&);
 
-	void spawnZombie();
-
 	void DrawZombies(RenderWindow& window, float deltaTime);
+
+	void spawnZombie();
 
 	Zombie** getZombies() { return zombies; }
 
@@ -63,4 +63,3 @@ public:
 	}
 	~ZombieFactory();
 };
-

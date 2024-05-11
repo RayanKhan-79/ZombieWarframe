@@ -134,6 +134,24 @@ int Levels::winCondition()
 
 bool Levels::start()
 {
+	const int GRID_LEFT = 300;
+	const int GRID_TOP = 85;
+	const int GRID_WIDTH = 855;
+	const int GRID_HEIGHT = 590;
+	const int CELL_WIDTH = 95;
+	const int CELL_HEIGHT = 118;
+
+
+	auto withinGrid = [&](int mouseX, int mouseY) {
+	
+		return (mouseX >= GRID_LEFT && mouseX < GRID_LEFT + GRID_WIDTH &&
+			mouseY >= GRID_TOP && mouseY < GRID_TOP + GRID_HEIGHT);
+		};
+
+	const int ROWS = 5;
+	const int COLS = 9;
+
+
 	srand(time(0));
 
 	RenderWindow window(VideoMode(1200, 700), "Plants Vs Zombies");
@@ -151,14 +169,13 @@ bool Levels::start()
 	//Game field (5*9)
 	//Point 137*79 - leftmost point
 	//length 41; width 53
-	const int ROWS = 5;
-	const int COLS = 9;
+
 
 	bool FIELD_GAME_STATUS[ROWS][COLS];
 
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
-			FIELD_GAME_STATUS[i][j] = true;
+			FIELD_GAME_STATUS[i][j] = 0;
 		}
 	}
 
@@ -219,14 +236,55 @@ bool Levels::start()
 			}
 
 
-			if (event.type == Event::MouseButtonReleased) 
+
+			if (event.type == Event::MouseButtonReleased)
 			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
-				std::cout << "x: " << MousePosition.x<<std::endl;
-				std::cout << "y: " << MousePosition.y<<std::endl;
-				pf.spawnSunflowerAtPosition(MousePosition.x, MousePosition.y);
+
+
+
+				// Check if the mouse click is within the game grid
+				if (withinGrid(MousePosition.x, MousePosition.y)) 
+				{
+					// Calculate the row and column of the clicked cell
+					int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
+					int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
+
+					std::cout << "GRID: " << col << ' ' << row << '\n';
+					
+					
+
+					// *********************************
+					// Itni zyadi mathematics karney ki kya zaroorat thi ?
+					// *********************************
+					
+					// Calculate the position of the plant
+					// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+					// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+
+					// Adjust the position to draw the sprite from its middle
+					// plantX -= pf.getSpriteWidth() / 2;
+					// plantY -= pf.getSpriteHeight() / 2;
+					// Spawn the plant at the calculated position
+					// pf.spawnSunflowerAtPosition(plantX, plantY);
+
+					// *********************************
+					// Bas itni sa likna tha :)
+					// *********************************
+					if (FIELD_GAME_STATUS[row][col] == 0)
+					{
+						FIELD_GAME_STATUS[row][col] = 1;
+
+						int plantX = GRID_LEFT + col * CELL_WIDTH;
+						int plantY = GRID_TOP + row * CELL_HEIGHT;
+						pf.spawnSunflowerAtPosition(plantX, plantY);
+					}
+					//-------------------------------------------
+				}
 			}
+
+
 
 
 
@@ -254,7 +312,7 @@ bool Levels::start()
 		//sentry.draw(window);
 		if (pauseMenu.paused == false) 
 		{
-			pf.spawnSunflowerRandomly(5, 9);
+			//pf.spawnSunflowerRandomly(5, 9);
 			pf.DrawPlants(window, deltaTime);
 			
 			//for (int i = 0; i < 5; i++)

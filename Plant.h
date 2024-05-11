@@ -21,6 +21,7 @@ protected:
 
 public:
 	Plant(int x, int y=randGrid(145), int h=200);
+	Plant();
 	virtual void Draw(RenderWindow& window, float deltaTime);
 	virtual void UpdateAnimation(float interval);
 	bool isClick();

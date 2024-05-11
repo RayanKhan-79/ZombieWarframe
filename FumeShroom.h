@@ -1,8 +1,10 @@
 #pragma once
-#include "Plant.h"
-class FumeShroom : public Plant
+#include "ShootingPlants.h"
+class FumeShroom : public ShootingPlants
 {
 public:
-
+	FumeShroom() { }
+	FumeShroom(int x, int y, int health);
+	void UpdateAnimation(float interval);
 };
 

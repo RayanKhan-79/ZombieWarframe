@@ -253,7 +253,25 @@ bool Levels::start()
 
 					std::cout << "GRID: " << col << ' ' << row << '\n';
 					
-					//-------------------------------------------
+					
+
+					// *********************************
+					// Itni zyadi mathematics karney ki kya zaroorat thi ?
+					// *********************************
+					
+					// Calculate the position of the plant
+					// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+					// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+
+					// Adjust the position to draw the sprite from its middle
+					// plantX -= pf.getSpriteWidth() / 2;
+					// plantY -= pf.getSpriteHeight() / 2;
+					// Spawn the plant at the calculated position
+					// pf.spawnSunflowerAtPosition(plantX, plantY);
+
+					// *********************************
+					// Bas itni sa likna tha :)
+					// *********************************
 					if (FIELD_GAME_STATUS[row][col] == 0)
 					{
 						FIELD_GAME_STATUS[row][col] = 1;
@@ -263,17 +281,6 @@ bool Levels::start()
 						pf.spawnSunflowerAtPosition(plantX, plantY);
 					}
 					//-------------------------------------------
-
-					// Calculate the position of the plant
-					//int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
-					//int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
-
-					// Adjust the position to draw the sprite from its middle
-					//plantX -= pf.getSpriteWidth() / 2;
-					//plantY -= pf.getSpriteHeight() / 2;
-
-					// Spawn the plant at the calculated position
-					//pf.spawnSunflowerAtPosition(plantX, plantY);
 				}
 			}
 

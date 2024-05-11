@@ -10,6 +10,7 @@ class Levels
 protected:
 
 	Icon pauseIcon;
+	Icon SkipLevel;
 	Texture background_Texture;
 	Sprite background_Sprite;
 	PauseMenu pauseMenu;

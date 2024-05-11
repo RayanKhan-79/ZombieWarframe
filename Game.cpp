@@ -3,18 +3,23 @@
 
 Game::Game()
 	: level(NULL), 
-	playgameIcon("Play", coordinates(465, 130), 56, 27, coordinates(735,270)), 
-	InstructionIcon("Instructions", coordinates(465, 280), 149, 25, coordinates(735, 420)),
-	highScoreIcon("High Score", coordinates(465, 430), 137, 31, coordinates(735, 570)),
-	Quit("Quit", coordinates(910, 540), 58, 29, coordinates(1180, 680)), 
+	playgameIcon(coordinates(465, 220), coordinates(735,300)), 
+	InstructionIcon(coordinates(465, 310), coordinates(735, 390)),
+	highScoreIcon(coordinates(465, 400), coordinates(735, 480)),
+	Quit(coordinates(910, 600), coordinates(1180, 680)), 
 	end(false)
 {
-	Texture buttonTexture;
-	buttonTexture.loadFromFile("./Images/button.png");
-	playgameIcon.setTexture(buttonTexture);
-	InstructionIcon.setTexture(buttonTexture);
-	highScoreIcon.setTexture(buttonTexture);
-	Quit.setTexture(buttonTexture);
+	
+	Texture buttonTextures[4];
+	buttonTextures[0].loadFromFile("./Images/PlayButton.png");
+	buttonTextures[1].loadFromFile("./Images/Instructions.png");
+	buttonTextures[2].loadFromFile("./Images/HighScore.png");
+	buttonTextures[3].loadFromFile("./Images/Quit.png");
+
+	playgameIcon.setTexture(buttonTextures[0]);
+	InstructionIcon.setTexture(buttonTextures[1]);
+	highScoreIcon.setTexture(buttonTextures[2]);
+	Quit.setTexture(buttonTextures[3]);
 
 	mainTexture.loadFromFile("./Images/main_back.png");
 	MainMenu.setTexture(mainTexture);

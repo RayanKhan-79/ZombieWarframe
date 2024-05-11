@@ -2,7 +2,7 @@
 
 Movers::Movers(coordinates pos) : pos(pos), mid(pos.x, pos.y+35), triggered(false)
 {
-	texture.loadFromFile("./Images/mover0.png");
+	texture.loadFromFile("./Images/mover.png");
 	sprite.setTexture(texture);
 	sprite.setPosition(pos.x, pos.y);
 }

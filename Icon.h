@@ -9,15 +9,11 @@ class Icon
 protected:
 	Texture icontexture;
 	Sprite iconSprite;
-	Font font;
-	Text text;
-	std::string message;
 
 	coordinates pos;
 	coordinates Area;
 
 public:
-	Icon(std::string, coordinates, int, int, coordinates);
 
 	Icon(coordinates, coordinates);
 

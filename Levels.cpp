@@ -1,8 +1,9 @@
 #include "Levels.h"
 
 Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers)
-	: 
-	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)), 
+	:
+	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
+	SkipLevel(coordinates(1030, 60), coordinates(1180, 100)),
 	pauseMenu(coordinates(325, 50)), 
 	killCount(0),  
 	pf(plantsUnlocked),
@@ -13,9 +14,12 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	for (int i = 0; i < 5; i++)
 		movers[i] = new Movers(coordinates(215, 85 + 118 * (i + 1) - 70));
 
-	Texture texture;
-	texture.loadFromFile("./Images/test2.png");
-	pauseIcon.setTexture(texture);
+	Texture pauseTexture;
+	pauseTexture.loadFromFile("./Images/PauseButton.png");
+	Texture skipTexture;
+	skipTexture.loadFromFile("./Images/SkipLevel.png");
+	pauseIcon.setTexture(pauseTexture);
+	SkipLevel.setTexture(skipTexture);
 }
 
 void Levels::drawMovers(RenderWindow& window)
@@ -201,8 +205,12 @@ bool Levels::start()
 
 			if (pauseIcon.isClicked(event) || pauseMenu.paused == true)
 			{
-				return true;
 				pauseMenu.paused = true;
+			}
+
+			if (SkipLevel.isClicked(event))
+			{
+				return true;
 			}
 
 			if (pauseMenu.resumeIsClicked(event))
@@ -230,7 +238,7 @@ bool Levels::start()
 
 
 		pauseIcon.draw(window);
-
+		SkipLevel.draw(window);
 		//if (z1 == NULL)
 		//{
 		//	z1 = new Zombie(200, 1, 20, 1000, 118 * 2 + 85 - 180);

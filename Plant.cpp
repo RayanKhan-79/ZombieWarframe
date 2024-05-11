@@ -3,7 +3,7 @@ Plant::Plant(int x, int y, int health)
 	: Pos(x, y), health(health), offset(0), Total_Animation_Time(0),
 	switchTime(0.2), mid(x, y + 70)
 {
-	texture.loadFromFile("../Animations/Sunflowers.png");
+	texture.loadFromFile("./Images/Sunflower.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, 105, 140));
 	sprite.setPosition(Pos.x, Pos.y);

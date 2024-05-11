@@ -8,6 +8,6 @@ public:
 	void UpdateAnimation(float deltaTime);
 	//void fly();
 	void move();
-
+	virtual void Attack(Plant* plant) {};
 };
 

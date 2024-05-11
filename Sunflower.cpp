@@ -1,13 +1,13 @@
 #include "Sunflower.h"
 Sunflower::Sunflower() :Plant()
 {
-	spriteHeight = 135;
-	spriteWidth = 101;
+	spriteHeight = 140;
+	spriteWidth = 105;
 }
 Sunflower::Sunflower(int x, int y, int health) :Plant(x,y,health)
 {
-	spriteHeight = 135;
-	spriteWidth = 101;
+	spriteHeight = 140;
+	spriteWidth = 105;
 	texture.loadFromFile("./Images/Sunflower.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(offset * spriteWidth, 0, spriteWidth, spriteHeight));

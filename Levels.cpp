@@ -138,8 +138,8 @@ bool Levels::start()
 	const int GRID_TOP = 85;
 	const int GRID_WIDTH = 855;
 	const int GRID_HEIGHT = 590;
-	const int CELL_WIDTH = 118;
-	const int CELL_HEIGHT = 95;
+	const int CELL_WIDTH = 95;
+	const int CELL_HEIGHT = 118;
 
 
 	auto withinGrid = [&](int mouseX, int mouseY) {
@@ -175,7 +175,7 @@ bool Levels::start()
 
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLS; j++) {
-			FIELD_GAME_STATUS[i][j] = true;
+			FIELD_GAME_STATUS[i][j] = 0;
 		}
 	}
 
@@ -242,22 +242,38 @@ bool Levels::start()
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
 
+
+
 				// Check if the mouse click is within the game grid
-				if (withinGrid(MousePosition.x, MousePosition.y)) {
+				if (withinGrid(MousePosition.x, MousePosition.y)) 
+				{
 					// Calculate the row and column of the clicked cell
 					int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
 					int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
 
+					std::cout << "GRID: " << col << ' ' << row << '\n';
+					
+					//-------------------------------------------
+					if (FIELD_GAME_STATUS[row][col] == 0)
+					{
+						FIELD_GAME_STATUS[row][col] = 1;
+
+						int plantX = GRID_LEFT + col * CELL_WIDTH;
+						int plantY = GRID_TOP + row * CELL_HEIGHT;
+						pf.spawnSunflowerAtPosition(plantX, plantY);
+					}
+					//-------------------------------------------
+
 					// Calculate the position of the plant
-					int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
-					int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+					//int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+					//int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
 
 					// Adjust the position to draw the sprite from its middle
-					plantX -= pf.getSpriteWidth() / 2;
-					plantY -= pf.getSpriteHeight() / 2;
+					//plantX -= pf.getSpriteWidth() / 2;
+					//plantY -= pf.getSpriteHeight() / 2;
 
 					// Spawn the plant at the calculated position
-					pf.spawnSunflowerAtPosition(plantX, plantY);
+					//pf.spawnSunflowerAtPosition(plantX, plantY);
 				}
 			}
 

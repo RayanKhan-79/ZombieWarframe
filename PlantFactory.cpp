@@ -3,13 +3,13 @@
 PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(plantsUnlocked)
 {
     // Initialize all textures (even locked ones)
-    seedTextures[0].loadFromFile("./Images/Sunflower_SD.png");  // Sunflower
-    seedTextures[1].loadFromFile("./Images/Peashooter_SD.png");  // Peashooter
-    seedTextures[2].loadFromFile("./Images/Walnut_SD.png");  // Walnut
-    seedTextures[3].loadFromFile("./Images/Cherrybomb_SD.png");  // CherryBomb
-    seedTextures[4].loadFromFile("./Images/Repeater_SD.png");  // Repeater
-    seedTextures[5].loadFromFile("./Images/Snowpea_SD.png");  // Snowpea
-    seedTextures[6].loadFromFile("./Images/Fumeshroom_SD.png");  // fumeShroom
+    seedTextures[0].loadFromFile("./Images/Sunflower_i.png");  // Sunflower
+    seedTextures[1].loadFromFile("./Images/Peashooter_i.png");  // Peashooter
+    seedTextures[2].loadFromFile("./Images/Wallnut_i.png");  // Walnut
+    seedTextures[3].loadFromFile("./Images/Cherrybomb_i.png");  // CherryBomb
+    seedTextures[4].loadFromFile("./Images/Repeater_i.png");  // Repeater
+    seedTextures[5].loadFromFile("./Images/Snowpea_i.png");  // Snowpea
+    seedTextures[6].loadFromFile("./Images/Fumeshroom_i.png");  // fumeShroom
    
 
     //seedPackets = new SeedPackets * [plantsUnlocked] {};
@@ -32,6 +32,7 @@ PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(p
 }
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
+
     if (numPlants < 50) {
         plants[numPlants] = new Sunflower(x, y, 100); 
         numPlants++;

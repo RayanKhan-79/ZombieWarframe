@@ -63,19 +63,19 @@ class Sentry
 	coordinates pos;
 	sf::RectangleShape shape;
 	sf::Clock clock;
-	Bullet* bullets;
+	//Bullet* bullets;
 
 	//int* bullets;
 
 public:
-	Sentry(coordinates pos) : pos(pos), bullets(NULL)
+	Sentry(coordinates pos) : pos(pos)
 	{
 		sf::Color c(0, 0, 0);
 		shape.setFillColor(c);
-		shape.setSize(sf::Vector2f(80, 160));
+		shape.setSize(sf::Vector2f(95, 118));
 	}
 
-	void shoot()
+	void shoot(Bullet* bullet)
 	{
 
 
@@ -83,7 +83,7 @@ public:
 			return;
 
 		clock.restart();
-		bullets = new Bullet(coordinates(pos.x + 80, pos.y + 80));
+		bullet = new Bullet(coordinates(pos.x + 95, pos.y + 59));
 	}
 
 

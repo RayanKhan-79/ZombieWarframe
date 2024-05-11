@@ -18,7 +18,7 @@ protected:
 	PauseMenu pauseMenu;
 	//Music backGroundMusic
 
-	//Bullet** projectiles;
+	Bullet** projectiles;
 
 	Movers* movers[5];
 	ZombieFactory zf;

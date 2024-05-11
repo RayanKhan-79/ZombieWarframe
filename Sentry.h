@@ -68,7 +68,7 @@ class Sentry
 	//int* bullets;
 
 public:
-	Sentry() : pos(300 + 95 * 1, 85 + 118 * 2 - 160), bullets(NULL)
+	Sentry(coordinates pos) : pos(pos), bullets(NULL)
 	{
 		sf::Color c(0, 0, 0);
 		shape.setFillColor(c);

@@ -4,6 +4,8 @@
 #include"PlantFactory.h"
 #include"PauseMenu.h"
 #include"Movers.h"
+//#include"Sentry.h"
+
 class Levels
 {
 
@@ -15,6 +17,8 @@ protected:
 	Sprite background_Sprite;
 	PauseMenu pauseMenu;
 	//Music backGroundMusic
+
+	//Bullet** projectiles;
 
 	Movers* movers[5];
 	ZombieFactory zf;

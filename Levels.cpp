@@ -193,7 +193,10 @@ bool Levels::start()
 	for (int i = 0; i < 5; i++)
 		z1[i] = new DancingZombie(5, 4, 200, 4);
 	//ZombieFactory zf;
-	//Sentry sentry;
+	
+	/*Sentry* sentry[3];
+	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));*/
+
 	float deltaTime;
 	while (window.isOpen())
 	{
@@ -278,7 +281,7 @@ bool Levels::start()
 
 						int plantX = GRID_LEFT + col * CELL_WIDTH;
 						int plantY = GRID_TOP + row * CELL_HEIGHT;
-						pf.spawnSunflowerAtPosition(plantX, plantY);
+						pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT);
 					}
 					//-------------------------------------------
 				}

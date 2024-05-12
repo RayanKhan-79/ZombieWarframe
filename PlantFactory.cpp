@@ -89,19 +89,93 @@ void PlantFactory::Shoot()
         plants[i]->Shoot();
 }
 
-
-void PlantFactory::spawnSunflowerAtPosition(int x, int y)
+//
+//void PlantFactory::spawnSunflowerAtPosition(int x, int y)
+//{
+int PlantFactory::Clicked(Event& event)
 {
+    std::cout << "I am in click" << std::endl;
+        
+    for (int i = 0; i < plantsUnlocked; i++)
+        if (seedPackets[i]->isClicked(event))
+            return (i + 1);
 
-    cherryBomb = new CherryBomb(x, y, 50);
+    return 0;
 
-    //if (numPlants < 50) {
-    //    plants[numPlants] = new PeaShooter(x, y, 100); 
-    //    numPlants++;
+    //if (seedPackets[0]->isClicked(event))
+    //{
+    //    return 1;
     //}
+    //else if (seedPackets[1]->isClicked(event))
+    //{
+    //    return 2;
+    //}
+    //else if (seedPackets[2]->isClicked(event))
+    //{
+    //    return 3;
+    //}
+    //else if (seedPackets[3]->isClicked(event))
+    //{
+    //    return 4;
+    //}
+    //else if (seedPackets[4]->isClicked(event))
+    //{
+    //    return 5;
+    //}
+    //else if (seedPackets[5]->isClicked(event))
+    //{
+    //    return 6;
+    //}
+    //else if (seedPackets[6]->isClicked(event))
+    //{
+    //    return 7;
+    //}
+    
+
 }
+void PlantFactory::spawnSunflowerAtPosition(int x, int y, int check)
+{
+    
+    switch (check)
+    {
+    case 0:
+        selected = false;
+        return;
 
-
+    case 1:
+        std::cout << "Sunflower " << std::endl;
+        plants[numPlants] = new Sunflower(x, y, 100);
+        break;
+    case 2:
+        std::cout << "PeaShooter " << std::endl;
+        plants[numPlants] = new PeaShooter(x, y, 100);
+        break;
+    case 3:
+        std::cout << "Walnut " << std::endl;
+        plants[numPlants] = new Walnut(x, y, 100);
+        break;
+    case 4:
+        std::cout << "Cherrybomb " << std::endl;
+        cherryBomb = new CherryBomb(x, y, 100);
+        numPlants--;
+        break;
+    case 5:
+        std::cout << "Repeater " << std::endl;
+        plants[numPlants] = new Repeater(x, y, 100);
+        break;
+    case 6:
+        std::cout << "Snowpea " << std::endl;
+        plants[numPlants] = new SnowPea(x, y, 100);
+        break;
+    case 7:
+        std::cout << "FumeShroom " << std::endl;
+        plants[numPlants] = new FumeShroom(x, y, 100);
+        break;
+    default:
+        break;
+    }
+    numPlants++;
+}
 void PlantFactory::DrawIcons(RenderWindow& window)
 {
     for (int i = 0; i < plantsUnlocked; ++i)

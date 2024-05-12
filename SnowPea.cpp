@@ -20,3 +20,12 @@ void SnowPea::UpdateAnimation(float deltaTime)
 	}
 	sprite.setTextureRect(IntRect(offset * 131, 0, 131, 135));
 }
+
+//void SnowPea::Shoot()
+//{
+//	if (clock.getElapsedTime().asSeconds() < 0.5 || Pea)
+//		return;
+//
+//	clock.restart();
+//	Pea = new Bullet(coordinates(Pos.x + 50, Pos.y + 50), 70, "frozen");
+//}

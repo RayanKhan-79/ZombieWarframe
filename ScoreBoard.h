@@ -20,7 +20,7 @@ public:
 		texture.loadFromFile("./Images/button_large.png");
 		sprite.setTexture(texture);
 
-		if (!font.loadFromFile("arial.ttf")) {
+		if (!font.loadFromFile("./Font/molger-regular.otf")) {
 			// Handle font loading error
 		}
 
@@ -33,8 +33,8 @@ public:
 		scoreText.setFillColor(sf::Color::White);
 
 		sprite.setPosition(10, 600);
-		sunText.setPosition(30, 615); // Position the text at the top left corner
-		scoreText.setPosition(30, 645);
+		sunText.setPosition(30, 605); // Position the text at the top left corner
+		scoreText.setPosition(30, 635);
 	}
 
 	void IncrementSuns(int amount)

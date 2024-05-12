@@ -12,7 +12,7 @@ public:
         std::ifstream file("killcount.txt");
         if (file.is_open()) {
             sf::Font font;
-            if (!font.loadFromFile("arial.ttf")) {
+            if (!font.loadFromFile("./Font/molger-regular.otf")) {
                 std::cerr << "Error loading font file!" << std::endl;
                 return;
             }

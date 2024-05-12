@@ -46,13 +46,7 @@ public:
 	//int getKills() { return killCount; }
 	//int getMax() { return maxZombies; }
 	int winCondition();
-	void storeKillCount() {
-		std::ofstream file("killcount.txt");
-		if (file.is_open()) {
-			file << killCount;
-			file.close();
-		}
-	}
+
 
 	void cherryBlast();
 

@@ -55,5 +55,15 @@ public:
 		window.draw(sunText);
 		window.draw(scoreText);
 	}
+
+	int getSun() 
+	{
+		return suns;
+	}
+
+	void setSun(int x)
+	{
+		suns = x;
+	}
 };
 

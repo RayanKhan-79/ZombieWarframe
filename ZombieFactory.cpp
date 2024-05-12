@@ -1,5 +1,5 @@
 #include "ZombieFactory.h"
-
+#include <SFML/Audio.hpp>
 
 ZombieFactory::ZombieFactory(int zombieLimit, int DancersLimit, int zombiesUnlocked, int waveLimit)
 	: spawnInterval(0), 
@@ -58,6 +58,8 @@ void ZombieFactory::UpdateBackUpDancers()
 
 bool ZombieFactory::spawnNextWave(int& kills)
 {
+
+	
 	// All zombies haven't been spawned yet
 	if (numOfZombies != zombieLimit || numOfDancers != DancersLimit)
 		return false;
@@ -76,6 +78,9 @@ bool ZombieFactory::spawnNextWave(int& kills)
 			if (backupDancers[i][j] && backupDancers[i][j]->getHealth() > 0)
 				return false;
 	
+	
+
+
 	// Deallocate memory to allow use in the next wave
 	for (int i = 0; i < numOfZombies; i++)
 	{
@@ -115,6 +120,25 @@ bool ZombieFactory::spawnNextWave(int& kills)
 	numOfDancers = 0;
 	
 	// keeping track of the number of waves called so far
+	sf::SoundBuffer buffer;
+	if (!buffer.loadFromFile("./Audio/zombiesWave.mp3")) {
+		std::cout << "Loading error of zombie wave audio" << std::endl;
+		return false;
+	}
+
+	sf::Sound sound;
+	sound.setBuffer(buffer);
+	sound.setVolume(100.0f);
+
+	// Play the sound
+	sound.play();
+
+	// Wait for the sound to finish playing before continuing
+	while (sound.getStatus() == sf::Sound::Playing) {
+		// Optional: You can add a delay here if needed
+	}
+
+	std::cout << "Spawning next wave" << std::endl;
 	waveCount++;
 	std::cout << waveCount + 1 << '\n';
 
@@ -125,7 +149,7 @@ bool ZombieFactory::spawnNextWave(int& kills)
 void ZombieFactory::spawnWave(int& kills)
 {
 	UpdateBackUpDancers();
-
+	
 	spawnNextWave(kills);
 
 

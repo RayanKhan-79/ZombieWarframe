@@ -11,9 +11,6 @@ public:
     void displayKillCount() {
         std::ifstream file("killcount.txt");
         if (file.is_open()) {
-            int killCount;
-            file >> killCount;
-
             sf::Font font;
             if (!font.loadFromFile("arial.ttf")) {
                 std::cerr << "Error loading font file!" << std::endl;
@@ -22,17 +19,33 @@ public:
 
             sf::Text text;
             text.setFont(font);
-            text.setString("Kill Count: " + std::to_string(killCount));
-            text.setCharacterSize(24);
-            text.setFillColor(sf::Color::White);
-            text.setPosition(20, 20);
+            text.setCharacterSize(94);
+            text.setFillColor(sf::Color::Green);
+            text.setPosition(400, 145);
 
+            std::string displayText = "HighScore:\n";
+
+            int killCount;
+            for (int i = 1; i <= 3 && file >> killCount; ++i) {
+                std::string suffix;
+                if (i == 1) suffix = "st";
+                else if (i == 2) suffix = "nd";
+                else if (i == 3) suffix = "rd";
+
+                displayText += std::to_string(i) + suffix + ": " + std::to_string(killCount) + "\n";
+            }
+
+            text.setString(displayText);
             window.draw(text);
+
+            file.close();
         }
         else {
             std::cerr << "Error opening file!" << std::endl;
         }
     }
+
+
 };
 
 

@@ -154,6 +154,7 @@ void Game::playGame()
 			if (!Gamewindow.isOpen() && end == false)
 			{
 				playGame();
+				storeKillCount(killCount);
 			}
 		}
 
@@ -171,7 +172,6 @@ Game::~Game()
 {
 	if (level != NULL)
 	{
-		storeKillCount();
 		delete level;
 		level = NULL;
 	}

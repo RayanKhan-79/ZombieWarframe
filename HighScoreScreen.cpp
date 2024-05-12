@@ -21,16 +21,18 @@ void HighScoreScreen::render()
 	window.setPosition(Vector2i(100, 100));
 	while (window.isOpen())
 	{
-
 		Event e;
 		while (window.pollEvent(e))
 		{
+			
 			if (e.type == Event::Closed || Back.isClicked(e))
 				window.close();
+			
 		}
 
 		window.clear();
 		window.draw(sprite);
+		displayKillCount();
 		drawIcons();
 		window.display();
 	}

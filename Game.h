@@ -24,10 +24,10 @@ class Game
 {
 	bool end;
 	bool win;
-	// For Testing
-	int progress = 0;
-	// =====
-	
+
+    String name;
+    Text dispName;
+
 	RenderWindow Gamewindow;
 	Texture mainTexture;
 	Sprite MainMenu;
@@ -35,8 +35,10 @@ class Game
 	Icon InstructionIcon;
 	Icon highScoreIcon;
 	Icon Quit;
+    Icon EnterName;
 
 	int killCount;
+    Font font;
 
 	GameOverScreen gS;
 	InstructionScreen iS;

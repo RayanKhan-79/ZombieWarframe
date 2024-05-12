@@ -9,7 +9,7 @@ void BeginnersGarden::createBack(RenderWindow& window)
 }
 
 BeginnersGarden::BeginnersGarden()
-	: Levels(2,1,8,0)
+	: Levels(3,1,8,0)
 	
 {
 	

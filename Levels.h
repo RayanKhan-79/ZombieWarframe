@@ -42,6 +42,7 @@ public:
 	bool start(int& killCount);
 	void drawMovers(RenderWindow& window);
 	void TriggerMovers();
+	void wallNutCollisions();
 	void MoveMovers();
 	//int getKills() { return killCount; }
 	//int getMax() { return maxZombies; }

@@ -113,6 +113,39 @@ void Levels::cherryBlast()
 
 }
 
+void Levels::wallNutCollisions()
+{
+	for (int i = 0; i < zf.getNumberOfZombies(); i++)
+	{
+		for (int j = 0; j < pf.getWallnutCount(); j++)
+			if (pf.getWallnuts()[j] && approxMatch(zf.getZombies()[i]->getHitArea(), pf.getWallnuts()[j]->getHitArea()))
+			{
+				std::cout << "Tada\n";
+				pf.getWallnuts()[j]->mark(zf.getZombies()[i]);
+			}
+	}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		for (int j = 0; j < pf.getWallnutCount(); j++)
+		{
+			if (pf.getWallnuts()[j] && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getWallnuts()[j]->getHitArea()))
+			{
+				std::cout << "Tada\n";
+				pf.getWallnuts()[j]->mark(zf.getDancers()[i]);
+			}
+			for (int k = 0; k < 4; k++)
+				if (pf.getWallnuts()[j] && zf.getBackUp()[i][k] && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getWallnuts()[j]->getHitArea()))
+				{
+					std::cout << "Tada\n";
+					pf.getWallnuts()[j]->mark(zf.getBackUp()[i][k]);
+				}
+
+		
+		}
+	}		
+}
+
 void Levels::TriggerMovers()
 {
 	for (int j = 0; j < 5; j++)
@@ -498,11 +531,11 @@ bool Levels::start(int& killCount)
 						// *********************************
 						if (FIELD_GAME_STATUS[row][col] == 0)
 						{
-							FIELD_GAME_STATUS[row][col] = 1;
 
 							int plantX = GRID_LEFT + col * CELL_WIDTH;
 							int plantY = GRID_TOP + row * CELL_HEIGHT;
-							pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
+							
+							FIELD_GAME_STATUS[row][col] = pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
 						}
 						//-------------------------------------------
 					}
@@ -558,7 +591,7 @@ bool Levels::start(int& killCount)
 			cherryBlast();
 			pf.DeleteDeadPlants(FIELD_GAME_STATUS);
 			pf.DrawPlants(window, deltaTime);
-			
+			pf.RollWallNuts();
 			pf.Shoot();
 
 
@@ -605,6 +638,7 @@ bool Levels::start(int& killCount)
 			zf.spawnWave(killCount);
 			zf.DrawZombies(window, deltaTime);
 			collisionDetection();
+			wallNutCollisions();
 			TriggerMovers();
 			MoveMovers();
 		}

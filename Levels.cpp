@@ -5,6 +5,7 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
 	SkipLevel(coordinates(1030, 60), coordinates(1180, 100)),
 	pauseMenu(coordinates(325, 50)), 
+	Shovel(coordinates(1130,630), coordinates(1200,700)),
 	killCount(0),  
 	pf(plantsUnlocked),
 	zf(maxZombies,maxDancers,zombiesUnlocked)
@@ -18,8 +19,11 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	pauseTexture.loadFromFile("./Images/PauseButton.png");
 	Texture skipTexture;
 	skipTexture.loadFromFile("./Images/SkipLevel.png");
+	Texture shovelTexture;
+	shovelTexture.loadFromFile("./Images/shovelicon.png");
 	pauseIcon.setTexture(pauseTexture);
 	SkipLevel.setTexture(skipTexture);
+	Shovel.setTexture(shovelTexture);
 }
 
 void Levels::drawMovers(RenderWindow& window)
@@ -226,6 +230,7 @@ bool Levels::start()
 	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));*/
 
 	float deltaTime;
+	bool shovel = false;
 	while (window.isOpen())
 	{
 		deltaTime = clock.restart().asSeconds();
@@ -266,12 +271,17 @@ bool Levels::start()
 				pauseMenu.paused = false;
 			}
 
+			if (Shovel.isClicked(event))
+			{
+				shovel = true;
+			}
 
 
 			if (event.type == Event::MouseButtonReleased)
 			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
+				pf.PlantClicked(event, shovel);
 
 
 
@@ -311,6 +321,11 @@ bool Levels::start()
 						int plantY = GRID_TOP + row * CELL_HEIGHT;
 						pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT);
 					}
+
+					//else if (pf.getPlants()[0]->isClicked(event))
+					//{
+					//	std::cout << "Clicked\n";
+					//}
 					//-------------------------------------------
 				}
 			}
@@ -328,6 +343,7 @@ bool Levels::start()
 
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);
+		Shovel.draw(window);
 		//if (z1 == NULL)
 		//{
 		//	z1 = new Zombie(200, 1, 20, 1000, 118 * 2 + 85 - 180);
@@ -344,11 +360,11 @@ bool Levels::start()
 		if (pauseMenu.paused == false) 
 		{
 			//pf.spawnSunflowerRandomly(5, 9);
+			pf.DeleteDeadPlants(FIELD_GAME_STATUS);
 			pf.DrawPlants(window, deltaTime);
 			
 			pf.Shoot();
-			pf.DrawProjectiles(window);
-			pf.MoveProjectiles();
+
 
 			//pf.DeleteProjectiles();
 			//for (int i = 0; i < 5; i++)

@@ -4,7 +4,7 @@ class Repeater : public ShootingPlants
 {
 
 public:
-	Repeater(int x, int y, int health);
+	Repeater(int x, int y, int health, int pixelsX, int pixelsY);
 	//void UpdateAnimation(float interval);
 };
 

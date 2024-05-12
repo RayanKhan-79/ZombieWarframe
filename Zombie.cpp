@@ -1,7 +1,7 @@
 #include "Zombie.h"
 
 Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
-	: Pos(x, y), health(health), speed(speed), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY),
+	: Pos(x, y), health(health), speed(speed), slowSpeed(speed/2), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY),
 	hitArea(x + 95, y + pixelsY), action("moving")
 {
 
@@ -17,6 +17,9 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int
 
 void Zombie::Attack(Plant* plant)
 {
+	if (health <= 0)
+		return;
+
 	action = "attacking";
 	plant->mark();
 	plant->getHealth() -= damage;
@@ -69,25 +72,18 @@ int& Zombie::getHealth()
 
 void Zombie::getShotAt(Bullet* bullet)
 {
-	//if (!bullet)
-	//{
-	//	std::cout << "NULL\n";
-	//	return;
-	//}
 
-	// hit area
-	//int h_y = Pos.y + pixelsY;
-	//int h_x = Pos.x + pixelsX/2;
-
-	// [h_y --- h_y - 118]
-	// [h_x --- h_x + 95]
-	//if (bullet->getCoordinates().y <= h_y && bullet->getCoordinates().y >= h_y - 118 &&
-	//	bullet->getCoordinates().x >= h_x && bullet->getCoordinates().x <= h_x + 95)
-	//{
 		
-	health -= 10;
+	health -= bullet->getDamage();
+
+	if (bullet->getType() == "frozen")
+	{
+		speed = slowSpeed;
+		sprite.setColor(Color::Blue);
+	}
+
 	bullet->setCollisonStatus(true);
 	
-	//}
+	
 }
 

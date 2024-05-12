@@ -26,34 +26,47 @@ PlantFactory::PlantFactory(int plantsUnlocked)
     }
 }
 
-void PlantFactory::DrawProjectiles(RenderWindow& window)
+void PlantFactory::PlantClicked(Event& e, bool& shovel)
 {
-   // projectiles[0]->draw(window);
-    //for (int i = 0; i < 50; i++)
-    //    if (projectiles[i])
-    //        projectiles[i]->draw(window);
+    std::cout << shovel;
+    for (int i = 0; i < numPlants; i++)
+        if (plants[i]->isClicked(e) && shovel == true)
+        {
+            plants[i]->getHealth() = 0;
+            shovel = false;
+            return;
+        }
+                
 }
 
-void PlantFactory::DeleteProjectiles()
+
+void PlantFactory::DeleteDeadPlants(bool FIELD_GAME_STATUS[][9])
 {
-    //for (int i = 0; i < 1; i++)
-    //    if (projectiles[i] && projectiles[i]->Existance() == false)
-    //    {
-    //        delete projectiles[i];
-    //        projectiles[i] = NULL;
-    //    }
+    for (int i = 0; i < 45; i++)
+        if (plants[i] && plants[i]->getHealth() <= 0)
+        {
+            int COL = (plants[i]->getHitArea().x - 300)/95;
+            int ROW = (plants[i]->getHitArea().y - 85)/118;
+            
+            FIELD_GAME_STATUS[ROW][COL] = 0;
+            std::cout << "FGS = " << COL << ' ' << ROW << '\n';
+
+            delete plants[i];
+            plants[i] = NULL;
+            numPlants--;
+        }
+
+    for (int i = 0; i < 45; i++)
+        for (int j = 0; j < 45-1; j++)
+            if (plants[j] == NULL && plants[j + 1] != NULL)
+            {
+                Plant* temp = plants[j+1];
+                plants[j + 1] = plants[j];
+                plants[j] = temp;
+            }
 }
 
-void PlantFactory::MoveProjectiles()
-{
 
-    //projectiles[0]->Move();
-    //for (int i = 0; i < 50; i++)
-    //    if (projectiles[i])
-    //    {
-    //        projectiles[i]->Move();
-    //    }
-}
 
 void PlantFactory::Shoot()
 {
@@ -68,11 +81,9 @@ void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 
     if (numPlants < 50) 
     {
-        if (/*Peashooter type plants*/ 1)
-        {
-            plants[numPlants] = new PeaShooter(x, y, 100);
+        
+        plants[numPlants] = new PeaShooter(x, y, 100);
             
-        }
         numPlants++;
     }
 }

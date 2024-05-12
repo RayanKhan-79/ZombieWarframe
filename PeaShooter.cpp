@@ -1,12 +1,12 @@
 #include "PeaShooter.h"
 
-PeaShooter::PeaShooter(int x, int y, int health) 
-	: ShootingPlants (x,y,health)
+PeaShooter::PeaShooter(int x, int y, int health, int pixelsX, int pixelsY)
+	: ShootingPlants (x,y,health, pixelsX, pixelsY)
 {
 	
 	texture.loadFromFile("./Images/Peashooter.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 115, 0, 115, 135));
+	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
@@ -17,7 +17,7 @@ void PeaShooter::Shoot()
 		return;
 
 	clock.restart();
-	Pea = new Bullet(coordinates(Pos.x + 50, Pos.y + 50));
+	Pea = new Bullet(coordinates(Pos.x + 50, Pos.y + 50), 70, "frozen");
 }
 
 void PeaShooter::Draw(RenderWindow& window, float deltaTime)
@@ -55,5 +55,5 @@ void PeaShooter::UpdateAnimation(float deltaTime) {
 		if (offset == 8)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 115, 0, 115, 135));
+	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 }

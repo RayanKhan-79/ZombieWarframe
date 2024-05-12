@@ -5,7 +5,7 @@
 #include "Walnut.h"
 #include "CherryBomb.h"
 #include "SeedPackets.h"
-#include "Sentry.h"
+
 
 
 class PlantFactory
@@ -34,13 +34,11 @@ public:
 
     void spawnSunflowerAtPosition(int x, int y);
 
-    void MoveProjectiles();
-    
-    void DrawProjectiles(RenderWindow&);
-
-    void DeleteProjectiles();
+    void DeleteDeadPlants(bool FIELD_GAME_STATUS[][9]);
 
     void Shoot();
+
+    void PlantClicked(Event& e, bool& shovel);
 
     //testing
     void spawnSunflowerRandomly(int numRows, int numCols);

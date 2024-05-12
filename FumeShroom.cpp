@@ -4,7 +4,7 @@ FumeShroom::FumeShroom(int x, int y, int health, int pixelsX, int pixelsY)
 {
 	texture.loadFromFile("./Images/Fume-Shroom.png");
 	sprite.setTexture(texture);
-	sprite.setTextureRect(IntRect(offset * 139, 0, 139, 135));
+	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 void FumeShroom::UpdateAnimation(float deltaTime)
@@ -18,5 +18,5 @@ void FumeShroom::UpdateAnimation(float deltaTime)
 		if (offset == 4)
 			offset = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * 139, 0, 139, 135));
+	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
 }

@@ -8,6 +8,8 @@ Repeater::Repeater(int x, int y, int health, int pixelsX, int pixelsY)
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(offset * 139, 0, 139, 135));
 	sprite.setPosition(Pos.x, Pos.y);
+
+	/*Pea = new Bullet * [bulletCount] {}*/
 }
 
 void Repeater::UpdateAnimation(float deltaTime)
@@ -23,3 +25,8 @@ void Repeater::UpdateAnimation(float deltaTime)
 	}
 	sprite.setTextureRect(IntRect(offset * 139, 0, 139, 135));
 }
+
+//void Repeater::Shoot()
+//{
+//
+//}

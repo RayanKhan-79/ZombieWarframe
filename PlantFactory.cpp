@@ -34,7 +34,7 @@ void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
 
     if (numPlants < 50) {
-        plants[numPlants] = new PeaShooter(x, y, 100); 
+        plants[numPlants] = new SnowPea(x, y, 100); 
         numPlants++;
     }
 }

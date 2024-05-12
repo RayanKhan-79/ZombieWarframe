@@ -36,10 +36,17 @@ public:
 		sprite.setColor(c);
 	}
 
-	virtual Bullet* getBullet()
+	virtual int getBulletCount()
 	{
-		Bullet* ignore(NULL);
-		return ignore;
+		return 0;
+	}
+
+	virtual Bullet** getBullet()
+	{
+		Bullet* ignore = NULL;
+		Bullet** ignore2 = &ignore;
+		
+		return ignore2;
 	}
 };
 

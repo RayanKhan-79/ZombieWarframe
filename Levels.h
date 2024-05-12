@@ -6,6 +6,8 @@
 #include"Movers.h"
 #include"ScoreBoard.h"
 #include "GenSun.h"
+#include <fstream>
+
 //#include"Sentry.h"
 
 class Levels
@@ -29,22 +31,28 @@ protected:
 	PlantFactory pf;
 	GenSun sunGenerator;
 	int lives = 3;
-	int killCount;
 	//int plantsUnlocked;
 	//int zombiesUnlocked;
 
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
 	void collisionDetection();
-	void BulletCollisions();
+	void decrementLives();
 	virtual void createBack(RenderWindow& window) = 0;
-	bool start();
+	bool start(int& killCount);
 	void drawMovers(RenderWindow& window);
 	void TriggerMovers();
 	void MoveMovers();
 	//int getKills() { return killCount; }
 	//int getMax() { return maxZombies; }
 	int winCondition();
+	//void storeKillCount() {
+	//	std::ofstream file("killcount.txt");
+	//	if (file.is_open()) {
+	//		file << killCount;
+	//		file.close();
+	//	}
+	//}
 
 	void cherryBlast();
 

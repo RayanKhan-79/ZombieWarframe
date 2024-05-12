@@ -26,7 +26,7 @@ void BackUpDancer::Draw(RenderWindow& window, float deltaTime)
 
 void BackUpDancer::Move()
 {
-	if (action == "attacking")
+	if (action == "attacking" || Pos.x <= 150)
 		return;
 
 	if (!spawned || health <= 0)

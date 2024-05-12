@@ -1,23 +1,24 @@
 #include "PeaShooter.h"
 
 PeaShooter::PeaShooter(int x, int y, int health, int pixelsX, int pixelsY)
-	: Plant (x,y,health, pixelsX, pixelsY)
+	: Plant (x,y,health, pixelsX, pixelsY), Pea(NULL), bulletCount(1)
 {
 	
 	texture.loadFromFile("./Images/Peashooter.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 	sprite.setPosition(Pos.x, Pos.y);
+	Pea = new Bullet * [bulletCount] {};
 }
 
 void PeaShooter::Shoot()
 {
 
-	if (clock.getElapsedTime().asSeconds() < 0.5 || Pea)
+	if (clock.getElapsedTime().asSeconds() < 0.5 || Pea[0])
 		return;
 
 	clock.restart();
-	Pea = new Bullet(coordinates(Pos.x + 50, Pos.y + 50), 70, "frozen");
+	Pea[0] = new Bullet(coordinates(Pos.x + 50, Pos.y + 50), 70, "normal");
 }
 
 void PeaShooter::Draw(RenderWindow& window, float deltaTime)
@@ -27,18 +28,18 @@ void PeaShooter::Draw(RenderWindow& window, float deltaTime)
 		UpdateAnimation(deltaTime);
 		window.draw(sprite);
 
-		if (Pea)
+		if (Pea[0])
 		{
-			if (Pea->Existance())
+			if (Pea[0]->Existance())
 			{
-				Pea->Move();
-				Pea->draw(window);
+				Pea[0]->Move();
+				Pea[0]->draw(window);
 			}
 
 			else
 			{
-				delete Pea;
-				Pea = NULL;
+				delete Pea[0];
+				Pea[0] = NULL;
 			}
 		}
 	}

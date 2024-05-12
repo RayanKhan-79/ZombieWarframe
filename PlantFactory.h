@@ -23,19 +23,20 @@ protected:
     int numPlants;
 
 
-
-
-
-
-    //int SpriteWidth;
-    //int SpriteHeight;
-
+    int SpriteWidth;
+    int SpriteHeight;
 public:
+    bool selected = false;
+
     PlantFactory(int plantsUnlocked);
+    
+    int Clicked(Event& event);
+
+    void SelectPlants(int x);
 
     void DrawPlants(RenderWindow& window, float deltaTime);
 
-    void spawnSunflowerAtPosition(int x, int y);
+    //void spawnSunflowerAtPosition(int x, int y);
 
     void DeleteDeadPlants(bool FIELD_GAME_STATUS[][9]);
 
@@ -53,6 +54,6 @@ public:
     Plant* const* getPlants() const { return plants; }
     CherryBomb* getCherryBomb() { return cherryBomb; }
 
-    //int getSpriteWidth() { return SpriteWidth; }
-    //int getSpriteHeight() { return SpriteHeight; }
+    //testing
+    void spawnSunflowerAtPosition(int x, int y, int check);
 };

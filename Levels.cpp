@@ -5,8 +5,7 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
 	SkipLevel(coordinates(1030, 60), coordinates(1180, 100)),
 	pauseMenu(coordinates(325, 50)), 
-	Shovel(coordinates(1130,630), coordinates(1200,700)),
-	killCount(0),  
+	Shovel(coordinates(1130,630), coordinates(1200,700)), 
 	pf(plantsUnlocked),
 	zf(maxZombies, maxDancers, zombiesUnlocked),
 	sunGenerator(10)
@@ -26,6 +25,40 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	pauseIcon.setTexture(pauseTexture);
 	SkipLevel.setTexture(skipTexture);
 	Shovel.setTexture(shovelTexture);
+}
+
+void Levels::decrementLives()
+{
+	for (int i = 0; i < zf.getNumberOfZombies(); i++)
+	{
+		if (zf.getZombies()[i]->getPosition().x <= 150 && !zf.getZombies()[i]->getReachedHomeStatus())
+		{
+			zf.getZombies()[i]->setReachedHomeStatus(true);
+			lives--;
+		}
+
+	}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		if (zf.getDancers()[i]->getPosition().x <= 150 && !zf.getDancers()[i]->getReachedHomeStatus())
+		{
+			zf.getDancers()[i]->setReachedHomeStatus(true);
+			lives--;
+		}
+
+	}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		for (int k = 0; k < 4; k++)
+			if (zf.getBackUp()[i][k] && zf.getBackUp()[i][k]->getPosition().x <= 150 && !zf.getBackUp()[i][k]->getReachedHomeStatus())
+			{
+				zf.getBackUp()[i][k]->setReachedHomeStatus(true);
+				lives--;
+			}
+	}
+
 }
 
 void Levels::drawMovers(RenderWindow& window)
@@ -51,6 +84,7 @@ void Levels::cherryBlast()
 		{
 
 			zf.getZombies()[i]->getHealth() -= 1000;
+			//killCount++;
 		}
 
 	for (int i = 0; i < zf.getNumberOfDancers(); i++)
@@ -59,6 +93,7 @@ void Levels::cherryBlast()
 		{
 
 			zf.getDancers()[i]->getHealth() -= 1000;
+			//killCount++;
 		}
 
 		for (int k = 0; k < 4; k++)
@@ -66,6 +101,7 @@ void Levels::cherryBlast()
 			{
 
 				zf.getBackUp()[i][k]->getHealth() -= 1000;
+				//killCount++;
 			}
 	
 	}
@@ -87,6 +123,7 @@ void Levels::TriggerMovers()
 			{
 				movers[j]->mark(zf.getZombies()[i]);
 				zf.getZombies()[i]->mark();
+				//killCount++;
 			}
 		}
 
@@ -96,6 +133,7 @@ void Levels::TriggerMovers()
 			{
 				movers[j]->mark(zf.getDancers()[i]);
 				zf.getDancers()[i]->mark();
+				//killCount++;
 			}
 		}
 		for (int i = 0; i < zf.getNumberOfDancers(); i++)
@@ -106,6 +144,7 @@ void Levels::TriggerMovers()
 				{
 					movers[j]->mark(zf.getBackUp()[i][k]);
 					zf.getBackUp()[i][k]->mark();
+					//killCount++;
 				}
 			}
 		}
@@ -126,12 +165,20 @@ void Levels::collisionDetection()
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
-			if (pf.getPlants()[j]->getBullet() != NULL &&  approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			for (int m = 0; m < pf.getPlants()[j]->getBulletCount(); m++)
 			{
-				if (zf.getZombies()[i]->getHealth() > 0)
+				if (pf.getPlants()[j]->getBullet() != NULL && pf.getPlants()[j]->getBullet()[m] != NULL && approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getBullet()[m]->getCoordinates()))
 				{
-					zf.getZombies()[i]->mark();
-					zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet());
+					if (zf.getZombies()[i]->getHealth() > 0)
+					{
+						zf.getZombies()[i]->mark();
+						zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet()[m]);
+					}
+
+					//else
+					//{
+					//	killCount++;
+					//}
 				}
 			}
 
@@ -146,13 +193,20 @@ void Levels::collisionDetection()
 
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
-
-			if (pf.getPlants()[j]->getBullet() != NULL && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			for (int m = 0; m < pf.getPlants()[j]->getBulletCount(); m++)
 			{
-				if (zf.getDancers()[i]->getHealth() > 0)
+				if (pf.getPlants()[j]->getBullet() != NULL && pf.getPlants()[j]->getBullet()[m] != NULL && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getBullet()[m]->getCoordinates()))
 				{
-					zf.getDancers()[i]->mark();
-					zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet());
+					if (zf.getDancers()[i]->getHealth() > 0)
+					{
+						zf.getDancers()[i]->mark();
+						zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet()[m]);
+					}
+
+					//else
+					//{
+					//	killCount++;
+					//}
 				}
 			}
 
@@ -169,12 +223,20 @@ void Levels::collisionDetection()
 
 				}
 
-				if (pf.getPlants()[j]->getBullet() != NULL && zf.getBackUp()[i][k] != NULL && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+				for (int m = 0; m < pf.getPlants()[j]->getBulletCount(); m++)
 				{
-					if (zf.getBackUp()[i][k]->getHealth() > 0)
+					if (pf.getPlants()[j]->getBullet() != NULL && pf.getPlants()[j]->getBullet()[m] != NULL && zf.getBackUp()[i][k] != NULL && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getBullet()[m]->getCoordinates()))
 					{
-						zf.getBackUp()[i][k]->mark();
-						zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet());
+						if (zf.getBackUp()[i][k]->getHealth() > 0)
+						{
+							zf.getBackUp()[i][k]->mark();
+							zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet()[m]);
+						}
+
+						//else
+						//{
+						//	killCount++;
+						//}
 					}
 				}
 
@@ -196,7 +258,7 @@ int Levels::winCondition()
 		return 0;  // Neither won nor lost continue playing
 }
 
-bool Levels::start()
+bool Levels::start(int& killCount)
 {
 	const int GRID_LEFT = 300;
 	const int GRID_TOP = 85;
@@ -214,8 +276,8 @@ bool Levels::start()
 
 	const int ROWS = 5;
 	const int COLS = 9;
-
-
+	
+	int x = 1;
 	srand(time(0));
 
 	RenderWindow window(VideoMode(1200, 700), "Plants Vs Zombies");
@@ -245,7 +307,10 @@ bool Levels::start()
 
 	Clock timeMoney;
 
-
+	//Texture tex;
+	//tex.loadFromFile("./Images/Sunflower_i.png");
+	//SeedPackets kicon(coordinates(300, 300), coordinates(400, 400), 1);
+	//kicon.setTexture(tex);
 
 
 
@@ -309,8 +374,71 @@ bool Levels::start()
 
 			if (sunGenerator.Update(event))
 			{
-				scoreBoard.IncrementScore(25);
+				scoreBoard.IncrementSuns(25);
 			}
+
+			//if (kicon.isClicked(event))
+			//{
+
+			//	std::cout << "I am clcikedddd";
+			//}
+			//if (seed.isClicked(event))
+			//{
+			//}
+			//else if (event.type == Event::MouseButtonReleased)
+			//	{
+			//		MousePosition.x = Mouse::getPosition(window).x;
+			//		MousePosition.y = Mouse::getPosition(window).y;
+
+			//		int x = 1;
+
+			//		// Check if the mouse click is within the game grid
+			//		if (withinGrid(MousePosition.x, MousePosition.y))
+			//		{
+			//			// Calculate the row and column of the clicked cell
+			//			int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
+			//			int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
+
+			//			std::cout << "GRID: " << col << ' ' << row << '\n';
+
+
+
+			//			// *********************************
+			//			// Itni zyadi mathematics karney ki kya zaroorat thi ?
+			//			// *********************************
+
+			//			// Calculate the position of the plant
+			//			// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+			//			// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+
+			//			// Adjust the position to draw the sprite from its middle
+			//			// plantX -= pf.getSpriteWidth() / 2;
+			//			// plantY -= pf.getSpriteHeight() / 2;
+			//			// Spawn the plant at the calculated position
+			//			// pf.spawnSunflowerAtPosition(plantX, plantY);
+
+			//			// *********************************
+			//			// Bas itni sa likna tha :)
+			//			// *********************************
+			//			if (FIELD_GAME_STATUS[row][col] == 0)
+			//			{
+			//				FIELD_GAME_STATUS[row][col] = 1;
+
+			//				int plantX = GRID_LEFT + col * CELL_WIDTH;
+			//				int plantY = GRID_TOP + row * CELL_HEIGHT;
+			//				pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
+			//			}
+			//			//-------------------------------------------
+			//		}
+			//	}
+			//if (event.type == Event::MouseButtonReleased && Mouse::getPosition().x < 290 && pf.selected == false)
+			//{
+			//	x = pf.Clicked(event);
+			//	pf.selected = true;
+			//}
+			/*else if (int x = pf.Clicked(event))
+			{*/
+			
 
 			else if (event.type == Event::MouseButtonReleased)
 			{
@@ -318,52 +446,56 @@ bool Levels::start()
 				MousePosition.y = Mouse::getPosition(window).y;
 				pf.PlantClicked(event, shovel);
 
-
-
-				// Check if the mouse click is within the game grid
-				if (withinGrid(MousePosition.x, MousePosition.y)) 
-				{
-					// Calculate the row and column of the clicked cell
-					int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
-					int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
-
-					std::cout << "GRID: " << col << ' ' << row << '\n';
-					
-					
-
-					// *********************************
-					// Itni zyadi mathematics karney ki kya zaroorat thi ?
-					// *********************************
-					
-					// Calculate the position of the plant
-					// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
-					// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
-
-					// Adjust the position to draw the sprite from its middle
-					// plantX -= pf.getSpriteWidth() / 2;
-					// plantY -= pf.getSpriteHeight() / 2;
-					// Spawn the plant at the calculated position
-					// pf.spawnSunflowerAtPosition(plantX, plantY);
-
-					// *********************************
-					// Bas itni sa likna tha :)
-					// *********************************
-					if (FIELD_GAME_STATUS[row][col] == 0)
+					if (pf.selected == false)
 					{
-						FIELD_GAME_STATUS[row][col] = 1;
-
-						int plantX = GRID_LEFT + col * CELL_WIDTH;
-						int plantY = GRID_TOP + row * CELL_HEIGHT;
-						pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT);
+						x = pf.Clicked(event);
+						pf.selected = true;
 					}
 
-					//else if (pf.getPlants()[0]->isClicked(event))
-					//{
-					//	std::cout << "Clicked\n";
-					//}
-					//-------------------------------------------
-				}
+
+					// Check if the mouse click is within the game grid
+					if (withinGrid(MousePosition.x, MousePosition.y) && pf.selected == true)
+					{
+						pf.selected = false;
+						// Calculate the row and column of the clicked cell
+						int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
+						int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
+
+						std::cout << "GRID: " << col << ' ' << row << '\n';
+
+
+
+						// *********************************
+						// Itni zyadi mathematics karney ki kya zaroorat thi ?
+						// *********************************
+
+						// Calculate the position of the plant
+						// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+						// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+
+						// Adjust the position to draw the sprite from its middle
+						// plantX -= pf.getSpriteWidth() / 2;
+						// plantY -= pf.getSpriteHeight() / 2;
+						// Spawn the plant at the calculated position
+						// pf.spawnSunflowerAtPosition(plantX, plantY);
+
+						// *********************************
+						// Bas itni sa likna tha :)
+						// *********************************
+						if (FIELD_GAME_STATUS[row][col] == 0)
+						{
+							FIELD_GAME_STATUS[row][col] = 1;
+
+							int plantX = GRID_LEFT + col * CELL_WIDTH;
+							int plantY = GRID_TOP + row * CELL_HEIGHT;
+							pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
+						}
+						//-------------------------------------------
+					}
 			}
+			//seed.draw(window);
+			//
+			//}
 
 		//Sun implementation
 		//	while (window.pollEvent(event)) {
@@ -388,7 +520,7 @@ bool Levels::start()
 
 
 
-
+		//kicon.draw(window);
 		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);
@@ -417,7 +549,9 @@ bool Levels::start()
 
 
 			//pf.DeleteProjectiles();
-
+			//std::cout << "KILLS: " << zf.getKills() << '\n';
+			scoreBoard.UpdateScore(killCount);
+			scoreBoard.UpdateLives(lives);
 			sunGenerator.spawnSun();
 			sunGenerator.moveSun(window);
 			//sun.draw(window);
@@ -480,6 +614,8 @@ bool Levels::start()
 		//	z1->Move();
 		//	z1->UpdateAnimation(deltaTime);
 		//}
+
+		decrementLives();
 
 		if (winCondition() == 1)
 			return true;

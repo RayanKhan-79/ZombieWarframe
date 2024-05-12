@@ -7,7 +7,9 @@ Game::Game()
 	InstructionIcon(coordinates(465, 310), coordinates(735, 390)),
 	highScoreIcon(coordinates(465, 400), coordinates(735, 480)),
 	Quit(coordinates(910, 600), coordinates(1180, 680)), 
-	end(false)
+	end(false),
+	win(false),
+	killCount(0)
 {
 	
 	Texture buttonTextures[4];
@@ -38,7 +40,7 @@ void Game::drawIcons(RenderWindow& window)
 void Game::playGame()
 {
 
-	Gamewindow.create(VideoMode(1200, 700), "PvZ");
+	Gamewindow.create(VideoMode(1200, 700), "Plant Vs Zombies");
 	Gamewindow.setPosition(Vector2i(100, 100));
 
 	while (Gamewindow.isOpen())
@@ -88,53 +90,54 @@ void Game::playGame()
 
 				iS.getWindow().close();
 
-				level = new BeginnersGarden;
+				level = new BeginnersGarden();
 				std::cout << "BEGINNER'S GARDEN\n";
-				if (level->start())
+				if (level->start(killCount))
 				{
 					
 					delete level;
-					level = new ZombieOutskirts;
+					level = new ZombieOutskirts();
 					
 					std::cout << "ZOMBIE OUTSKIRTS\n";
 					
-					if (level->start())
+					if (level->start(killCount))
 					{
 					
 						delete level;
-						level = new SunflowerFields;
+						level = new SunflowerFields();
 
 						std::cout << "SUNFLOWER FIELDS\n";
 						
-						if (level->start())
+						if (level->start(killCount))
 						{
 						
 							delete level;
-							level = new FoggyForest;
+							level = new FoggyForest();
 
 							std::cout << "FOGGY FOREST\n";
 
-							if (level->start())
+							if (level->start(killCount))
 							{
 							
 								delete level;
-								level = new NightTimeSiege;
+								level = new NightTimeSiege();
 
 								std::cout << "FOGGY FOREST\n";
 
-								if (level->start())
+								if (level->start(killCount))
 								{
 								
 									delete level;
-									level = new RoofTopRampage;
+									level = new RoofTopRampage();
 								
 									std::cout << "ROOF TOP RAMPAGE\n";
 
-									if (level->start())
+									if (level->start(killCount))
 									{
 									
 										delete level;
 										level = NULL;
+										win = true;
 										std::cout << "YOU WON\n";
 									}
 
@@ -148,15 +151,22 @@ void Game::playGame()
 					
 				}
 
+				if (!win)
+				{
+					gS.Render();
+					
+				}
+
+
 			}
 
 			if (!Gamewindow.isOpen() && end == false)
 			{
+				win = false;
 				playGame();
+				storeKillCount(killCount);
 			}
 		}
-
-
 
 		Gamewindow.draw(MainMenu);
 

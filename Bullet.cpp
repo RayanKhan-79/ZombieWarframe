@@ -9,9 +9,6 @@ Bullet::Bullet(coordinates pos, int damage, std::string type) : pos(pos), collid
 	{
 		bullet.setColor(sf::Color(0, 0, 255));
 	}
-	//sf::Color c(255, 0, 0);
-	//bullet.setFillColor(c);
-	//bullet.setRadius(5);
 	bullet.setPosition(pos.x, pos.y);
 }
 

@@ -18,7 +18,7 @@ class ScoreBoard
 	Text liveText;
 
 public:
-	ScoreBoard() : suns(0), score(0), lives(1)
+	ScoreBoard() : suns(0), score(0), lives(0)
 	{
 		texture.loadFromFile("./Images/scoreboard1.png");
 		sprite.setTexture(texture);
@@ -27,7 +27,7 @@ public:
 			// Handle font loading error
 		}
 
-		Color Green(0, 160, 0);
+		Color Green(0, 170, 0);
 
 		sunText.setFont(font); // Set the font
 		sunText.setCharacterSize(28); // Set the character size

@@ -5,8 +5,7 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
 	SkipLevel(coordinates(1030, 60), coordinates(1180, 100)),
 	pauseMenu(coordinates(325, 50)), 
-	Shovel(coordinates(1130,630), coordinates(1200,700)),
-	killCount(0),  
+	Shovel(coordinates(1130,630), coordinates(1200,700)), 
 	pf(plantsUnlocked),
 	zf(maxZombies, maxDancers, zombiesUnlocked),
 	sunGenerator(10)
@@ -51,6 +50,7 @@ void Levels::cherryBlast()
 		{
 
 			zf.getZombies()[i]->getHealth() -= 1000;
+			//killCount++;
 		}
 
 	for (int i = 0; i < zf.getNumberOfDancers(); i++)
@@ -59,6 +59,7 @@ void Levels::cherryBlast()
 		{
 
 			zf.getDancers()[i]->getHealth() -= 1000;
+			//killCount++;
 		}
 
 		for (int k = 0; k < 4; k++)
@@ -66,6 +67,7 @@ void Levels::cherryBlast()
 			{
 
 				zf.getBackUp()[i][k]->getHealth() -= 1000;
+				//killCount++;
 			}
 	
 	}
@@ -87,6 +89,7 @@ void Levels::TriggerMovers()
 			{
 				movers[j]->mark(zf.getZombies()[i]);
 				zf.getZombies()[i]->mark();
+				//killCount++;
 			}
 		}
 
@@ -96,6 +99,7 @@ void Levels::TriggerMovers()
 			{
 				movers[j]->mark(zf.getDancers()[i]);
 				zf.getDancers()[i]->mark();
+				//killCount++;
 			}
 		}
 		for (int i = 0; i < zf.getNumberOfDancers(); i++)
@@ -106,6 +110,7 @@ void Levels::TriggerMovers()
 				{
 					movers[j]->mark(zf.getBackUp()[i][k]);
 					zf.getBackUp()[i][k]->mark();
+					//killCount++;
 				}
 			}
 		}
@@ -133,6 +138,11 @@ void Levels::collisionDetection()
 					zf.getZombies()[i]->mark();
 					zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet());
 				}
+
+				//else
+				//{
+				//	killCount++;
+				//}
 			}
 
 
@@ -154,6 +164,11 @@ void Levels::collisionDetection()
 					zf.getDancers()[i]->mark();
 					zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet());
 				}
+
+				//else
+				//{
+				//	killCount++;
+				//}
 			}
 
 
@@ -176,6 +191,11 @@ void Levels::collisionDetection()
 						zf.getBackUp()[i][k]->mark();
 						zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet());
 					}
+
+					//else
+					//{
+					//	killCount++;
+					//}
 				}
 
 			}
@@ -196,7 +216,7 @@ int Levels::winCondition()
 		return 0;  // Neither won nor lost continue playing
 }
 
-bool Levels::start()
+bool Levels::start(int& killCount)
 {
 	const int GRID_LEFT = 300;
 	const int GRID_TOP = 85;
@@ -309,7 +329,7 @@ bool Levels::start()
 
 			if (sunGenerator.Update(event))
 			{
-				scoreBoard.IncrementScore(25);
+				scoreBoard.IncrementSuns(25);
 			}
 
 			else if (event.type == Event::MouseButtonReleased)
@@ -388,7 +408,7 @@ bool Levels::start()
 
 
 
-
+		
 		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);
@@ -417,7 +437,8 @@ bool Levels::start()
 
 
 			//pf.DeleteProjectiles();
-
+			//std::cout << "KILLS: " << zf.getKills() << '\n';
+			scoreBoard.UpdateScore(killCount);
 			sunGenerator.spawnSun();
 			sunGenerator.moveSun(window);
 			//sun.draw(window);

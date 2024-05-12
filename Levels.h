@@ -29,7 +29,6 @@ protected:
 	PlantFactory pf;
 	GenSun sunGenerator;
 	int lives = 3;
-	int killCount;
 	//int plantsUnlocked;
 	//int zombiesUnlocked;
 
@@ -38,7 +37,7 @@ public:
 	void collisionDetection();
 	void BulletCollisions();
 	virtual void createBack(RenderWindow& window) = 0;
-	bool start();
+	bool start(int& killCount);
 	void drawMovers(RenderWindow& window);
 	void TriggerMovers();
 	void MoveMovers();

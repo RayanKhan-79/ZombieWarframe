@@ -17,12 +17,19 @@ protected:
     SeedPackets** seedPackets = NULL;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
+
+    CherryBomb* cherryBomb = NULL;
     Plant* plants[50]{};
     int numPlants;
 
 
-    int SpriteWidth;
-    int SpriteHeight;
+
+
+
+
+    //int SpriteWidth;
+    //int SpriteHeight;
+
 public:
     bool selected = false;
 
@@ -31,15 +38,24 @@ public:
     void SelectPlants(int x);
     void DrawPlants(RenderWindow& window, float deltaTime);
 
-    void spawnSunflowerRandomly(int numRows, int numCols);
-    //void DrawIcons(); // Draw all icons
+    void spawnSunflowerAtPosition(int x, int y);
 
-    int getNumPlants() const { return numPlants; }
-    Plant* const* getPlants() const { return plants; }
-    int getSpriteWidth() { return SpriteWidth; }
-    int getSpriteHeight() { return SpriteHeight; }
-    void DrawIcons(RenderWindow& window); // Draw all icons
+    void DeleteDeadPlants(bool FIELD_GAME_STATUS[][9]);
+
+    void Shoot();
+
+    void PlantClicked(Event& e, bool& shovel);
 
     //testing
-    void spawnSunflowerAtPosition(int x, int y, int check);
+    void spawnSunflowerRandomly(int numRows, int numCols);
+    void DrawIcons(RenderWindow& window); // Draw all icons
+ 
+    
+    
+    int getNumPlants() const { return numPlants; }
+    Plant* const* getPlants() const { return plants; }
+    CherryBomb* getCherryBomb() { return cherryBomb; }
+
+    //int getSpriteWidth() { return SpriteWidth; }
+    //int getSpriteHeight() { return SpriteHeight; }
 };

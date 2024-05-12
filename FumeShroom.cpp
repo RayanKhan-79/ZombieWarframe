@@ -1,5 +1,6 @@
 #include "FumeShroom.h"
-FumeShroom::FumeShroom(int x, int y, int health) : ShootingPlants(x,y,health)
+FumeShroom::FumeShroom(int x, int y, int health, int pixelsX, int pixelsY)
+	: Plant(x,y,health, pixelsX, pixelsY)
 {
 	texture.loadFromFile("./Images/Fume-Shroom.png");
 	sprite.setTexture(texture);

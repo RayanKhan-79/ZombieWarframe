@@ -1,8 +1,12 @@
-#include "ShootingPlants.h"
-
-ShootingPlants::ShootingPlants(int x, int y, int health) : Plant(x, y, health) { }
-
-void ShootingPlants::UpdateAnimation(float interval)
-{
-
-}
+//#include "ShootingPlants.h"
+//
+//ShootingPlants::ShootingPlants(int x, int y, int health, int pixelsX, int pixelsY)
+//	: Plant(x, y, health, pixelsX, pixelsY), Pea(Pea)
+//{ 
+//
+//}
+//
+//void ShootingPlants::UpdateAnimation(float interval)
+//{
+//
+//}

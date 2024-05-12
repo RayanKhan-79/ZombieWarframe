@@ -1,12 +1,14 @@
 #include "CherryBomb.h"
 
-CherryBomb::CherryBomb()
+CherryBomb::CherryBomb(int x, int y, int health, int pixelsX, int pixlesY) 
+    : Plant(x, y, health, pixelsX, pixlesY),
+    BlastPoint1(Pos.x - 95, Pos.y - 118*2 + pixlesY),
+    BlastPoint2(Pos.x + 95*2, Pos.y + 118 + pixlesY)
 {
 
-}
+    mid.x = Pos.x;
+    mid.y = Pos.y + 70;
 
-CherryBomb::CherryBomb(int x, int y, int health) : Plant(x, y, health)
-{
     texture.loadFromFile("./Images/Cherrybomb_static.png");
     sprite.setTexture(texture);
     sprite.setPosition(Pos.x, Pos.y);
@@ -30,8 +32,11 @@ void CherryBomb::UpdateAnimation_cherry(float deltaTime)
         offset++;
 
         if (offset == 8)
+        {
             offset = 0;
-             health = 0;
+            health = 0;
+            std::cout << "Blast --> " << BlastPoint1.x << ' ' << BlastPoint2.x << "\n" << BlastPoint1.y << ' ' << BlastPoint2.y << "\n";
+        }
     }
     sprite.setTextureRect(IntRect(offset * 238, 0, 238, 180));
 }

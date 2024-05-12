@@ -17,28 +17,29 @@ protected:
 
 	Icon pauseIcon;
 	Icon SkipLevel;
+	Icon Shovel;
 	Texture background_Texture;
 	Sprite background_Sprite;
 	PauseMenu pauseMenu;
 	ScoreBoard scoreBoard;
 	//Music backGroundMusic
 
-	//Bullet** projectiles;
+	
 
 	Movers* movers[5];
 	ZombieFactory zf;
 	PlantFactory pf;
 	GenSun sunGenerator;
 	int lives = 3;
-	int killCount;
 	//int plantsUnlocked;
 	//int zombiesUnlocked;
 
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
 	void collisionDetection();
+	void BulletCollisions();
 	virtual void createBack(RenderWindow& window) = 0;
-	bool start();
+	bool start(int& killCount);
 	void drawMovers(RenderWindow& window);
 	void TriggerMovers();
 	void MoveMovers();
@@ -52,6 +53,8 @@ public:
 			file.close();
 		}
 	}
+
+	void cherryBlast();
 
 };
 

@@ -4,8 +4,8 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	:
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
 	SkipLevel(coordinates(1030, 60), coordinates(1180, 100)),
-	pauseMenu(coordinates(325, 50)),
-	killCount(0),
+	pauseMenu(coordinates(325, 50)), 
+	Shovel(coordinates(1130,630), coordinates(1200,700)), 
 	pf(plantsUnlocked),
 	zf(maxZombies, maxDancers, zombiesUnlocked),
 	sunGenerator(10)
@@ -20,8 +20,11 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	pauseTexture.loadFromFile("./Images/PauseButton.png");
 	Texture skipTexture;
 	skipTexture.loadFromFile("./Images/SkipLevel.png");
+	Texture shovelTexture;
+	shovelTexture.loadFromFile("./Images/shovelicon.png");
 	pauseIcon.setTexture(pauseTexture);
 	SkipLevel.setTexture(skipTexture);
+	Shovel.setTexture(shovelTexture);
 }
 
 void Levels::drawMovers(RenderWindow& window)
@@ -36,6 +39,46 @@ void Levels::MoveMovers()
 		movers[i]->Move();
 }
 
+void Levels::cherryBlast()
+{
+
+	if (!pf.getCherryBomb())
+		return;
+
+	for (int i = 0; i < zf.getNumberOfZombies(); i++)
+		if (LargeAreaMatch(pf.getCherryBomb()->getBlastPoint1(), pf.getCherryBomb()->getBlastPoint2(), zf.getZombies()[i]->getHitArea()))
+		{
+
+			zf.getZombies()[i]->getHealth() -= 1000;
+			//killCount++;
+		}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		if (LargeAreaMatch(pf.getCherryBomb()->getBlastPoint1(), pf.getCherryBomb()->getBlastPoint2(), zf.getDancers()[i]->getHitArea()))
+		{
+
+			zf.getDancers()[i]->getHealth() -= 1000;
+			//killCount++;
+		}
+
+		for (int k = 0; k < 4; k++)
+			if (zf.getBackUp()[i][k] && LargeAreaMatch(pf.getCherryBomb()->getBlastPoint1(), pf.getCherryBomb()->getBlastPoint2(), zf.getBackUp()[i][k]->getHitArea()))
+			{
+
+				zf.getBackUp()[i][k]->getHealth() -= 1000;
+				//killCount++;
+			}
+	
+	}
+
+	
+
+
+
+
+}
+
 void Levels::TriggerMovers()
 {
 	for (int j = 0; j < 5; j++)
@@ -46,6 +89,7 @@ void Levels::TriggerMovers()
 			{
 				movers[j]->mark(zf.getZombies()[i]);
 				zf.getZombies()[i]->mark();
+				//killCount++;
 			}
 		}
 
@@ -55,6 +99,7 @@ void Levels::TriggerMovers()
 			{
 				movers[j]->mark(zf.getDancers()[i]);
 				zf.getDancers()[i]->mark();
+				//killCount++;
 			}
 		}
 		for (int i = 0; i < zf.getNumberOfDancers(); i++)
@@ -65,6 +110,7 @@ void Levels::TriggerMovers()
 				{
 					movers[j]->mark(zf.getBackUp()[i][k]);
 					zf.getBackUp()[i][k]->mark();
+					//killCount++;
 				}
 			}
 		}
@@ -85,7 +131,19 @@ void Levels::collisionDetection()
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
+			if (pf.getPlants()[j]->getBullet() != NULL &&  approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			{
+				if (zf.getZombies()[i]->getHealth() > 0)
+				{
+					zf.getZombies()[i]->mark();
+					zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet());
+				}
 
+				//else
+				//{
+				//	killCount++;
+				//}
+			}
 
 
 		}
@@ -99,7 +157,19 @@ void Levels::collisionDetection()
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
+			if (pf.getPlants()[j]->getBullet() != NULL && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			{
+				if (zf.getDancers()[i]->getHealth() > 0)
+				{
+					zf.getDancers()[i]->mark();
+					zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet());
+				}
 
+				//else
+				//{
+				//	killCount++;
+				//}
+			}
 
 
 		}
@@ -114,7 +184,19 @@ void Levels::collisionDetection()
 
 				}
 
+				if (pf.getPlants()[j]->getBullet() != NULL && zf.getBackUp()[i][k] != NULL && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+				{
+					if (zf.getBackUp()[i][k]->getHealth() > 0)
+					{
+						zf.getBackUp()[i][k]->mark();
+						zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet());
+					}
 
+					//else
+					//{
+					//	killCount++;
+					//}
+				}
 
 			}
 
@@ -134,7 +216,7 @@ int Levels::winCondition()
 		return 0;  // Neither won nor lost continue playing
 }
 
-bool Levels::start()
+bool Levels::start(int& killCount)
 {
 	const int GRID_LEFT = 300;
 	const int GRID_TOP = 85;
@@ -199,12 +281,10 @@ bool Levels::start()
 	//	z1[i] = new DancingZombie(5, 4, 200, 4);
 	//ZombieFactory zf;
 	
-	/*Sentry* sentry[3];
-	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));*/
 
-	//SeedPackets seed(coordinates(10, 10), coordinates(20, 20), 1);
-	//seed.setTexture(tex);
+
 	float deltaTime;
+	bool shovel = false;
 	while (window.isOpen())
 	{
 		deltaTime = clock.restart().asSeconds();
@@ -245,10 +325,14 @@ bool Levels::start()
 				pauseMenu.paused = false;
 			}
 
+			if (Shovel.isClicked(event))
+			{
+				shovel = true;
+			}
+
 			if (sunGenerator.Update(event))
 			{
-				std::cout << "S\n";
-				scoreBoard.IncrementScore(25);
+				scoreBoard.IncrementSuns(25);
 			}
 
 			//if (kicon.isClicked(event))
@@ -315,10 +399,10 @@ bool Levels::start()
 			
 
 			else if (event.type == Event::MouseButtonReleased)
-				{
-			
-					MousePosition.x = Mouse::getPosition(window).x;
-					MousePosition.y = Mouse::getPosition(window).y;
+			{
+				MousePosition.x = Mouse::getPosition(window).x;
+				MousePosition.y = Mouse::getPosition(window).y;
+				pf.PlantClicked(event, shovel);
 
 					if (pf.selected == false)
 					{
@@ -360,12 +444,17 @@ bool Levels::start()
 						{
 							FIELD_GAME_STATUS[row][col] = 1;
 
-							int plantX = GRID_LEFT + col * CELL_WIDTH;
-							int plantY = GRID_TOP + row * CELL_HEIGHT;
-							pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
-						}
-						//-------------------------------------------
+						int plantX = GRID_LEFT + col * CELL_WIDTH;
+						int plantY = GRID_TOP + row * CELL_HEIGHT;
+						pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT);
 					}
+
+					//else if (pf.getPlants()[0]->isClicked(event))
+					//{
+					//	std::cout << "Clicked\n";
+					//}
+					//-------------------------------------------
+				}
 			}
 			//seed.draw(window);
 			//
@@ -394,10 +483,11 @@ bool Levels::start()
 
 
 
-		//kicon.draw(window);
+		
 		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);
+		Shovel.draw(window);
 		//if (z1 == NULL)
 		//{
 		//	z1 = new Zombie(200, 1, 20, 1000, 118 * 2 + 85 - 180);
@@ -414,8 +504,16 @@ bool Levels::start()
 		if (pauseMenu.paused == false) 
 		{
 			//pf.spawnSunflowerRandomly(5, 9);
+			cherryBlast();
+			pf.DeleteDeadPlants(FIELD_GAME_STATUS);
 			pf.DrawPlants(window, deltaTime);
+			
+			pf.Shoot();
 
+
+			//pf.DeleteProjectiles();
+			//std::cout << "KILLS: " << zf.getKills() << '\n';
+			scoreBoard.UpdateScore(killCount);
 			sunGenerator.spawnSun();
 			sunGenerator.moveSun(window);
 			//sun.draw(window);

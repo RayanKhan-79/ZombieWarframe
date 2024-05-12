@@ -32,6 +32,7 @@ class Game
 	Icon highScoreIcon;
 	Icon Quit;
 
+	int killCount;
 
 	InstructionScreen iS;
 	HighScoreScreen hS;

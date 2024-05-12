@@ -1,12 +1,15 @@
 #include "Repeater.h"
 
-Repeater::Repeater(int x, int y, int health) : ShootingPlants(x, y, health)
+
+Repeater::Repeater(int x, int y, int health, int pixelsX, int pixelsY)
+	: PeaShooter(x, y, health, pixelsX, pixelsY)
 {
 	texture.loadFromFile("./Images/Repeater.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(offset * 139, 0, 139, 135));
 	sprite.setPosition(Pos.x, Pos.y);
 }
+
 void Repeater::UpdateAnimation(float deltaTime)
 {
 	Total_Animation_Time += deltaTime;

@@ -21,6 +21,24 @@ bool approxMatch(const coordinates& hit_1, const coordinates& pos_2)
 	return false;
 }
 
+bool LargeAreaMatch(const coordinates& p1, const coordinates& p2, const coordinates& zombie)
+{
+	
+	if
+	(
+			zombie.x - 47 >= p1.x &&
+			zombie.x - 47 <= p2.x &&
+			zombie.y - 60 >= p1.y &&
+			zombie.y - 60 <= p2.y
+	)
+	{
+		return true;
+	}
+
+	return false;
+		
+}
+
 int randGrid(int Y_pixels)
 {
 	return (118 * (rand() % 4 + 1)) + 85 - Y_pixels;

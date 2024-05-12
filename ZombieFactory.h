@@ -32,6 +32,7 @@ class ZombieFactory
 
 
 
+
 public:
 	ZombieFactory(int,int,int,int=3);
 
@@ -57,9 +58,11 @@ public:
 
 	int getNumberOfZombies() { return numOfZombies; }
 
+
 	bool isWaveLimitReached()
 	{
 		return (waveCount >= waveLimit);
 	}
 	~ZombieFactory();
+
 };

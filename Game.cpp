@@ -173,7 +173,7 @@ Game::~Game()
 {
 	if (level != NULL)
 	{
-		//storeKillCount();
+		storeKillCount();
 		delete level;
 		level = NULL;
 	}

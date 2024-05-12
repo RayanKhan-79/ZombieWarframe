@@ -10,5 +10,6 @@ struct coordinates
 
 };
 bool approxMatch(const coordinates&, const coordinates&);
+bool LargeAreaMatch(const coordinates&, const coordinates&, const coordinates&);
 int randGrid(int);
 	

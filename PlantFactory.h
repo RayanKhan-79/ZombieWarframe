@@ -18,7 +18,7 @@ protected:
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
 
-
+    CherryBomb* cherryBomb = NULL;
     Plant* plants[50]{};
     int numPlants;
 
@@ -51,6 +51,8 @@ public:
     
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }
+    CherryBomb* getCherryBomb() { return cherryBomb; }
+
     //int getSpriteWidth() { return SpriteWidth; }
     //int getSpriteHeight() { return SpriteHeight; }
 };

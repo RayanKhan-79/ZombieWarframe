@@ -25,7 +25,7 @@ public:
 	Plant();
 	virtual void Draw(RenderWindow& window, float deltaTime);
 	virtual void UpdateAnimation(float interval);
-	virtual void Shoot() { std::cout << "Plant\n"; }
+	virtual void Shoot() { }
 	bool isClicked(Event&);
 	coordinates getPosition() { return Pos; }
 	coordinates getHitArea() { return mid; }

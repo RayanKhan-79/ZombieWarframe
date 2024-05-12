@@ -42,6 +42,20 @@ void PlantFactory::PlantClicked(Event& e, bool& shovel)
 
 void PlantFactory::DeleteDeadPlants(bool FIELD_GAME_STATUS[][9])
 {
+
+    if (cherryBomb && cherryBomb->getHealth() <= 0)
+    {
+        int COL = (cherryBomb->getHitArea().x - 300) / 95;
+        int ROW = (cherryBomb->getHitArea().y - 85) / 118;
+
+        FIELD_GAME_STATUS[ROW][COL] = 0;
+        std::cout << "FGS = " << COL << ' ' << ROW << '\n';
+
+        delete cherryBomb;
+        cherryBomb = NULL;
+
+    }
+
     for (int i = 0; i < 45; i++)
         if (plants[i] && plants[i]->getHealth() <= 0)
         {
@@ -79,10 +93,12 @@ void PlantFactory::Shoot()
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
 
-    if (numPlants < 50) {
-        plants[numPlants] = new SnowPea(x, y, 100); 
-        numPlants++;
-    }
+    cherryBomb = new CherryBomb(x, y, 50);
+
+    //if (numPlants < 50) {
+    //    plants[numPlants] = new PeaShooter(x, y, 100); 
+    //    numPlants++;
+    //}
 }
 
 
@@ -101,6 +117,9 @@ void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
     {
         plants[i]->Draw(window, deltaTime);
     }
+
+    if (cherryBomb)
+        cherryBomb->Draw(window,deltaTime);
 }
 
 void PlantFactory::spawnSunflowerRandomly(int numRows, int numCols)

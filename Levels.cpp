@@ -40,12 +40,42 @@ void Levels::MoveMovers()
 		movers[i]->Move();
 }
 
-
-void Levels::BulletCollisions()
+void Levels::cherryBlast()
 {
 
-}
+	if (!pf.getCherryBomb())
+		return;
 
+	for (int i = 0; i < zf.getNumberOfZombies(); i++)
+		if (LargeAreaMatch(pf.getCherryBomb()->getBlastPoint1(), pf.getCherryBomb()->getBlastPoint2(), zf.getZombies()[i]->getHitArea()))
+		{
+
+			zf.getZombies()[i]->getHealth() -= 1000;
+		}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		if (LargeAreaMatch(pf.getCherryBomb()->getBlastPoint1(), pf.getCherryBomb()->getBlastPoint2(), zf.getDancers()[i]->getHitArea()))
+		{
+
+			zf.getDancers()[i]->getHealth() -= 1000;
+		}
+
+		for (int k = 0; k < 4; k++)
+			if (zf.getBackUp()[i][k] && LargeAreaMatch(pf.getCherryBomb()->getBlastPoint1(), pf.getCherryBomb()->getBlastPoint2(), zf.getBackUp()[i][k]->getHitArea()))
+			{
+
+				zf.getBackUp()[i][k]->getHealth() -= 1000;
+			}
+	
+	}
+
+	
+
+
+
+
+}
 
 void Levels::TriggerMovers()
 {
@@ -279,7 +309,6 @@ bool Levels::start()
 
 			if (sunGenerator.Update(event))
 			{
-				std::cout << "S\n";
 				scoreBoard.IncrementScore(25);
 			}
 
@@ -380,6 +409,7 @@ bool Levels::start()
 		if (pauseMenu.paused == false) 
 		{
 			//pf.spawnSunflowerRandomly(5, 9);
+			cherryBlast();
 			pf.DeleteDeadPlants(FIELD_GAME_STATUS);
 			pf.DrawPlants(window, deltaTime);
 			

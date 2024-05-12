@@ -50,8 +50,8 @@ public:
 
 	void mark()
 	{
-		//Color c(0, 140, 140);
-		//sprite.setColor(c);
+		Color c(0, 140, 140);
+		sprite.setColor(c);
 	}
 };
 

@@ -46,5 +46,7 @@ public:
 	//int getMax() { return maxZombies; }
 	int winCondition();
 
+	void cherryBlast();
+
 };
 

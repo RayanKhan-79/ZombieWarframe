@@ -23,7 +23,7 @@ public:
 		texture.loadFromFile("./Images/scoreboard1.png");
 		sprite.setTexture(texture);
 
-		if (!font.loadFromFile("arial.ttf")) {
+		if (!font.loadFromFile("./Font/molger-regular.otf")) {
 			// Handle font loading error
 		}
 

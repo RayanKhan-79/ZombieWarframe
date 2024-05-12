@@ -9,7 +9,10 @@
 #include "FoggyForest.h"
 #include"NightTimeSiege.h"
 #include "RoofTopRampage.h"
-
+#include "string.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
 // Grid 
 // origin	  -->   [300px ,85px]
 // SE corner  -->   [1155px, 675px]
@@ -47,6 +50,43 @@ public:
 
 	void playGame();
 
+    void storeKillCount(int killCount) {
+        std::ifstream inFile("killcount.txt");
+        std::ofstream tempFile("temp.txt");
+
+        if (inFile.is_open() && tempFile.is_open()) {
+            int existingKill;
+            bool inserted = false;
+            bool insertedKillCount = false;
+
+            // Read existing kill counts and append the new one
+            while (inFile >> existingKill) {
+                if (killCount >= existingKill && !inserted && !insertedKillCount) {
+                    tempFile << killCount << "\n";
+                    insertedKillCount = true;
+                }
+                tempFile << existingKill << "\n";
+                if (!inserted && insertedKillCount) {
+                    inserted = true;
+                }
+            }
+
+            // If the new kill count is the largest, add it at the end
+            if (!insertedKillCount) {
+                tempFile << killCount << "\n";
+            }
+
+            inFile.close();
+            tempFile.close();
+
+            // Replace the original file with the sorted file
+            std::remove("killcount.txt");
+            std::rename("temp.txt", "killcount.txt");
+        }
+        else {
+            std::cerr << "Error: Unable to open file(s) for reading or writing.\n";
+        }
+    }
 	~Game();
 
 };

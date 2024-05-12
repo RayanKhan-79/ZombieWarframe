@@ -40,7 +40,7 @@ void Game::drawIcons(RenderWindow& window)
 void Game::playGame()
 {
 
-	Gamewindow.create(VideoMode(1200, 700), "PvZ");
+	Gamewindow.create(VideoMode(1200, 700), "Plant Vs Zombies");
 	Gamewindow.setPosition(Vector2i(100, 100));
 
 	while (Gamewindow.isOpen())
@@ -164,10 +164,9 @@ void Game::playGame()
 			{
 				win = false;
 				playGame();
+				storeKillCount(killCount);
 			}
 		}
-
-
 
 		Gamewindow.draw(MainMenu);
 

@@ -1,6 +1,9 @@
 #include "PlantFactory.h"
 
-PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(plantsUnlocked)
+PlantFactory::PlantFactory(int plantsUnlocked) 
+    : numPlants(0), 
+    plantsUnlocked(plantsUnlocked) 
+
 {
     // Initialize all textures (even locked ones)
     seedTextures[0].loadFromFile("./Images/Sunflower_i.png");  // Sunflower
@@ -11,15 +14,7 @@ PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(p
     seedTextures[5].loadFromFile("./Images/Snowpea_i.png");  // Snowpea
     seedTextures[6].loadFromFile("./Images/Fumeshroom_i.png");  // fumeShroom
    
-
-    //seedPackets = new SeedPackets * [plantsUnlocked] {};
-
-    //for (int i = 0; i < plantsUnlocked; i++)
-    //{
-    //    seedPackets[i] = new SeedPackets(coordinates(10, (83 * i) + 83), true);
-    //    seedPackets[i]->setTexture(seedTextures[i]);
-    //}
-
+    
 
 
     seedPackets = new SeedPackets * [plantsUnlocked] {};
@@ -30,14 +25,70 @@ PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(p
         seedPackets[i]->setTexture(seedTextures[i]);
     }
 }
+
+void PlantFactory::PlantClicked(Event& e, bool& shovel)
+{
+    std::cout << shovel;
+    for (int i = 0; i < numPlants; i++)
+        if (plants[i]->isClicked(e) && shovel == true)
+        {
+            plants[i]->getHealth() = 0;
+            shovel = false;
+            return;
+        }
+                
+}
+
+
+void PlantFactory::DeleteDeadPlants(bool FIELD_GAME_STATUS[][9])
+{
+    for (int i = 0; i < 45; i++)
+        if (plants[i] && plants[i]->getHealth() <= 0)
+        {
+            int COL = (plants[i]->getHitArea().x - 300)/95;
+            int ROW = (plants[i]->getHitArea().y - 85)/118;
+            
+            FIELD_GAME_STATUS[ROW][COL] = 0;
+            std::cout << "FGS = " << COL << ' ' << ROW << '\n';
+
+            delete plants[i];
+            plants[i] = NULL;
+            numPlants--;
+        }
+
+    for (int i = 0; i < 45; i++)
+        for (int j = 0; j < 45-1; j++)
+            if (plants[j] == NULL && plants[j + 1] != NULL)
+            {
+                Plant* temp = plants[j+1];
+                plants[j + 1] = plants[j];
+                plants[j] = temp;
+            }
+}
+
+
+
+void PlantFactory::Shoot()
+{
+        
+    for (int i = 0; i < numPlants; i++)
+        plants[i]->Shoot();
+}
+
+
 void PlantFactory::spawnSunflowerAtPosition(int x, int y)
 {
 
-    if (numPlants < 50) {
-        plants[numPlants] = new Sunflower(x, y, 100); 
+    if (numPlants < 50) 
+    {
+        
+        plants[numPlants] = new PeaShooter(x, y, 100);
+            
         numPlants++;
     }
 }
+
+
 void PlantFactory::DrawIcons(RenderWindow& window)
 {
     for (int i = 0; i < plantsUnlocked; ++i)
@@ -45,6 +96,8 @@ void PlantFactory::DrawIcons(RenderWindow& window)
         seedPackets[i]->draw(window);
     }
 }
+
+
 void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
 {
     for (int i = 0; i < numPlants; ++i)
@@ -55,12 +108,12 @@ void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
 
 void PlantFactory::spawnSunflowerRandomly(int numRows, int numCols)
 {
-    if (numPlants < 10)
-    {
-        int randomRow = rand() % numRows;
-        int randomCol = rand() % numCols;
+    //if (numPlants < 10)
+    //{
+    //    int randomRow = rand() % numRows;
+    //    int randomCol = rand() % numCols;
 
-        plants[numPlants] = new Plant(randomCol * 95 + 300, randGrid(138), 300);
-        numPlants++;
-    }
+    //    plants[numPlants] = new Plant(randomCol * 95 + 300, randGrid(138), 300);
+    //    numPlants++;
+    //}
 }

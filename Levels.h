@@ -4,7 +4,6 @@
 #include"PlantFactory.h"
 #include"PauseMenu.h"
 #include"Movers.h"
-//#include"Sentry.h"
 
 class Levels
 {
@@ -13,12 +12,13 @@ protected:
 
 	Icon pauseIcon;
 	Icon SkipLevel;
+	Icon Shovel;
 	Texture background_Texture;
 	Sprite background_Sprite;
 	PauseMenu pauseMenu;
 	//Music backGroundMusic
 
-	Bullet** projectiles;
+	
 
 	Movers* movers[5];
 	ZombieFactory zf;
@@ -32,6 +32,7 @@ protected:
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
 	void collisionDetection();
+	void BulletCollisions();
 	virtual void createBack(RenderWindow& window) = 0;
 	bool start();
 	void drawMovers(RenderWindow& window);

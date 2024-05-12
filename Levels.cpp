@@ -27,6 +27,40 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	Shovel.setTexture(shovelTexture);
 }
 
+void Levels::decrementLives()
+{
+	for (int i = 0; i < zf.getNumberOfZombies(); i++)
+	{
+		if (zf.getZombies()[i]->getPosition().x <= 150 && !zf.getZombies()[i]->getReachedHomeStatus())
+		{
+			zf.getZombies()[i]->setReachedHomeStatus(true);
+			lives--;
+		}
+
+	}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		if (zf.getDancers()[i]->getPosition().x <= 150 && !zf.getDancers()[i]->getReachedHomeStatus())
+		{
+			zf.getDancers()[i]->setReachedHomeStatus(true);
+			lives--;
+		}
+
+	}
+
+	for (int i = 0; i < zf.getNumberOfDancers(); i++)
+	{
+		for (int k = 0; k < 4; k++)
+			if (zf.getBackUp()[i][k] && zf.getBackUp()[i][k]->getPosition().x <= 150 && !zf.getBackUp()[i][k]->getReachedHomeStatus())
+			{
+				zf.getBackUp()[i][k]->setReachedHomeStatus(true);
+				lives--;
+			}
+	}
+
+}
+
 void Levels::drawMovers(RenderWindow& window)
 {
 	for (int i = 0; i < 5; i++)
@@ -517,6 +551,7 @@ bool Levels::start(int& killCount)
 			//pf.DeleteProjectiles();
 			//std::cout << "KILLS: " << zf.getKills() << '\n';
 			scoreBoard.UpdateScore(killCount);
+			scoreBoard.UpdateLives(lives);
 			sunGenerator.spawnSun();
 			sunGenerator.moveSun(window);
 			//sun.draw(window);
@@ -579,6 +614,8 @@ bool Levels::start(int& killCount)
 		//	z1->Move();
 		//	z1->UpdateAnimation(deltaTime);
 		//}
+
+		decrementLives();
 
 		if (winCondition() == 1)
 			return true;

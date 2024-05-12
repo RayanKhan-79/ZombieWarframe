@@ -149,6 +149,7 @@
     <ClCompile Include="FootballZombie.cpp" />
     <ClCompile Include="FumeShroom.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="HighScoreScreen.cpp" />
     <ClCompile Include="Icon.cpp" />
     <ClCompile Include="InstructionScreen.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="FootballZombie.h" />
     <ClInclude Include="FumeShroom.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="HighScoreScreen.h" />
     <ClInclude Include="Icon.h" />
     <ClInclude Include="InstructionScreen.h" />

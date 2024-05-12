@@ -1,4 +1,5 @@
 #pragma once
+#include"GameOverScreen.h"
 #include"InstructionScreen.h"
 #include"HighScoreScreen.h"
 #include"Levels.h"
@@ -19,7 +20,7 @@
 class Game
 {
 	bool end;
-
+	bool win;
 	// For Testing
 	int progress = 0;
 	// =====
@@ -34,6 +35,7 @@ class Game
 
 	int killCount;
 
+	GameOverScreen gS;
 	InstructionScreen iS;
 	HighScoreScreen hS;
 	Levels* level;

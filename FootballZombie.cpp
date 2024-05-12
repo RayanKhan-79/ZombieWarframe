@@ -41,7 +41,7 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 
 void FootballZombie::Move()
 {
-	if (action == "attacking")
+	if (action == "attacking" || Pos.x <= 150)
 		return;
 
 	Pos.x -= speed;

@@ -15,7 +15,8 @@ protected:
 	int speed;
 	int slowSpeed;
 	int damage;
-
+	bool reachedHome = false;
+	
 	float Total_Animation_Time;
 	float switchTime;
 	int offset;
@@ -30,7 +31,7 @@ protected:
 
 
 public:
-	Zombie(int=200, int=2, int=5, int=1000, int=randGrid(180), int=180, int=180);
+	Zombie(int=20000, int=7, int=5, int=1000, int=randGrid(180), int=180, int=180);
 	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);
@@ -42,7 +43,8 @@ public:
 	int& getHealth();
 	coordinates getPosition() const { return Pos; }
 	coordinates getHitArea() const { return hitArea; }
-
+	bool getReachedHomeStatus() const { return reachedHome; }
+	void setReachedHomeStatus(bool boolean) { reachedHome = boolean; }
 	void Decrement_Health(int amount = 0)
 	{
 		health -= amount;

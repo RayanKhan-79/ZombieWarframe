@@ -8,6 +8,7 @@ Game::Game()
 	highScoreIcon(coordinates(465, 400), coordinates(735, 480)),
 	Quit(coordinates(910, 600), coordinates(1180, 680)), 
 	end(false),
+	win(false),
 	killCount(0)
 {
 	
@@ -136,6 +137,7 @@ void Game::playGame()
 									
 										delete level;
 										level = NULL;
+										win = true;
 										std::cout << "YOU WON\n";
 									}
 
@@ -149,10 +151,18 @@ void Game::playGame()
 					
 				}
 
+				if (!win)
+				{
+					gS.Render();
+					
+				}
+
+
 			}
 
 			if (!Gamewindow.isOpen() && end == false)
 			{
+				win = false;
 				playGame();
 			}
 		}

@@ -6,6 +6,7 @@ SnowPea::SnowPea(int x, int y, int health, int pixelsX, int pixelsY)
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(offset * 131, 0, 131, 135));
 	sprite.setPosition(Pos.x, Pos.y);
+	Pea = new Bullet * [bulletCount] {};
 }
 void SnowPea::UpdateAnimation(float deltaTime)
 {
@@ -21,11 +22,11 @@ void SnowPea::UpdateAnimation(float deltaTime)
 	sprite.setTextureRect(IntRect(offset * 131, 0, 131, 135));
 }
 
-//void SnowPea::Shoot()
-//{
-//	if (clock.getElapsedTime().asSeconds() < 0.5 || Pea)
-//		return;
-//
-//	clock.restart();
-//	Pea = new Bullet(coordinates(Pos.x + 50, Pos.y + 50), 70, "frozen");
-//}
+void SnowPea::Shoot()
+{
+	if (clock.getElapsedTime().asSeconds() < 0.5 || Pea[0])
+		return;
+
+	clock.restart();
+	Pea[0] = new Bullet(coordinates(Pos.x + 50, Pos.y + 50), 70, "frozen");
+}

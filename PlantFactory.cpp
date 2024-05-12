@@ -163,21 +163,67 @@ int PlantFactory::Clicked(Event& event)
     
 
 }
-bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check)
+#include <SFML/Audio.hpp>
+
+bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard& scoreboard)
 {
-    
+    // Load the sound file
+    sf::SoundBuffer buffer;
+    if (!buffer.loadFromFile("./Audio/Plantsound.mp3")) {
+        std::cout << "Loading error of plant spawn audio" << std::endl;
+        return false;
+    }
+
+    // Create a sound instance
+    sf::Sound sound;
+    sound.setBuffer(buffer);
+    sound.setVolume(100.0f);
+
     switch (check)
     {
+    case 0:
+        selected = false;
+        return false;
 
     case 1:
-        std::cout << "Sunflower " << std::endl;
-        plants[numPlants] = new Sunflower(x, y, 100);
+        if (scoreboard.getSun() >= 100)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 100);
+            std::cout << "Sunflower " << std::endl;
+            plants[numPlants] = new Sunflower(x, y, 100);
+            numPlants++;
+        }
+        else
+        {
+            return false;
+        }
         break;
     case 2:
-        std::cout << "PeaShooter " << std::endl;
-        plants[numPlants] = new PeaShooter(x, y, 100);
+        if (scoreboard.getSun() >= 100)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 100);
+            std::cout << "PeaShooter " << std::endl;
+            plants[numPlants] = new PeaShooter(x, y, 100);
+            numPlants++;
+        }
+        else
+        {
+            return false;
+        }
         break;
     case 3:
+        if (scoreboard.getSun() >= 50)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 50);
+            std::cout << "Walnut " << std::endl;
+            plants[numPlants] = new Walnut(x, y, 100);  
+            numPlants++;
+        }
+        else
+        {
+            return false;
+        }
+        break;
         std::cout << "Walnut " << std::endl;
         wallnuts[wallnutCount] = new Walnut(x, y, 900);
         wallnutCount++;
@@ -186,24 +232,69 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check)
         std::cout << "Cherrybomb " << std::endl;
         cherryBomb = new CherryBomb(x, y, 100);
         return false;
+        if (scoreboard.getSun() >= 150)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 150);
+            std::cout << "Cherrybomb " << std::endl;
+            cherryBomb = new CherryBomb(x, y, 100);
+            numPlants--;
+        }
+        else
+        {
+            return false;
+        }
+        break;
     case 5:
-        std::cout << "Repeater " << std::endl;
-        plants[numPlants] = new Repeater(x, y, 100);
+        if (scoreboard.getSun() >= 200)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 200);
+            std::cout << "Repeater " << std::endl;
+            plants[numPlants] = new Repeater(x, y, 100);
+            numPlants++;
+        }
+        else
+        {
+            return false;
+        }
         break;
     case 6:
-        std::cout << "Snowpea " << std::endl;
-        plants[numPlants] = new SnowPea(x, y, 100);
+        if (scoreboard.getSun() >= 175)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 175);
+            std::cout << "Snowpea " << std::endl;
+            plants[numPlants] = new SnowPea(x, y, 100);
+            numPlants++;
+        }
+        else
+        {
+            return false;
+        }
         break;
     case 7:
-        std::cout << "FumeShroom " << std::endl;
-        plants[numPlants] = new FumeShroom(x, y, 100);
+        if (scoreboard.getSun() >= 75)
+        {
+            scoreboard.setSun(scoreboard.getSun() - 75);
+            std::cout << "FumeShroom " << std::endl;
+            plants[numPlants] = new FumeShroom(x, y, 100);
+            numPlants++;
+        }
+        else
+        {
+            return false;
+        }
         break;
     default:
         return false;
     }
     numPlants++;
     return true;
+    
+
+    while (sound.getStatus() == sf::Sound::Playing) {
+        // Optional: You can add a delay here if needed
+    }
 }
+
 void PlantFactory::DrawIcons(RenderWindow& window)
 {
     for (int i = 0; i < plantsUnlocked; ++i)

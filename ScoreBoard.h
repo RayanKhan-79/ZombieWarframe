@@ -72,5 +72,15 @@ public:
 		window.draw(liveText);
 		window.draw(scoreText);
 	}
+
+	int getSun() 
+	{
+		return suns;
+	}
+
+	void setSun(int x)
+	{
+		suns = x;
+	}
 };
 

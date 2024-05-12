@@ -8,7 +8,7 @@
 #include "SnowPea.h"
 #include "FumeShroom.h"
 #include "SeedPackets.h"
-
+#include "ScoreBoard.h"
 
 
 class PlantFactory
@@ -62,5 +62,5 @@ public:
     CherryBomb* getCherryBomb() { return cherryBomb; }
 
     //testing
-    bool spawnSunflowerAtPosition(int x, int y, int check);
+    bool spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard& scoreboard);
 };

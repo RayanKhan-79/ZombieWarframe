@@ -1,5 +1,6 @@
 #pragma once
 #include "Sun.h"
+#include <SFML/Audio.hpp>
 class GenSun
 {
 private:
@@ -10,7 +11,7 @@ private:
 
 public:
 
-	GenSun(float interval = 10)
+	GenSun(float interval = 1)
 		: interval(interval), sun(NULL)
 	{
 
@@ -29,7 +30,10 @@ public:
 
 		sun = new Sun(coordinates(x, y));
 		clock.restart();
+
+		
 	}
+
 
 	void moveSun(RenderWindow& window)
 	{
@@ -44,6 +48,7 @@ public:
 	{
 		if (sun && sun->isClicked(e))
 		{
+
 			delete sun;
 			sun = NULL;
 			return true;

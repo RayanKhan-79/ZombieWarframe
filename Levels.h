@@ -37,7 +37,7 @@ protected:
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
 	void collisionDetection();
-	void BulletCollisions();
+	//void BulletCollisions();
 	virtual void createBack(RenderWindow& window) = 0;
 	bool start(int& killCount);
 	void drawMovers(RenderWindow& window);
@@ -46,13 +46,13 @@ public:
 	//int getKills() { return killCount; }
 	//int getMax() { return maxZombies; }
 	int winCondition();
-	void storeKillCount() {
-		std::ofstream file("killcount.txt");
-		if (file.is_open()) {
-			file << killCount;
-			file.close();
-		}
-	}
+	//void storeKillCount() {
+	//	std::ofstream file("killcount.txt");
+	//	if (file.is_open()) {
+	//		file << killCount;
+	//		file.close();
+	//	}
+	//}
 
 	void cherryBlast();
 

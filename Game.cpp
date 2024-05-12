@@ -154,7 +154,7 @@ void Game::playGame()
 			if (!Gamewindow.isOpen() && end == false)
 			{
 				playGame();
-				level->storeKillCount();
+				//level->storeKillCount();
 			}
 		}
 

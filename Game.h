@@ -48,43 +48,49 @@ public:
 
 	void playGame();
 
+#include <iostream>
+#include <fstream>
+
     void storeKillCount(int killCount) {
         std::ifstream inFile("killcount.txt");
         std::ofstream tempFile("temp.txt");
 
-        if (inFile.is_open() && tempFile.is_open()) {
-            int existingKill;
-            bool inserted = false;
-            bool insertedKillCount = false;
+        if (!inFile.is_open()) {
+            std::cerr << "Error: Unable to open input file 'killcount.txt'\n";
+            return;
+        }
 
-            // Read existing kill counts and append the new one
-            while (inFile >> existingKill) {
-                if (killCount >= existingKill && !inserted && !insertedKillCount) {
-                    tempFile << killCount << "\n";
-                    insertedKillCount = true;
-                }
-                tempFile << existingKill << "\n";
-                if (!inserted && insertedKillCount) {
-                    inserted = true;
-                }
-            }
-
-            // If the new kill count is the largest, add it at the end
-            if (!insertedKillCount) {
-                tempFile << killCount << "\n";
-            }
-
+        if (!tempFile.is_open()) {
+            std::cerr << "Error: Unable to open output file 'temp.txt'\n";
             inFile.close();
-            tempFile.close();
+            return;
+        }
 
-            // Replace the original file with the sorted file
-            std::remove("killcount.txt");
-            std::rename("temp.txt", "killcount.txt");
+        int existingKill;
+        bool inserted = false;
+
+        // Read existing kill counts and insert the new one in sorted order
+        while (inFile >> existingKill) {
+            if (killCount >= existingKill && !inserted) {
+                tempFile << killCount << "\n";
+                inserted = true;
+            }
+            tempFile << existingKill << "\n";
         }
-        else {
-            std::cerr << "Error: Unable to open file(s) for reading or writing.\n";
+
+        // If the new kill count is the smallest, add it at the end
+        if (!inserted) {
+            tempFile << killCount << "\n";
         }
+
+        inFile.close();
+        tempFile.close();
+
+        // Replace the original file with the sorted file
+        std::remove("killcount.txt");
+        std::rename("temp.txt", "killcount.txt");
     }
+
 	~Game();
 
 };

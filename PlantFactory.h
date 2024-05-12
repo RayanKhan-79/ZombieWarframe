@@ -29,11 +29,14 @@ public:
     bool selected = false;
 
     PlantFactory(int plantsUnlocked);
+    
     int Clicked(Event& event);
+
     void SelectPlants(int x);
+
     void DrawPlants(RenderWindow& window, float deltaTime);
 
-    void spawnSunflowerAtPosition(int x, int y);
+    //void spawnSunflowerAtPosition(int x, int y);
 
     void DeleteDeadPlants(bool FIELD_GAME_STATUS[][9]);
 

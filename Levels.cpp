@@ -131,18 +131,21 @@ void Levels::collisionDetection()
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
 
-			if (pf.getPlants()[j]->getBullet() != NULL &&  approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			for (int m = 0; m < pf.getPlants()[j]->getBulletCount(); m++)
 			{
-				if (zf.getZombies()[i]->getHealth() > 0)
+				if (pf.getPlants()[j]->getBullet() != NULL && pf.getPlants()[j]->getBullet()[m] != NULL && approxMatch(zf.getZombies()[i]->getHitArea(), pf.getPlants()[j]->getBullet()[m]->getCoordinates()))
 				{
-					zf.getZombies()[i]->mark();
-					zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet());
-				}
+					if (zf.getZombies()[i]->getHealth() > 0)
+					{
+						zf.getZombies()[i]->mark();
+						zf.getZombies()[i]->getShotAt(pf.getPlants()[j]->getBullet()[m]);
+					}
 
-				//else
-				//{
-				//	killCount++;
-				//}
+					//else
+					//{
+					//	killCount++;
+					//}
+				}
 			}
 
 
@@ -156,19 +159,21 @@ void Levels::collisionDetection()
 
 				//std::cout << pf.getPlants()[j]->getHealth() << '\n';
 			}
-
-			if (pf.getPlants()[j]->getBullet() != NULL && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+			for (int m = 0; m < pf.getPlants()[j]->getBulletCount(); m++)
 			{
-				if (zf.getDancers()[i]->getHealth() > 0)
+				if (pf.getPlants()[j]->getBullet() != NULL && pf.getPlants()[j]->getBullet()[m] != NULL && approxMatch(zf.getDancers()[i]->getHitArea(), pf.getPlants()[j]->getBullet()[m]->getCoordinates()))
 				{
-					zf.getDancers()[i]->mark();
-					zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet());
-				}
+					if (zf.getDancers()[i]->getHealth() > 0)
+					{
+						zf.getDancers()[i]->mark();
+						zf.getDancers()[i]->getShotAt(pf.getPlants()[j]->getBullet()[m]);
+					}
 
-				//else
-				//{
-				//	killCount++;
-				//}
+					//else
+					//{
+					//	killCount++;
+					//}
+				}
 			}
 
 
@@ -184,18 +189,21 @@ void Levels::collisionDetection()
 
 				}
 
-				if (pf.getPlants()[j]->getBullet() != NULL && zf.getBackUp()[i][k] != NULL && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getBullet()->getCoordinates()))
+				for (int m = 0; m < pf.getPlants()[j]->getBulletCount(); m++)
 				{
-					if (zf.getBackUp()[i][k]->getHealth() > 0)
+					if (pf.getPlants()[j]->getBullet() != NULL && pf.getPlants()[j]->getBullet()[m] != NULL && zf.getBackUp()[i][k] != NULL && approxMatch(zf.getBackUp()[i][k]->getHitArea(), pf.getPlants()[j]->getBullet()[m]->getCoordinates()))
 					{
-						zf.getBackUp()[i][k]->mark();
-						zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet());
-					}
+						if (zf.getBackUp()[i][k]->getHealth() > 0)
+						{
+							zf.getBackUp()[i][k]->mark();
+							zf.getBackUp()[i][k]->getShotAt(pf.getPlants()[j]->getBullet()[m]);
+						}
 
-					//else
-					//{
-					//	killCount++;
-					//}
+						//else
+						//{
+						//	killCount++;
+						//}
+					}
 				}
 
 			}

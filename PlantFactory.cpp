@@ -89,9 +89,9 @@ void PlantFactory::Shoot()
         plants[i]->Shoot();
 }
 
-
-void PlantFactory::spawnSunflowerAtPosition(int x, int y)
-{
+//
+//void PlantFactory::spawnSunflowerAtPosition(int x, int y)
+//{
 int PlantFactory::Clicked(Event& event)
 {
     std::cout << "I am in click" << std::endl;
@@ -156,7 +156,8 @@ void PlantFactory::spawnSunflowerAtPosition(int x, int y, int check)
         break;
     case 4:
         std::cout << "Cherrybomb " << std::endl;
-        plants[numPlants] = new CherryBomb(x, y, 100);
+        cherryBomb = new CherryBomb(x, y, 100);
+        numPlants--;
         break;
     case 5:
         std::cout << "Repeater " << std::endl;

@@ -1,5 +1,5 @@
 #include "Levels.h"
-
+#include <SFML/Audio.hpp>
 Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers)
 	:
 	pauseIcon(coordinates(1030, 10), coordinates(1180, 55)),
@@ -327,6 +327,20 @@ bool Levels::start(int& killCount)
 
 	float deltaTime;
 	bool shovel = false;
+
+	sf::Music backgroundMusic;
+	if (!backgroundMusic.openFromFile("./Audio/level.mp3")) {
+		std::cerr << "Error loading background music!" << std::endl;
+		return false; // Exit if music file loading fails
+	}
+
+	// Set the volume to 50
+	backgroundMusic.setVolume(50);
+
+	// Play the music in a loop
+	backgroundMusic.setLoop(true);
+	backgroundMusic.play();
+
 	while (window.isOpen())
 	{
 		deltaTime = clock.restart().asSeconds();

@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include <SFML/Audio.hpp>
 
 Game::Game()
 	: level(NULL), 
@@ -43,9 +43,21 @@ void Game::playGame()
 	Gamewindow.create(VideoMode(1200, 700), "Plant Vs Zombies");
 	Gamewindow.setPosition(Vector2i(100, 100));
 
+	sf::Music backgroundMusic;
+	if (!backgroundMusic.openFromFile("./Audio/game.mp3")) {
+		std::cerr << "Error loading background music!" << std::endl;
+		return; // Exit if music file loading fails
+	}
+
+	// Set the volume to 50
+	backgroundMusic.setVolume(50);
+
+	// Play the music in a loop
+	backgroundMusic.setLoop(true);
+	backgroundMusic.play();
+
 	while (Gamewindow.isOpen())
 	{
-
 
 		Event e;
 		while (Gamewindow.pollEvent(e))
@@ -67,6 +79,7 @@ void Game::playGame()
 
 			if (InstructionIcon.isClicked(e))
 			{
+				backgroundMusic.setVolume(0);
 				Gamewindow.close();
 
 				hS.getWindow().close();
@@ -76,6 +89,7 @@ void Game::playGame()
 
 			if (highScoreIcon.isClicked(e))
 			{
+				backgroundMusic.setVolume(0);
 				Gamewindow.close();
 
 				iS.getWindow().close();
@@ -85,6 +99,7 @@ void Game::playGame()
 
 			if (playgameIcon.isClicked(e))
 			{
+				backgroundMusic.setVolume(0);
 				Gamewindow.close();
 				hS.getWindow().close();
 

@@ -10,6 +10,7 @@ private:
     coordinates BlastPoint2;
 
 public:
+    CherryBomb() { }
     CherryBomb(int x, int y, int health, int pixelsX = 140, int pixlesY = 140);
     void UpdateAnimation(float deltaTime);
     void UpdateAnimation_cherry(float deltaTime);

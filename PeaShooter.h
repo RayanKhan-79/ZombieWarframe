@@ -7,6 +7,7 @@ protected:
 	int bulletCount;
 	Clock clock;
 public:
+	PeaShooter() { }
 	PeaShooter(int x, int y, int health, int pixelsX = 111, int pixelsY = 135);
 	void UpdateAnimation(float deltaTime);
 	virtual void Shoot();

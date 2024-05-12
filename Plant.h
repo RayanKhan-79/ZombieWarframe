@@ -1,8 +1,8 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"coordinates.h"
-#include"Plant.h"
 #include"Bullet.h"
+
 using namespace sf;
 class Plant
 {

@@ -1,6 +1,6 @@
 #include "SnowPea.h"
 SnowPea::SnowPea(int x, int y, int health, int pixelsX, int pixelsY) 
-	: ShootingPlants(x, y, health, pixelsX, pixelsY)
+	: PeaShooter(x, y, health, pixelsX, pixelsY)
 {
 	texture.loadFromFile("./Images/Snowpea.png");
 	sprite.setTexture(texture);

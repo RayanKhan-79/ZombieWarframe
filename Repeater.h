@@ -1,6 +1,6 @@
 #pragma once
-#include "ShootingPlants.h"
-class Repeater : public ShootingPlants
+#include "PeaShooter.h"
+class Repeater : public PeaShooter
 {
 
 public:

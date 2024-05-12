@@ -2,7 +2,7 @@
 
 
 Repeater::Repeater(int x, int y, int health, int pixelsX, int pixelsY)
-	: ShootingPlants(x, y, health, pixelsX, pixelsY)
+	: PeaShooter(x, y, health, pixelsX, pixelsY)
 {
 	texture.loadFromFile("./Images/Repeater.png");
 	sprite.setTexture(texture);

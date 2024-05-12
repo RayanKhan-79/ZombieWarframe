@@ -1,7 +1,7 @@
 #include "PeaShooter.h"
 
 PeaShooter::PeaShooter(int x, int y, int health, int pixelsX, int pixelsY)
-	: ShootingPlants (x,y,health, pixelsX, pixelsY)
+	: Plant (x,y,health, pixelsX, pixelsY)
 {
 	
 	texture.loadFromFile("./Images/Peashooter.png");

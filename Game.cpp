@@ -38,7 +38,7 @@ void Game::drawIcons(RenderWindow& window)
 void Game::playGame()
 {
 
-	Gamewindow.create(VideoMode(1200, 700), "PvZ");
+	Gamewindow.create(VideoMode(1200, 700), "Plant Vs Zombies");
 	Gamewindow.setPosition(Vector2i(100, 100));
 
 	while (Gamewindow.isOpen())
@@ -153,10 +153,9 @@ void Game::playGame()
 			if (!Gamewindow.isOpen() && end == false)
 			{
 				playGame();
+				level->storeKillCount();
 			}
 		}
-
-
 
 		Gamewindow.draw(MainMenu);
 
@@ -172,6 +171,7 @@ Game::~Game()
 {
 	if (level != NULL)
 	{
+		
 		delete level;
 		level = NULL;
 	}

@@ -6,6 +6,8 @@
 #include"Movers.h"
 #include"ScoreBoard.h"
 #include "GenSun.h"
+#include <fstream>
+
 //#include"Sentry.h"
 
 class Levels
@@ -43,6 +45,13 @@ public:
 	//int getKills() { return killCount; }
 	//int getMax() { return maxZombies; }
 	int winCondition();
+	void storeKillCount() {
+		std::ofstream file("killcount.txt");
+		if (file.is_open()) {
+			file << killCount;
+			file.close();
+		}
+	}
 
 };
 

@@ -23,7 +23,8 @@ protected:
     int SpriteHeight;
 public:
     PlantFactory(int plantsUnlocked);
-
+    int Clicked(Event event);
+    void SelectPlants(int x);
     void DrawPlants(RenderWindow& window, float deltaTime);
 
     void spawnSunflowerRandomly(int numRows, int numCols);
@@ -36,5 +37,5 @@ public:
     void DrawIcons(RenderWindow& window); // Draw all icons
 
     //testing
-    void spawnSunflowerAtPosition(int x, int y);
+    void spawnSunflowerAtPosition(int x, int y, int check);
 };

@@ -30,13 +30,75 @@ PlantFactory::PlantFactory(int plantsUnlocked) : numPlants(0) , plantsUnlocked(p
         seedPackets[i]->setTexture(seedTextures[i]);
     }
 }
-void PlantFactory::spawnSunflowerAtPosition(int x, int y)
+int PlantFactory::Clicked(Event event)
 {
-
-    if (numPlants < 50) {
-        plants[numPlants] = new SnowPea(x, y, 100); 
-        numPlants++;
+    std::cout << "I am in click" << std::endl;
+    if (seedPackets[0]->isClicked(event))
+    {
+        return 1;
     }
+    else if (seedPackets[1]->isClicked(event))
+    {
+        return 2;
+    }
+    else if (seedPackets[2]->isClicked(event))
+    {
+        return 3;
+    }
+    else if (seedPackets[3]->isClicked(event))
+    {
+        return 4;
+    }
+    else if (seedPackets[4]->isClicked(event))
+    {
+        return 5;
+    }
+    else if (seedPackets[5]->isClicked(event))
+    {
+        return 6;
+    }
+    else if (seedPackets[6]->isClicked(event))
+    {
+        return 7;
+    }
+}
+void PlantFactory::spawnSunflowerAtPosition(int x, int y, int check)
+{
+    static int i = 0;
+    switch (check)
+    {
+    case 1:
+        std::cout << "Sunflower " << std::endl;
+        plants[i] = new Sunflower(x, y, 100);
+        break;
+    case 2:
+        std::cout << "PeaShooter " << std::endl;
+        plants[i] = new PeaShooter(x, y, 100);
+        break;
+    case 3:
+        std::cout << "Walnut " << std::endl;
+        plants[i] = new Walnut(x, y, 100);
+        break;
+    case 4:
+        std::cout << "Cherrybomb " << std::endl;
+        plants[i] = new CherryBomb(x, y, 100);
+        break;
+    case 5:
+        std::cout << "Repeater " << std::endl;
+        plants[i] = new Repeater(x, y, 100);
+        break;
+    case 6:
+        std::cout << "Snowpea " << std::endl;
+        plants[i] = new SnowPea(x, y, 100);
+        break;
+    case 7:
+        std::cout << "FumeShroom " << std::endl;
+        plants[i] = new FumeShroom(x, y, 100);
+        break;
+    default:
+        break;
+    }
+    i++;
 }
 void PlantFactory::DrawIcons(RenderWindow& window)
 {

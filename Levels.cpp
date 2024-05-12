@@ -234,8 +234,8 @@ bool Levels::start(int& killCount)
 
 	const int ROWS = 5;
 	const int COLS = 9;
-
-
+	
+	int x = 1;
 	srand(time(0));
 
 	RenderWindow window(VideoMode(1200, 700), "Plants Vs Zombies");
@@ -265,7 +265,10 @@ bool Levels::start(int& killCount)
 
 	Clock timeMoney;
 
-
+	//Texture tex;
+	//tex.loadFromFile("./Images/Sunflower_i.png");
+	//SeedPackets kicon(coordinates(300, 300), coordinates(400, 400), 1);
+	//kicon.setTexture(tex);
 
 
 
@@ -332,58 +335,125 @@ bool Levels::start(int& killCount)
 				scoreBoard.IncrementSuns(25);
 			}
 
+			//if (kicon.isClicked(event))
+			//{
+
+			//	std::cout << "I am clcikedddd";
+			//}
+			//if (seed.isClicked(event))
+			//{
+			//}
+			//else if (event.type == Event::MouseButtonReleased)
+			//	{
+			//		MousePosition.x = Mouse::getPosition(window).x;
+			//		MousePosition.y = Mouse::getPosition(window).y;
+
+			//		int x = 1;
+
+			//		// Check if the mouse click is within the game grid
+			//		if (withinGrid(MousePosition.x, MousePosition.y))
+			//		{
+			//			// Calculate the row and column of the clicked cell
+			//			int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
+			//			int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
+
+			//			std::cout << "GRID: " << col << ' ' << row << '\n';
+
+
+
+			//			// *********************************
+			//			// Itni zyadi mathematics karney ki kya zaroorat thi ?
+			//			// *********************************
+
+			//			// Calculate the position of the plant
+			//			// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+			//			// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+
+			//			// Adjust the position to draw the sprite from its middle
+			//			// plantX -= pf.getSpriteWidth() / 2;
+			//			// plantY -= pf.getSpriteHeight() / 2;
+			//			// Spawn the plant at the calculated position
+			//			// pf.spawnSunflowerAtPosition(plantX, plantY);
+
+			//			// *********************************
+			//			// Bas itni sa likna tha :)
+			//			// *********************************
+			//			if (FIELD_GAME_STATUS[row][col] == 0)
+			//			{
+			//				FIELD_GAME_STATUS[row][col] = 1;
+
+			//				int plantX = GRID_LEFT + col * CELL_WIDTH;
+			//				int plantY = GRID_TOP + row * CELL_HEIGHT;
+			//				pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
+			//			}
+			//			//-------------------------------------------
+			//		}
+			//	}
+			//if (event.type == Event::MouseButtonReleased && Mouse::getPosition().x < 290 && pf.selected == false)
+			//{
+			//	x = pf.Clicked(event);
+			//	pf.selected = true;
+			//}
+			/*else if (int x = pf.Clicked(event))
+			{*/
+			
+
 			else if (event.type == Event::MouseButtonReleased)
 			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
 				pf.PlantClicked(event, shovel);
 
-
-
-				// Check if the mouse click is within the game grid
-				if (withinGrid(MousePosition.x, MousePosition.y)) 
-				{
-					// Calculate the row and column of the clicked cell
-					int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
-					int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
-
-					std::cout << "GRID: " << col << ' ' << row << '\n';
-					
-					
-
-					// *********************************
-					// Itni zyadi mathematics karney ki kya zaroorat thi ?
-					// *********************************
-					
-					// Calculate the position of the plant
-					// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
-					// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
-
-					// Adjust the position to draw the sprite from its middle
-					// plantX -= pf.getSpriteWidth() / 2;
-					// plantY -= pf.getSpriteHeight() / 2;
-					// Spawn the plant at the calculated position
-					// pf.spawnSunflowerAtPosition(plantX, plantY);
-
-					// *********************************
-					// Bas itni sa likna tha :)
-					// *********************************
-					if (FIELD_GAME_STATUS[row][col] == 0)
+					if (pf.selected == false)
 					{
-						FIELD_GAME_STATUS[row][col] = 1;
-
-						int plantX = GRID_LEFT + col * CELL_WIDTH;
-						int plantY = GRID_TOP + row * CELL_HEIGHT;
-						pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT);
+						x = pf.Clicked(event);
+						pf.selected = true;
 					}
 
-					//else if (pf.getPlants()[0]->isClicked(event))
-					//{
-					//	std::cout << "Clicked\n";
-					//}
-					//-------------------------------------------
-				}
+
+					// Check if the mouse click is within the game grid
+					if (withinGrid(MousePosition.x, MousePosition.y) && pf.selected == true)
+					{
+						pf.selected = false;
+						// Calculate the row and column of the clicked cell
+						int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
+						int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
+
+						std::cout << "GRID: " << col << ' ' << row << '\n';
+
+
+
+						// *********************************
+						// Itni zyadi mathematics karney ki kya zaroorat thi ?
+						// *********************************
+
+						// Calculate the position of the plant
+						// int plantX = GRID_LEFT + col * CELL_WIDTH + CELL_WIDTH / 2; // Center of the cell
+						// int plantY = GRID_TOP + row * CELL_HEIGHT + CELL_HEIGHT / 2; // Center of the cell
+
+						// Adjust the position to draw the sprite from its middle
+						// plantX -= pf.getSpriteWidth() / 2;
+						// plantY -= pf.getSpriteHeight() / 2;
+						// Spawn the plant at the calculated position
+						// pf.spawnSunflowerAtPosition(plantX, plantY);
+
+						// *********************************
+						// Bas itni sa likna tha :)
+						// *********************************
+						if (FIELD_GAME_STATUS[row][col] == 0)
+						{
+							FIELD_GAME_STATUS[row][col] = 1;
+
+							int plantX = GRID_LEFT + col * CELL_WIDTH;
+							int plantY = GRID_TOP + row * CELL_HEIGHT;
+							pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
+						}
+						//-------------------------------------------
+					}
 			}
+			//seed.draw(window);
+			//
+			//}
 
 		//Sun implementation
 		//	while (window.pollEvent(event)) {
@@ -408,7 +478,7 @@ bool Levels::start(int& killCount)
 
 
 
-		
+		//kicon.draw(window);
 		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);

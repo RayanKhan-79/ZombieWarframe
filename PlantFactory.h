@@ -4,6 +4,9 @@
 #include "PeaShooter.h"
 #include "Walnut.h"
 #include "CherryBomb.h"
+#include "Repeater.h"
+#include "SnowPea.h"
+#include "FumeShroom.h"
 #include "SeedPackets.h"
 
 

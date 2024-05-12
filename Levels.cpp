@@ -8,7 +8,9 @@ Levels::Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxD
 	Shovel(coordinates(1130,630), coordinates(1200,700)),
 	killCount(0),  
 	pf(plantsUnlocked),
-	zf(maxZombies,maxDancers,zombiesUnlocked)
+	zf(maxZombies, maxDancers, zombiesUnlocked),
+	sunGenerator(10)
+	
 	
 {
 
@@ -221,9 +223,9 @@ bool Levels::start()
 	Clock time;
 	window.setFramerateLimit(20);
 
-	DancingZombie* z1[5]{};
-	for (int i = 0; i < 5; i++)
-		z1[i] = new DancingZombie(5, 4, 200, 4);
+	//DancingZombie* z1[5]{};
+	//for (int i = 0; i < 5; i++)
+	//	z1[i] = new DancingZombie(5, 4, 200, 4);
 	//ZombieFactory zf;
 	
 
@@ -275,8 +277,13 @@ bool Levels::start()
 				shovel = true;
 			}
 
+			if (sunGenerator.Update(event))
+			{
+				std::cout << "S\n";
+				scoreBoard.IncrementScore(25);
+			}
 
-			if (event.type == Event::MouseButtonReleased)
+			else if (event.type == Event::MouseButtonReleased)
 			{
 				MousePosition.x = Mouse::getPosition(window).x;
 				MousePosition.y = Mouse::getPosition(window).y;
@@ -329,17 +336,31 @@ bool Levels::start()
 				}
 			}
 
+		//Sun implementation
+		//	while (window.pollEvent(event)) {
+		//		if (event.type == sf::Event::Closed) {
+		//			window.close();
+		//		}
+		//		// Pass the event to Sun's isClick function
+		//		sun.isClick(event);
+		//	}
+
+		//	sun.UpdateAnimation(deltaTime,0.25);
+
+		//	window.draw(sun.getSprite());
+
+		//	// Draw the score
+		//	sun.scoreDisplay(window, font);
 
 
-
-
-			if (event.type == Event::MouseButtonReleased)
-				std::cout << "Game --> x: " << Mouse::getPosition(window).x << " y: " << Mouse::getPosition(window).y << "\n";
+		//	if (event.type == Event::MouseButtonReleased)
+		//		std::cout << "Game --> x: " << Mouse::getPosition(window).x << " y: " << Mouse::getPosition(window).y << "\n";
 		}
 
 
 
 
+		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);
 		Shovel.draw(window);
@@ -366,6 +387,11 @@ bool Levels::start()
 
 
 			//pf.DeleteProjectiles();
+
+			sunGenerator.spawnSun();
+			sunGenerator.moveSun(window);
+			//sun.draw(window);
+			//sun.Move();
 			//for (int i = 0; i < 5; i++)
 			//{
 			//	z1[i]->Move();

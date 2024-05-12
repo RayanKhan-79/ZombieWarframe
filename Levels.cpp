@@ -152,8 +152,8 @@ bool Levels::start()
 
 	const int ROWS = 5;
 	const int COLS = 9;
-
-
+	
+	int x = 1;
 	srand(time(0));
 
 	RenderWindow window(VideoMode(1200, 700), "Plants Vs Zombies");
@@ -183,7 +183,10 @@ bool Levels::start()
 
 	Clock timeMoney;
 
-
+	//Texture tex;
+	//tex.loadFromFile("./Images/Sunflower_i.png");
+	//SeedPackets kicon(coordinates(300, 300), coordinates(400, 400), 1);
+	//kicon.setTexture(tex);
 
 
 
@@ -199,10 +202,8 @@ bool Levels::start()
 	/*Sentry* sentry[3];
 	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));*/
 
-	Texture tex;
-	tex.loadFromFile("./Images/Sunflower_i.png");
-	SeedPackets seed(coordinates(10, 10), coordinates(20, 20), 1);
-	seed.setTexture(tex);
+	//SeedPackets seed(coordinates(10, 10), coordinates(20, 20), 1);
+	//seed.setTexture(tex);
 	float deltaTime;
 	while (window.isOpen())
 	{
@@ -249,10 +250,15 @@ bool Levels::start()
 				std::cout << "S\n";
 				scoreBoard.IncrementScore(25);
 			}
-			if (seed.isClicked(event))
-			{
-				std::cout << "I am clcikedddd";
-			}
+
+			//if (kicon.isClicked(event))
+			//{
+
+			//	std::cout << "I am clcikedddd";
+			//}
+			//if (seed.isClicked(event))
+			//{
+			//}
 			//else if (event.type == Event::MouseButtonReleased)
 			//	{
 			//		MousePosition.x = Mouse::getPosition(window).x;
@@ -299,24 +305,32 @@ bool Levels::start()
 			//			//-------------------------------------------
 			//		}
 			//	}
-
-			
+			//if (event.type == Event::MouseButtonReleased && Mouse::getPosition().x < 290 && pf.selected == false)
+			//{
+			//	x = pf.Clicked(event);
+			//	pf.selected = true;
+			//}
 			/*else if (int x = pf.Clicked(event))
 			{*/
 			
 
 			else if (event.type == Event::MouseButtonReleased)
 				{
-				//int x = pf.Clicked(event);
-				int x = 1;
+			
 					MousePosition.x = Mouse::getPosition(window).x;
 					MousePosition.y = Mouse::getPosition(window).y;
 
+					if (pf.selected == false)
+					{
+						x = pf.Clicked(event);
+						pf.selected = true;
+					}
 
 
 					// Check if the mouse click is within the game grid
-					if (withinGrid(MousePosition.x, MousePosition.y))
+					if (withinGrid(MousePosition.x, MousePosition.y) && pf.selected == true)
 					{
+						pf.selected = false;
 						// Calculate the row and column of the clicked cell
 						int row = (MousePosition.y - GRID_TOP) / CELL_HEIGHT;
 						int col = (MousePosition.x - GRID_LEFT) / CELL_WIDTH;
@@ -353,7 +367,7 @@ bool Levels::start()
 						//-------------------------------------------
 					}
 			}
-			seed.draw(window);
+			//seed.draw(window);
 			//
 			//}
 
@@ -380,7 +394,7 @@ bool Levels::start()
 
 
 
-
+		//kicon.draw(window);
 		scoreBoard.draw(window);
 		pauseIcon.draw(window);
 		SkipLevel.draw(window);

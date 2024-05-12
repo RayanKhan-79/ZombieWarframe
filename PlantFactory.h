@@ -19,16 +19,20 @@ protected:
     int plantsUnlocked;
     Plant* plants[50]{};
     int numPlants;
+
+
     int SpriteWidth;
     int SpriteHeight;
 public:
+    bool selected = false;
+
     PlantFactory(int plantsUnlocked);
-    int Clicked(Event event);
+    int Clicked(Event& event);
     void SelectPlants(int x);
     void DrawPlants(RenderWindow& window, float deltaTime);
 
     void spawnSunflowerRandomly(int numRows, int numCols);
-    void DrawIcons(); // Draw all icons
+    //void DrawIcons(); // Draw all icons
 
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }

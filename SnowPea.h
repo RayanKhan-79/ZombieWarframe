@@ -3,8 +3,7 @@
 class SnowPea : public ShootingPlants
 {
 public:
-	SnowPea() { }
-	SnowPea(int x, int y, int health);
+	SnowPea(int x, int y, int health, int pixelsX=131, int pixelsY=135);
 	void UpdateAnimation(float interval);
 };
 

@@ -44,7 +44,13 @@ public:
 	void drawIcons(RenderWindow& window);
 
 	void playGame();
-
+	/*void storeKillCount() {
+		std::ofstream file("killcount.txt");
+		if (file.is_open()) {
+			file << killCount;
+			file.close();
+		}
+	}*/
 	~Game();
 
 };

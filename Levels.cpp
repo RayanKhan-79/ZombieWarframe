@@ -226,10 +226,7 @@ bool Levels::start()
 		z1[i] = new DancingZombie(5, 4, 200, 4);
 	//ZombieFactory zf;
 	
-	Sentry* sentry[3];
-	sentry[0] = new Sentry(coordinates(GRID_LEFT, GRID_TOP));
-	sentry[1] = new Sentry(coordinates(GRID_LEFT + CELL_WIDTH, GRID_TOP + 2 * CELL_HEIGHT));
-	sentry[2] = new Sentry(coordinates(GRID_LEFT + 2 * CELL_WIDTH, GRID_TOP + CELL_HEIGHT));
+
 
 	float deltaTime;
 	bool shovel = false;
@@ -400,11 +397,6 @@ bool Levels::start()
 			//	
 			//	}
 
-			for (int i = 0; i < 3; i++)
-			{
-				sentry[i]->draw(window);
-				sentry[i]->shoot();
-			}
 
 			zf.spawnWave(killCount);
 			zf.DrawZombies(window, deltaTime);

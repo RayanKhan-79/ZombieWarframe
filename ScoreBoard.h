@@ -8,8 +8,6 @@ class ScoreBoard
 	int suns;
 	int score;
 	int lives;
-
-	//coordinates Pos;
 	Texture texture;
 	Sprite sprite;
 	Font font;

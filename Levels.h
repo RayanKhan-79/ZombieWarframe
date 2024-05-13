@@ -22,10 +22,6 @@ protected:
 	Sprite background_Sprite;
 	PauseMenu pauseMenu;
 	ScoreBoard scoreBoard;
-	//Music backGroundMusic
-
-	
-
 	Movers* movers[5];
 	ZombieFactory zf;
 	PlantFactory pf;
@@ -33,6 +29,7 @@ protected:
 	int lives = 3;
 	//int plantsUnlocked;
 	//int zombiesUnlocked;
+	//Music backGroundMusic
 
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
@@ -58,4 +55,5 @@ public:
 	void cherryBlast();
 
 };
+
 

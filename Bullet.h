@@ -9,7 +9,6 @@ class Bullet
 	int damage;
 	std::string type;
 	coordinates pos;
-	//sf::CircleShape bullet;
 	sf::Texture texture;
 	sf::Sprite bullet;
 	sf::Clock clock;

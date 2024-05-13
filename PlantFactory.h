@@ -54,8 +54,9 @@ public:
 
     void PlantClicked(Event& e, bool& shovel);
 
+    bool spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard& scoreboard);
     //testing
-    void spawnSunflowerRandomly(int numRows, int numCols);
+    //void spawnSunflowerRandomly(int numRows, int numCols);
     void DrawIcons(RenderWindow& window); // Draw all icons
  
     
@@ -66,5 +67,4 @@ public:
     CherryBomb* getCherryBomb() { return cherryBomb; }
 
     //testing
-    bool spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard& scoreboard);
 };

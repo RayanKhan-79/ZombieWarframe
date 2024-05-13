@@ -29,9 +29,13 @@ public:
 	virtual void genSun() {}
 	virtual bool Update(Event& e) { return false; }
 	bool isClicked(Event&);
+	
+	
 	coordinates getPosition() { return Pos; }
 	coordinates getHitArea() { return mid; }
 	int& getHealth() { return health; }
+	
+	
 	void mark()
 	{
 		Color c(255, 0, 0);

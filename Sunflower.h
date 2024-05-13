@@ -16,7 +16,6 @@ public:
 	void genSun();
 	bool Update(Event& e);
 	virtual void Draw(RenderWindow& window, float deltaTime);
-	//int getSpriteWidth() { return spriteWidth; }
-	//int getSpriteHeight() { return spriteHeight;  }
+
 };
 

@@ -182,7 +182,6 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
     switch (check)
     {
     case 0:
-        selected = false;
         return false;
 
     case 1:
@@ -216,28 +215,20 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
         {
             scoreboard.setSun(scoreboard.getSun() - 50);
             std::cout << "Walnut " << std::endl;
-            plants[numPlants] = new Walnut(x, y, 100);  
-            numPlants++;
+            wallnuts[wallnutCount] = new Walnut(x, y, 900);
+            wallnutCount++;
         }
         else
         {
             return false;
         }
         break;
-        std::cout << "Walnut " << std::endl;
-        wallnuts[wallnutCount] = new Walnut(x, y, 900);
-        wallnutCount++;
-        return false;
     case 4:
-        std::cout << "Cherrybomb " << std::endl;
-        cherryBomb = new CherryBomb(x, y, 100);
-        return false;
         if (scoreboard.getSun() >= 150)
         {
             scoreboard.setSun(scoreboard.getSun() - 150);
             std::cout << "Cherrybomb " << std::endl;
             cherryBomb = new CherryBomb(x, y, 100);
-            numPlants--;
         }
         else
         {
@@ -286,7 +277,6 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
     default:
         return false;
     }
-    numPlants++;
     return true;
     
 

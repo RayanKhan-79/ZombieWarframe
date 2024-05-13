@@ -18,7 +18,7 @@ class ScoreBoard
 	Text liveText;
 
 public:
-	ScoreBoard() : suns(0), score(0), lives(0)
+	ScoreBoard() : suns(1000), score(0), lives(0)
 	{
 		texture.loadFromFile("./Images/scoreboard1.png");
 		sprite.setTexture(texture);

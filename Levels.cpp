@@ -534,9 +534,9 @@ bool Levels::start(int& killCount)
 
 							int plantX = GRID_LEFT + col * CELL_WIDTH;
 							int plantY = GRID_TOP + row * CELL_HEIGHT;
-							pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x, scoreBoard);
+							FIELD_GAME_STATUS[row][col] = pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x, scoreBoard);
 							
-							FIELD_GAME_STATUS[row][col] = pf.spawnSunflowerAtPosition(plantX, plantY - 140 + CELL_HEIGHT, x);
+							
 						}
 						//-------------------------------------------
 					}

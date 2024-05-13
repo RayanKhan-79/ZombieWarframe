@@ -13,15 +13,11 @@ class DancingZombie : public Zombie
 public:
 	DancingZombie(float = 5, int = 200, int = 3, int = 5, int = 1000, int = randGrid(180), int = 125, int = 180);
 	void UpdateAnimation(float deltaTime);
-	//void Draw(RenderWindow&, float);
 	void SummonBackUp(BackUpDancer**& backUp);
 	void resetTime()
 	{
 		clock.restart();
 	}
-	//void checkAssignment(BackUpDancer**& backUp);
-	//virtual void Attack(Plant*);
-	//void checkStatus();
 	void Move();
 
 

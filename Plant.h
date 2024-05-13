@@ -34,25 +34,8 @@ public:
 	coordinates getPosition() { return Pos; }
 	coordinates getHitArea() { return mid; }
 	int& getHealth() { return health; }
-	
-	
-	void mark()
-	{
-		Color c(255, 0, 0);
-		sprite.setColor(c);
-	}
-
-	virtual int getBulletCount()
-	{
-		return 0;
-	}
-
-	virtual Bullet** getBullet()
-	{
-		Bullet* ignore = NULL;
-		Bullet** ignore2 = &ignore;
-		
-		return ignore2;
-	}
+	void mark();
+	virtual int getBulletCount();
+	virtual Bullet** getBullet();
 };
 

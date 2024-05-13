@@ -11,50 +11,9 @@ private:
 
 public:
 
-	GenSun(float interval = 1)
-		: interval(interval), sun(NULL)
-	{
-
-	}
-	
-	void spawnSun()
-	{
-		if (clock.getElapsedTime().asSeconds() < interval)
-			return;
-
-		if (sun)
-			return;
-
-		int x = (rand() % 855) + 300;
-		int y = 0;
-
-		sun = new Sun(coordinates(x, y));
-		clock.restart();
-
-		
-	}
-
-
-	void moveSun(RenderWindow& window)
-	{
-		if (!sun)
-			return;
-
-		sun->Move();
-		sun->draw(window);
-	}
-
-	bool Update(Event& e)
-	{
-		if (sun && sun->isClicked(e))
-		{
-
-			delete sun;
-			sun = NULL;
-			return true;
-		}
-
-		return false;
-	}
+	GenSun(float interval = 1);
+	void spawnSun();
+	void moveSun(RenderWindow& window);
+	bool Update(Event& e);
 };
 

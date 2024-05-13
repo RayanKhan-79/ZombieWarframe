@@ -45,15 +45,6 @@ public:
 	coordinates getHitArea() const { return hitArea; }
 	bool getReachedHomeStatus() const { return reachedHome; }
 	void setReachedHomeStatus(bool boolean) { reachedHome = boolean; }
-	void Decrement_Health(int amount = 0)
-	{
-		health -= amount;
-	}
-
-	void mark()
-	{
-		Color c(0, 140, 140);
-		sprite.setColor(c);
-	}
+	void mark();
 };
 

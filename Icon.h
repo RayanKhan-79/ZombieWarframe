@@ -22,7 +22,6 @@ public:
 
 	bool isClicked(Event&);
 
-	//coordinates getPos() const { return pos; }
 	Sprite getSprite() const { return iconSprite; }
 	
 };

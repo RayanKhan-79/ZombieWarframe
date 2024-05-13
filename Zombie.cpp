@@ -86,4 +86,8 @@ void Zombie::getShotAt(Bullet* bullet)
 	
 	
 }
-
+void Zombie::mark()
+{
+	Color c(0, 140, 140);
+	sprite.setColor(c);
+}

@@ -8,17 +8,19 @@ Game::Game()
 	highScoreIcon(coordinates(465, 400), coordinates(735, 480)),
 	Quit(coordinates(910, 600), coordinates(1180, 680)),
 	EnterName(coordinates(465, 490), coordinates(735, 580)),
+	Badges(coordinates(465, 10), coordinates(630,70)),
 	end(false),
 	win(false),
 	killCount(0)
 {
 	
-	Texture buttonTextures[5];
+	Texture buttonTextures[6];
 	buttonTextures[0].loadFromFile("./Images/PlayButton.png");
 	buttonTextures[1].loadFromFile("./Images/Instructions.png");
 	buttonTextures[2].loadFromFile("./Images/HighScore.png");
 	buttonTextures[3].loadFromFile("./Images/Quit.png");
 	buttonTextures[4].loadFromFile("./Images/button_large.png");
+	buttonTextures[5].loadFromFile("./Images/badges0.png");
 
 
 	playgameIcon.setTexture(buttonTextures[0]);
@@ -26,6 +28,7 @@ Game::Game()
 	highScoreIcon.setTexture(buttonTextures[2]);
 	Quit.setTexture(buttonTextures[3]);
 	EnterName.setTexture(buttonTextures[4]);
+	Badges.setTexture(buttonTextures[5]);
 
 	mainTexture.loadFromFile("./Images/main_back.png");
 	MainMenu.setTexture(mainTexture);
@@ -48,6 +51,7 @@ void Game::drawIcons(RenderWindow& window)
 	highScoreIcon.draw(window);
 	Quit.draw(window);
 	EnterName.draw(window);
+	Badges.draw(window);
 	window.draw(dispName);
 }
 
@@ -83,8 +87,6 @@ void Game::playGame()
 				Gamewindow.close();
 			}
 
-
-			// ===========================================
 			if (EnterName.isClicked(e))
 			{
 				toggle = true;
@@ -101,29 +103,12 @@ void Game::playGame()
 			{
 				toggle = false;
 			}
-			// ==============================================
-
-			//sf::String playerInput;
-			//sf::Text playerText;
-
-			//...
-
-			//	if (event.type == sf::Event::TextEntered)
-			//	{
-			//		playerInput += event.text.unicode;
-			//		playerText.setString(playerInput);
-			//	}
-
-			//...
-
-			//	window.draw(playerText);
-
-			// For Testing
+			
 			if (e.type == Event::MouseButtonReleased)
 			{
 				std::cout << "x: " << Mouse::getPosition(Gamewindow).x << " y: " << Mouse::getPosition(Gamewindow).y << "\n";
 			}
-			// ==========
+
 
 			if (InstructionIcon.isClicked(e))
 			{
@@ -241,6 +226,44 @@ void Game::playGame()
 
 	}
 
+}
+void Game::storeKillCount(int killCount) {
+	std::ifstream inFile("killcount.txt");
+	std::ofstream tempFile("temp.txt");
+	if (!inFile.is_open()) {
+		std::cerr << "Error: Unable to open input file 'killcount.txt'\n";
+		return;
+	}
+
+	if (!tempFile.is_open()) {
+		std::cerr << "Error: Unable to open output file 'temp.txt'\n";
+		inFile.close();
+		return;
+	}
+
+	int existingKill;
+	bool inserted = false;
+
+	// Read existing kill counts and insert the new one in sorted order
+	while (inFile >> existingKill) {
+		if (killCount >= existingKill && !inserted) {
+			tempFile << killCount << "\n";
+			inserted = true;
+		}
+		tempFile << existingKill << "\n";
+	}
+
+	// If the new kill count is the smallest, add it at the end
+	if (!inserted) {
+		tempFile << killCount << "\n";
+	}
+
+	inFile.close();
+	tempFile.close();
+
+	// Replace the original file with the sorted file
+	std::remove("killcount.txt");
+	std::rename("temp.txt", "killcount.txt");
 }
 
 Game::~Game()

@@ -42,3 +42,21 @@ void Plant::UpdateAnimation(float deltaTime)
 	}
 	sprite.setTextureRect(IntRect(offset * 105, 0, 105, 140));
 }
+void Plant::mark()
+{
+	Color c(255, 0, 0);
+	sprite.setColor(c);
+}
+
+int Plant::getBulletCount()
+{
+	return 0;
+}
+
+Bullet** Plant::getBullet()
+{
+	Bullet* ignore = NULL;
+	Bullet** ignore2 = &ignore;
+
+	return ignore2;
+}

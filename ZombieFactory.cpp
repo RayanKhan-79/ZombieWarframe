@@ -2,7 +2,7 @@
 #include <SFML/Audio.hpp>
 
 ZombieFactory::ZombieFactory(int zombieLimit, int DancersLimit, int zombiesUnlocked, int waveLimit)
-	: spawnInterval(0), 
+	: spawnInterval(1), 
 	numOfZombies(0), 
 	numOfDancers(0), 
 	waveCount(0),

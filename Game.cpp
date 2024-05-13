@@ -8,17 +8,19 @@ Game::Game()
 	highScoreIcon(coordinates(465, 400), coordinates(735, 480)),
 	Quit(coordinates(910, 600), coordinates(1180, 680)),
 	EnterName(coordinates(465, 490), coordinates(735, 580)),
+	Badges(coordinates(465, 10), coordinates(630,70)),
 	end(false),
 	win(false),
 	killCount(0)
 {
 	
-	Texture buttonTextures[5];
+	Texture buttonTextures[6];
 	buttonTextures[0].loadFromFile("./Images/PlayButton.png");
 	buttonTextures[1].loadFromFile("./Images/Instructions.png");
 	buttonTextures[2].loadFromFile("./Images/HighScore.png");
 	buttonTextures[3].loadFromFile("./Images/Quit.png");
 	buttonTextures[4].loadFromFile("./Images/button_large.png");
+	buttonTextures[5].loadFromFile("./Images/badges0.png");
 
 
 	playgameIcon.setTexture(buttonTextures[0]);
@@ -26,6 +28,7 @@ Game::Game()
 	highScoreIcon.setTexture(buttonTextures[2]);
 	Quit.setTexture(buttonTextures[3]);
 	EnterName.setTexture(buttonTextures[4]);
+	Badges.setTexture(buttonTextures[5]);
 
 	mainTexture.loadFromFile("./Images/main_back.png");
 	MainMenu.setTexture(mainTexture);
@@ -48,6 +51,7 @@ void Game::drawIcons(RenderWindow& window)
 	highScoreIcon.draw(window);
 	Quit.draw(window);
 	EnterName.draw(window);
+	Badges.draw(window);
 	window.draw(dispName);
 }
 

@@ -36,6 +36,7 @@ class Game
 	Icon highScoreIcon;
 	Icon Quit;
     Icon EnterName;
+    Icon Badges;
 
 	int killCount;
     Font font;

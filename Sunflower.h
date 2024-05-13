@@ -1,5 +1,7 @@
 #pragma once
 #include "Plant.h"
+#include "Sun.h"
+
 class Sunflower :public Plant
 {
 private:
@@ -9,7 +11,7 @@ public:
 	Sunflower();
 	Sunflower(int x, int y, int health);
 	void UpdateAnimation(float deltaTime);
-	//void genSun();
+	void genSun();
 	int getSpriteWidth() { return spriteWidth; }
 	int getSpriteHeight() { return spriteHeight;  }
 };

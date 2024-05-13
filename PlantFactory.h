@@ -9,7 +9,7 @@
 #include "FumeShroom.h"
 #include "SeedPackets.h"
 #include "ScoreBoard.h"
-
+#include <SFML/Audio.hpp>
 
 class PlantFactory
 {

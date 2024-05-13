@@ -57,7 +57,7 @@ void Zombie::UpdateAnimation(float deltaTime)
 
 void Zombie::Move()
 {
-	if (action == "attacking")
+	if (action == "attacking" || Pos.x <= 150)
 		return;
 
 	Pos.x -= speed;

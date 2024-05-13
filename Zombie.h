@@ -15,7 +15,8 @@ protected:
 	int speed;
 	int slowSpeed;
 	int damage;
-
+	bool reachedHome = false;
+	
 	float Total_Animation_Time;
 	float switchTime;
 	int offset;
@@ -42,7 +43,8 @@ public:
 	int& getHealth();
 	coordinates getPosition() const { return Pos; }
 	coordinates getHitArea() const { return hitArea; }
-
+	bool getReachedHomeStatus() const { return reachedHome; }
+	void setReachedHomeStatus(bool boolean) { reachedHome = boolean; }
 	void Decrement_Health(int amount = 0)
 	{
 		health -= amount;

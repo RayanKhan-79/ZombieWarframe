@@ -2,7 +2,12 @@
 
 PlantFactory::PlantFactory(int plantsUnlocked) 
     : numPlants(0), 
-    plantsUnlocked(plantsUnlocked) 
+    plantsUnlocked(plantsUnlocked),
+    seedPackets(NULL),
+    cherryBomb(NULL),
+    wallnutCount(0)
+    
+    
 
 {
     // Initialize all textures (even locked ones)
@@ -15,7 +20,6 @@ PlantFactory::PlantFactory(int plantsUnlocked)
     seedTextures[6].loadFromFile("./Images/Fumeshroom_i.png");  // fumeShroom
    
     
-
 
     seedPackets = new SeedPackets * [plantsUnlocked] {};
 
@@ -39,6 +43,14 @@ void PlantFactory::PlantClicked(Event& e, bool& shovel)
                 
 }
 
+void PlantFactory::RollWallNuts()
+{
+    for (int i = 0; i < wallnutCount; i++)
+        if (wallnuts[i] && wallnuts[i]->getHealth() > 0)
+        {
+            wallnuts[i]->RolyPoly();
+        }
+}
 
 void PlantFactory::DeleteDeadPlants(bool FIELD_GAME_STATUS[][9])
 {
@@ -56,6 +68,15 @@ void PlantFactory::DeleteDeadPlants(bool FIELD_GAME_STATUS[][9])
 
     }
 
+    for (int i = 0; i < 5; i++)
+        if (wallnuts && wallnuts[i] && wallnuts[i]->getHealth() <= 0)
+        {
+            // wont update field game status
+            wallnutCount--;
+            delete wallnuts[i];
+            wallnuts[i] = NULL;
+        }
+
     for (int i = 0; i < 45; i++)
         if (plants[i] && plants[i]->getHealth() <= 0)
         {
@@ -69,6 +90,15 @@ void PlantFactory::DeleteDeadPlants(bool FIELD_GAME_STATUS[][9])
             plants[i] = NULL;
             numPlants--;
         }
+
+    for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 5-1; j++)
+            if (wallnuts[j] == NULL && wallnuts[j + 1] != NULL)
+            {
+                Walnut* temp = wallnuts[j + 1];
+                wallnuts[j + 1] = wallnuts[j];
+                wallnuts[j] = temp;
+            }
 
     for (int i = 0; i < 45; i++)
         for (int j = 0; j < 45-1; j++)
@@ -152,7 +182,6 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
     switch (check)
     {
     case 0:
-        selected = false;
         return false;
 
     case 1:
@@ -186,8 +215,9 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
         {
             scoreboard.setSun(scoreboard.getSun() - 50);
             std::cout << "Walnut " << std::endl;
-            plants[numPlants] = new Walnut(x, y, 100);  
-            numPlants++;
+            wallnuts[wallnutCount] = new Walnut(x, y, 900);
+            wallnutCount++;
+            return false;
         }
         else
         {
@@ -200,7 +230,6 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
             scoreboard.setSun(scoreboard.getSun() - 150);
             std::cout << "Cherrybomb " << std::endl;
             cherryBomb = new CherryBomb(x, y, 100);
-            numPlants--;
         }
         else
         {
@@ -247,8 +276,9 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
         }
         break;
     default:
-        break;
+        return false;
     }
+    return true;
     
 
     while (sound.getStatus() == sf::Sound::Playing) {
@@ -274,6 +304,10 @@ void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
 
     if (cherryBomb)
         cherryBomb->Draw(window,deltaTime);
+
+    for (int i = 0; i < wallnutCount; i++)
+        if (wallnuts[i])
+            wallnuts[i]->Draw(window, deltaTime);
 }
 
 void PlantFactory::spawnSunflowerRandomly(int numRows, int numCols)

@@ -14,17 +14,21 @@
 class PlantFactory
 {
 protected:
-    SeedPackets** seedPackets = NULL;
+    SeedPackets** seedPackets;
     Texture seedTextures[7]{};  // Total number of plants
     int plantsUnlocked;
 
-    CherryBomb* cherryBomb = NULL;
+    CherryBomb* cherryBomb;
+    
+    Walnut* wallnuts[5]{};
+    int wallnutCount;
+
     Plant* plants[50]{};
     int numPlants;
 
 
-    int SpriteWidth;
-    int SpriteHeight;
+    //int SpriteWidth;
+    //int SpriteHeight;
 public:
     bool selected = false;
 
@@ -32,13 +36,15 @@ public:
     
     int Clicked(Event& event);
 
-    void SelectPlants(int x);
+    //void SelectPlants(int x);
 
     void DrawPlants(RenderWindow& window, float deltaTime);
 
     //void spawnSunflowerAtPosition(int x, int y);
 
     void DeleteDeadPlants(bool FIELD_GAME_STATUS[][9]);
+
+    void RollWallNuts();
 
     void Shoot();
 
@@ -49,7 +55,8 @@ public:
     void DrawIcons(RenderWindow& window); // Draw all icons
  
     
-    
+    int getWallnutCount() const { return wallnutCount; }
+    Walnut* const* getWallnuts() { return wallnuts; }
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }
     CherryBomb* getCherryBomb() { return cherryBomb; }

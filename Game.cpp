@@ -2,29 +2,42 @@
 #include <SFML/Audio.hpp>
 
 Game::Game()
-	: level(NULL), 
-	playgameIcon(coordinates(465, 220), coordinates(735,300)), 
+	: level(NULL),
+	playgameIcon(coordinates(465, 220), coordinates(735, 300)),
 	InstructionIcon(coordinates(465, 310), coordinates(735, 390)),
 	highScoreIcon(coordinates(465, 400), coordinates(735, 480)),
-	Quit(coordinates(910, 600), coordinates(1180, 680)), 
+	Quit(coordinates(910, 600), coordinates(1180, 680)),
+	EnterName(coordinates(465, 490), coordinates(735, 580)),
 	end(false),
+	win(false),
 	killCount(0)
 {
 	
-	Texture buttonTextures[4];
+	Texture buttonTextures[5];
 	buttonTextures[0].loadFromFile("./Images/PlayButton.png");
 	buttonTextures[1].loadFromFile("./Images/Instructions.png");
 	buttonTextures[2].loadFromFile("./Images/HighScore.png");
 	buttonTextures[3].loadFromFile("./Images/Quit.png");
+	buttonTextures[4].loadFromFile("./Images/button_large.png");
+
 
 	playgameIcon.setTexture(buttonTextures[0]);
 	InstructionIcon.setTexture(buttonTextures[1]);
 	highScoreIcon.setTexture(buttonTextures[2]);
 	Quit.setTexture(buttonTextures[3]);
+	EnterName.setTexture(buttonTextures[4]);
 
 	mainTexture.loadFromFile("./Images/main_back.png");
 	MainMenu.setTexture(mainTexture);
 	MainMenu.setPosition(0, 0);
+
+
+	font.loadFromFile("./Font/COMICSANSBOLD.ttf");
+	dispName.setPosition(465, 500);
+	dispName.setCharacterSize(32);
+	dispName.setFillColor(Color(255, 0, 0));
+	dispName.setFont(font);
+	dispName.setString("");
 }
 
 void Game::drawIcons(RenderWindow& window)
@@ -34,11 +47,13 @@ void Game::drawIcons(RenderWindow& window)
 	InstructionIcon.draw(window);
 	highScoreIcon.draw(window);
 	Quit.draw(window);
+	EnterName.draw(window);
+	window.draw(dispName);
 }
 
 void Game::playGame()
 {
-
+	bool toggle = false;
 	Gamewindow.create(VideoMode(1200, 700), "Plant Vs Zombies");
 	Gamewindow.setPosition(Vector2i(100, 100));
 
@@ -68,6 +83,40 @@ void Game::playGame()
 				Gamewindow.close();
 			}
 
+
+			// ===========================================
+			if (EnterName.isClicked(e))
+			{
+				toggle = true;
+			}
+
+			if (e.type == Event::TextEntered && toggle)
+			{
+				std::cout << std::to_string(e.text.unicode) << ' ';
+				name += e.text.unicode;
+				dispName.setString(name);
+			}
+
+			if (e.type == Event::KeyReleased && e.key.code == Keyboard::Enter && toggle)
+			{
+				toggle = false;
+			}
+			// ==============================================
+
+			//sf::String playerInput;
+			//sf::Text playerText;
+
+			//...
+
+			//	if (event.type == sf::Event::TextEntered)
+			//	{
+			//		playerInput += event.text.unicode;
+			//		playerText.setString(playerInput);
+			//	}
+
+			//...
+
+			//	window.draw(playerText);
 
 			// For Testing
 			if (e.type == Event::MouseButtonReleased)
@@ -151,6 +200,7 @@ void Game::playGame()
 									
 										delete level;
 										level = NULL;
+										win = true;
 										std::cout << "YOU WON\n";
 									}
 
@@ -164,10 +214,18 @@ void Game::playGame()
 					
 				}
 
+				if (!win)
+				{
+					gS.Render();
+					
+				}
+
+
 			}
 
 			if (!Gamewindow.isOpen() && end == false)
 			{
+				win = false;
 				playGame();
 				storeKillCount(killCount);
 			}
@@ -176,6 +234,8 @@ void Game::playGame()
 		Gamewindow.draw(MainMenu);
 
 		drawIcons(Gamewindow);
+
+		//Gamewindow.draw(dispName);
 
 		Gamewindow.display();
 

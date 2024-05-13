@@ -7,6 +7,7 @@ public:
 	Repeater() { }
 	Repeater(int x, int y, int health, int pixelsX=139, int pixelsY=135);
 	void UpdateAnimation(float interval);
-	//void Shoot();
+	void Draw(RenderWindow& window, float deltaTime);
+	void Shoot();
 };
 

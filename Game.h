@@ -50,16 +50,18 @@ public:
 	Game();
 
 	void drawIcons(RenderWindow& window);
-
+    
 	void playGame();
 
 #include <iostream>
 #include <fstream>
-
+    void displayBadges()
+    {
+       
+    }
     void storeKillCount(int killCount) {
         std::ifstream inFile("killcount.txt");
         std::ofstream tempFile("temp.txt");
-
         if (!inFile.is_open()) {
             std::cerr << "Error: Unable to open input file 'killcount.txt'\n";
             return;

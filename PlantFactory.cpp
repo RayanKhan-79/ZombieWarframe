@@ -217,6 +217,7 @@ bool PlantFactory::spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard&
             std::cout << "Walnut " << std::endl;
             wallnuts[wallnutCount] = new Walnut(x, y, 900);
             wallnutCount++;
+            return false;
         }
         else
         {

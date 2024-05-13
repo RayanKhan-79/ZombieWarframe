@@ -2,7 +2,7 @@
 #include <SFML/Audio.hpp>
 
 ZombieFactory::ZombieFactory(int zombieLimit, int DancersLimit, int zombiesUnlocked, int waveLimit)
-	: spawnInterval(1), 
+	: spawnInterval(2), 
 	numOfZombies(0), 
 	numOfDancers(0), 
 	waveCount(0),
@@ -134,9 +134,9 @@ bool ZombieFactory::spawnNextWave(int& kills)
 	sound.play();
 
 	// Wait for the sound to finish playing before continuing
-	while (sound.getStatus() == sf::Sound::Playing) {
-		// Optional: You can add a delay here if needed
-	}
+	//while (sound.getStatus() == sf::Sound::Playing) {
+	//	// Optional: You can add a delay here if needed
+	//}
 
 	std::cout << "Spawning next wave" << std::endl;
 	waveCount++;

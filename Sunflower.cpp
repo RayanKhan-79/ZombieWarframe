@@ -31,7 +31,7 @@ void Sunflower::genSun()
 		return;
 
 	sun = new Sun(coordinates(mid.x, Pos.y));
-	clock.restart();
+	//clock.restart();
 }
 
 bool Sunflower::Update(Event& e)
@@ -40,6 +40,7 @@ bool Sunflower::Update(Event& e)
 	{
 		delete sun;
 		sun = NULL;
+		clock.restart();
 		return true;
 	}
 

@@ -11,7 +11,7 @@ private:
 	
 	
 public:
-	Sunflower(int x, int y, int health, int interval = 3, int pixelsX = 105, int pixelsY = 140);
+	Sunflower(int x, int y, int health, int interval = 6, int pixelsX = 105, int pixelsY = 140);
 	void UpdateAnimation(float deltaTime);
 	void genSun();
 	bool Update(Event& e);

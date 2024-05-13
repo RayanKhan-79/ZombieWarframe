@@ -1,5 +1,5 @@
 #include "ScoreBoard.h"
-ScoreBoard::ScoreBoard() : suns(100), score(0), lives(0)
+ScoreBoard::ScoreBoard() : suns(500), score(0), lives(0)
 {
 	texture.loadFromFile("./Images/scoreboard1.png");
 	sprite.setTexture(texture);

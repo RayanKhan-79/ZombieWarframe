@@ -30,6 +30,22 @@ PlantFactory::PlantFactory(int plantsUnlocked)
     }
 }
 
+void PlantFactory::genSuns_Sunflower()
+{
+    for (int i = 0; i < numPlants; i++)
+        plants[i]->genSun();
+}
+
+void PlantFactory::UpdateSuns(ScoreBoard& scoreBoard, Event& e)
+{
+    for (int i = 0; i < numPlants; i++)
+        if (plants[i] && plants[i]->Update(e))
+        {
+            scoreBoard.IncrementSuns(25);
+        }
+
+}
+
 void PlantFactory::PlantClicked(Event& e, bool& shovel)
 {
     std::cout << shovel;

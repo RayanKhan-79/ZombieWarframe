@@ -25,7 +25,9 @@ public:
 	Plant();
 	virtual void Draw(RenderWindow& window, float deltaTime);
 	virtual void UpdateAnimation(float interval);
-	virtual void Shoot() { }
+	virtual void Shoot() {}
+	virtual void genSun() {}
+	virtual bool Update(Event& e) { return false; }
 	bool isClicked(Event&);
 	coordinates getPosition() { return Pos; }
 	coordinates getHitArea() { return mid; }

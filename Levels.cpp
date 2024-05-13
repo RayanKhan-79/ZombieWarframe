@@ -424,6 +424,9 @@ bool Levels::start(int& killCount)
 				scoreBoard.IncrementSuns(25);
 			}
 
+
+
+
 			//if (kicon.isClicked(event))
 			//{
 
@@ -540,11 +543,13 @@ bool Levels::start(int& killCount)
 						}
 						//-------------------------------------------
 					}
+
+
 			}
 			//seed.draw(window);
 			//
 			//}
-
+			pf.UpdateSuns(scoreBoard, event);
 		//Sun implementation
 		//	while (window.pollEvent(event)) {
 		//		if (event.type == sf::Event::Closed) {
@@ -635,7 +640,7 @@ bool Levels::start(int& killCount)
 			//	
 			//	}
 
-
+			pf.genSuns_Sunflower();
 			zf.spawnWave(killCount);
 			zf.DrawZombies(window, deltaTime);
 			collisionDetection();
@@ -683,16 +688,3 @@ bool Levels::start(int& killCount)
 
 
 
-
-
-
-
-
-
-
-//////std::cout << "px: " << zf.getZombies()[i]->getPosition().x << "  hx: " << zf.getZombies()[i]->getHitArea().x << '\n';
-//////std::cout << "py: " << zf.getZombies()[i]->getPosition().y + 180 - 118 << "  hy: " << zf.getZombies()[i]->getHitArea().y << '\n';
-//////std::cout << "Plant:\n";
-//////std::cout << "px: " << pf.getPlants()[i]->getPosition().x << "  hx: " << pf.getPlants()[i]->getPosition().x + 95 << '\n';
-//////std::cout << "py: " << pf.getPlants()[i]->getPosition().y + 145 - 118 << "  hy: " << pf.getPlants()[i]->getPosition().y + 145 << '\n';
-//system("pause");

@@ -36,6 +36,10 @@ public:
     
     int Clicked(Event& event);
 
+    void genSuns_Sunflower();
+
+    void UpdateSuns(ScoreBoard&, Event&);
+
     //void SelectPlants(int x);
 
     void DrawPlants(RenderWindow& window, float deltaTime);

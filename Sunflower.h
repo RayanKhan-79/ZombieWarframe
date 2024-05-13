@@ -5,14 +5,18 @@
 class Sunflower :public Plant
 {
 private:
-	int spriteWidth;
-	int spriteHeight;
+	float interval;
+	Sun* sun;
+	Clock clock;
+	
+	
 public:
-	Sunflower();
-	Sunflower(int x, int y, int health);
+	Sunflower(int x, int y, int health, int interval = 3, int pixelsX = 105, int pixelsY = 140);
 	void UpdateAnimation(float deltaTime);
 	void genSun();
-	int getSpriteWidth() { return spriteWidth; }
-	int getSpriteHeight() { return spriteHeight;  }
+	bool Update(Event& e);
+	virtual void Draw(RenderWindow& window, float deltaTime);
+	//int getSpriteWidth() { return spriteWidth; }
+	//int getSpriteHeight() { return spriteHeight;  }
 };
 

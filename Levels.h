@@ -27,9 +27,6 @@ protected:
 	PlantFactory pf;
 	GenSun sunGenerator;
 	int lives = 3;
-	//int plantsUnlocked;
-	//int zombiesUnlocked;
-	//Music backGroundMusic
 
 public:
 	Levels(int plantsUnlocked, int zombiesUnlocked, int maxZombies, int maxDancers);
@@ -41,17 +38,7 @@ public:
 	void TriggerMovers();
 	void wallNutCollisions();
 	void MoveMovers();
-	//int getKills() { return killCount; }
-	//int getMax() { return maxZombies; }
 	int winCondition();
-	//void storeKillCount() {
-	//	std::ofstream file("killcount.txt");
-	//	if (file.is_open()) {
-	//		file << killCount;
-	//		file.close();
-	//	}
-	//}
-
 	void cherryBlast();
 
 };

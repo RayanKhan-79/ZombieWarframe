@@ -9,7 +9,6 @@ public:
 	Sunflower();
 	Sunflower(int x, int y, int health);
 	void UpdateAnimation(float deltaTime);
-	//void genSun();
 	int getSpriteWidth() { return spriteWidth; }
 	int getSpriteHeight() { return spriteHeight;  }
 };

@@ -16,8 +16,5 @@ protected:
 public:
 	Screens();
 	RenderWindow& getWindow();
-	void setTexture(Texture tex)
-	{
-		sprite.setTexture(tex);
-	}
+	void setTexture(Texture tex) { sprite.setTexture(tex);  }
 };

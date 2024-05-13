@@ -87,8 +87,6 @@ void Game::playGame()
 				Gamewindow.close();
 			}
 
-
-			// ===========================================
 			if (EnterName.isClicked(e))
 			{
 				toggle = true;
@@ -105,29 +103,12 @@ void Game::playGame()
 			{
 				toggle = false;
 			}
-			// ==============================================
-
-			//sf::String playerInput;
-			//sf::Text playerText;
-
-			//...
-
-			//	if (event.type == sf::Event::TextEntered)
-			//	{
-			//		playerInput += event.text.unicode;
-			//		playerText.setString(playerInput);
-			//	}
-
-			//...
-
-			//	window.draw(playerText);
-
-			// For Testing
+			
 			if (e.type == Event::MouseButtonReleased)
 			{
 				std::cout << "x: " << Mouse::getPosition(Gamewindow).x << " y: " << Mouse::getPosition(Gamewindow).y << "\n";
 			}
-			// ==========
+
 
 			if (InstructionIcon.isClicked(e))
 			{
@@ -245,6 +226,44 @@ void Game::playGame()
 
 	}
 
+}
+void Game::storeKillCount(int killCount) {
+	std::ifstream inFile("killcount.txt");
+	std::ofstream tempFile("temp.txt");
+	if (!inFile.is_open()) {
+		std::cerr << "Error: Unable to open input file 'killcount.txt'\n";
+		return;
+	}
+
+	if (!tempFile.is_open()) {
+		std::cerr << "Error: Unable to open output file 'temp.txt'\n";
+		inFile.close();
+		return;
+	}
+
+	int existingKill;
+	bool inserted = false;
+
+	// Read existing kill counts and insert the new one in sorted order
+	while (inFile >> existingKill) {
+		if (killCount >= existingKill && !inserted) {
+			tempFile << killCount << "\n";
+			inserted = true;
+		}
+		tempFile << existingKill << "\n";
+	}
+
+	// If the new kill count is the smallest, add it at the end
+	if (!inserted) {
+		tempFile << killCount << "\n";
+	}
+
+	inFile.close();
+	tempFile.close();
+
+	// Replace the original file with the sorted file
+	std::remove("killcount.txt");
+	std::rename("temp.txt", "killcount.txt");
 }
 
 Game::~Game()

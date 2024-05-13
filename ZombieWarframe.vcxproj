@@ -167,7 +167,6 @@
     <ClCompile Include="Screens.cpp" />
     <ClCompile Include="SeedPackets.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="ShootingPlants.cpp" />
     <ClCompile Include="SnowPea.cpp" />
     <ClCompile Include="GenSun.cpp" />
     <ClCompile Include="Sun.cpp" />
@@ -206,7 +205,6 @@
     <ClInclude Include="Screens.h" />
     <ClInclude Include="SeedPackets.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="ShootingPlants.h" />
     <ClInclude Include="SnowPea.h" />
     <ClInclude Include="GenSun.h" />
     <ClInclude Include="Sun.h" />

@@ -21,3 +21,27 @@ void Movers::Move()
 	pos.x += 5;
 	mid.x += 5;
 }
+void Movers::mark(Zombie* zombie)
+{
+	zombie->getHealth() -= 2000;
+	triggered = true;
+	Color c(0, 255, 0);
+	sprite.setColor(c);
+}
+
+void Movers::mark(DancingZombie* zombie)
+{
+	zombie->getHealth() -= 2000;
+	triggered = true;
+	Color c(0, 255, 0);
+	sprite.setColor(c);
+}
+
+void Movers::mark(BackUpDancer* zombie)
+{
+	zombie->getHealth() -= 2000;
+	triggered = true;
+	Color c(0, 255, 0);
+	sprite.setColor(c);
+}
+

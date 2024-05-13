@@ -25,10 +25,6 @@ protected:
 
     Plant* plants[50]{};
     int numPlants;
-
-
-    //int SpriteWidth;
-    //int SpriteHeight;
 public:
     bool selected = false;
 
@@ -36,11 +32,8 @@ public:
     
     int Clicked(Event& event);
 
-    //void SelectPlants(int x);
 
     void DrawPlants(RenderWindow& window, float deltaTime);
-
-    //void spawnSunflowerAtPosition(int x, int y);
 
     void DeleteDeadPlants(bool FIELD_GAME_STATUS[][9]);
 
@@ -60,7 +53,5 @@ public:
     int getNumPlants() const { return numPlants; }
     Plant* const* getPlants() const { return plants; }
     CherryBomb* getCherryBomb() { return cherryBomb; }
-
-    //testing
     bool spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard& scoreboard);
 };

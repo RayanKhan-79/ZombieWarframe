@@ -60,6 +60,4 @@ public:
     Plant* const* getPlants() const { return plants; }
     CherryBomb* getCherryBomb() { return cherryBomb; }
 
-    //testing
-    bool spawnSunflowerAtPosition(int x, int y, int check, ScoreBoard& scoreboard);
 };

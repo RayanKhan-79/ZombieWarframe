@@ -326,14 +326,4 @@ void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
             wallnuts[i]->Draw(window, deltaTime);
 }
 
-void PlantFactory::spawnSunflowerRandomly(int numRows, int numCols)
-{
-    //if (numPlants < 10)
-    //{
-    //    int randomRow = rand() % numRows;
-    //    int randomCol = rand() % numCols;
 
-    //    plants[numPlants] = new Plant(randomCol * 95 + 300, randGrid(138), 300);
-    //    numPlants++;
-    //}
-}

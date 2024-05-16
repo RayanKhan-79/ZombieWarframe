@@ -3,9 +3,6 @@ Plant::Plant(int x, int y, int health, int pixelsX, int pixelsY)
 	: Pos(x, y), health(health), offset(0), Total_Animation_Time(0),
 	switchTime(0.2), mid(x + (pixelsX / 2), y + (pixelsY / 2)), pixelsX(pixelsX), pixelsY(pixelsY) {}
 
-Plant::Plant() :Pos(0, 0), health(0), offset(0), Total_Animation_Time(0), switchTime(0)
-{
-}
 
 bool Plant::isClicked(Event& e)
 {

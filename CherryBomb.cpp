@@ -3,9 +3,11 @@
 CherryBomb::CherryBomb(int x, int y, int health, int pixelsX, int pixlesY) 
     : Plant(x, y, health, pixelsX, pixlesY),
     BlastPoint1(Pos.x - 95, Pos.y - 118*2 + pixlesY),
-    BlastPoint2(Pos.x + 95*2, Pos.y + 118 + pixlesY)
+    BlastPoint2(Pos.x + 95*2, Pos.y + 118 + pixlesY),
+    Blast(false),
+    offsetY(0)
 {
-
+    switchTime = 0.05;
     mid.x = Pos.x;
     mid.y = Pos.y + 70;
 
@@ -19,26 +21,25 @@ CherryBomb::CherryBomb(int x, int y, int health, int pixelsX, int pixlesY)
 
 void CherryBomb::UpdateAnimation(float deltaTime)
 {
-    blast(deltaTime);
+    if (!Blast)
+        return;
 
-}
-
-void CherryBomb::UpdateAnimation_cherry(float deltaTime)
-{
     Total_Animation_Time += deltaTime;
     if (Total_Animation_Time >= switchTime)
     {
         Total_Animation_Time -= switchTime;
         offset++;
 
-        if (offset == 8)
+        if (offset == 6)
         {
             offset = 0;
-            health = 0;
-            std::cout << "Blast --> " << BlastPoint1.x << ' ' << BlastPoint2.x << "\n" << BlastPoint1.y << ' ' << BlastPoint2.y << "\n";
+            offsetY++;
+            
+            if (offsetY == 2)
+                health = 0;
         }
     }
-    sprite.setTextureRect(IntRect(offset * 238, 0, 238, 180));
+    sprite.setTextureRect(IntRect(offset * 200, offsetY * 200, 200, 200));
 }
 
 void CherryBomb::blast(float deltaTime)
@@ -47,12 +48,14 @@ void CherryBomb::blast(float deltaTime)
     if (timer.getElapsedTime().asSeconds() >= 0.5f)
     {
        //loading blast animation
-        texture.loadFromFile("./Images/Cherrybomb_blast.png");
+        Blast = true;
+        texture.loadFromFile("./Images/xplosions/r01.png");
         sprite.setTexture(texture);
-        sprite.setTextureRect(IntRect(offset * 238, 0, 238, 180));
+        sprite.setTextureRect(IntRect(offset * 200, offsetY * 200, 200, 200));
         sprite.setPosition(Pos.x, Pos.y);
+        sprite.setOrigin(pixelsX / 2, pixelsY / 2);
+        sprite.setScale(2, 2);
 
-        //updating
-        UpdateAnimation_cherry(deltaTime);
+
     }
 }

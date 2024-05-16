@@ -21,8 +21,7 @@ protected:
 	coordinates mid;
 
 public:
-	Plant(int x, int y=randGrid(145), int h=200, int pixelsX=0, int pixelsY=0);
-	Plant();
+	Plant(int x=0, int y=0, int h=0, int pixelsX=0, int pixelsY=0);
 	virtual void Draw(RenderWindow& window, float deltaTime);
 	virtual void UpdateAnimation(float interval);
 	virtual void Shoot() {}

@@ -219,7 +219,7 @@ void ZombieFactory::spawnZombie()
 		case 1:
 			if (numOfDancers < DancersLimit)
 			{
-				Dancers[numOfDancers] = new DancingZombie(5,600);
+				Dancers[numOfDancers] = new DancingZombie;
 				std::cout << "DZombie\n";
 				numOfDancers++;
 			}
@@ -247,8 +247,6 @@ void ZombieFactory::DrawZombies(RenderWindow& window, float deltaTime)
 				Dancers[j]->Draw(window, deltaTime);
 			}
 	
-				//std::cout << Dancers[j]->getHitArea().x - 95 << " , ";
-				//std::cout << Dancers[j]->getHitArea().y - 118 << '\n';
 
 				if (Dancers[j]->getHealth() > 0)
 					Dancers[j]->SummonBackUp(backupDancers[j]);

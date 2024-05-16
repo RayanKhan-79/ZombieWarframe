@@ -319,7 +319,10 @@ void PlantFactory::DrawPlants(RenderWindow& window, float deltaTime)
     }
 
     if (cherryBomb)
-        cherryBomb->Draw(window,deltaTime);
+    {
+        cherryBomb->Draw(window, deltaTime);
+        cherryBomb->blast(deltaTime);
+    }
 
     for (int i = 0; i < wallnutCount; i++)
         if (wallnuts[i])

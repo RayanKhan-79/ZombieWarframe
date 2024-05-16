@@ -4,7 +4,7 @@ Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int
 	: Pos(x, y), health(health), speed(speed), slowSpeed(speed/2), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY),
 	hitArea(x + 95, y + pixelsY), action("moving")
 {
-
+	std::cout << speed << " " << this->speed << '\n';
 
 	texture.loadFromFile("./Images/zombie.png");
 	sprite.setTexture(texture);

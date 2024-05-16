@@ -8,19 +8,19 @@ ScoreBoard::ScoreBoard() : suns(500), score(0), lives(0)
 		// Handle font loading error
 	}
 
-	Color Green(0, 170, 0);
+	Color Yellow(255, 165, 0);
 
 	sunText.setFont(font); // Set the font
 	sunText.setCharacterSize(28); // Set the character size
-	sunText.setFillColor(Green); // Set the fill color
+	sunText.setFillColor(Yellow); // Set the fill color
 
 	scoreText.setFont(font);
 	scoreText.setCharacterSize(28);
-	scoreText.setFillColor(Green);
+	scoreText.setFillColor(Yellow);
 
 	liveText.setFont(font);
 	liveText.setCharacterSize(28);
-	liveText.setFillColor(Green);
+	liveText.setFillColor(Yellow);
 
 	sprite.setPosition(10, 600);
 	sunText.setPosition(30, 600); // Position the text at the top left corner

@@ -1,4 +1,12 @@
-﻿#include<iostream>
+﻿/////////////////////////
+// Rayan Khan		   //
+// 23i-0745 B		   //
+// Muneeba Zaheer      //
+// 23i-0581 B          //
+/////////////////////////
+
+
+#include<iostream>
 #include <SFML/Graphics.hpp>
 #include <ctime>
 #include"Game.h"
@@ -10,8 +18,8 @@ using namespace std;
 int main()
 {
 
-	Game PlantsVsZombeis;
-	PlantsVsZombeis.playGame();
+	Game PlantsVsZombies;
+	PlantsVsZombies.playGame();
 
 	return 0;
 }

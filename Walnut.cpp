@@ -2,7 +2,7 @@
 
 Walnut::Walnut(int x, int y, int health, int pixelsX, int pixelsY) :Plant(x,y,health, pixelsX, pixelsY)
 {
-	switchTime = 0.15;
+	switchTime = 0.09;
 	texture.loadFromFile("./Images/Wallnut_roll1.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
@@ -27,8 +27,8 @@ void Walnut::RolyPoly()
 	if (Pos.x >= 1200)
 		health = 0;
 
-	Pos.x += 5;
-	mid.x += 5;
+	Pos.x += 8;
+	mid.x += 8;
 	sprite.setPosition(Pos.x, Pos.y);
 }
 

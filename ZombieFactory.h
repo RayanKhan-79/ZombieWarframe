@@ -1,4 +1,5 @@
 #pragma once
+#include<SFML/Audio.hpp>
 #include"Zombie.h"
 #include"FootballZombie.h"
 #include"DancingZombie.h"
@@ -30,7 +31,8 @@ class ZombieFactory
 	int waveCount;
 	int waveLimit;
 
-
+	SoundBuffer buffer;
+	Sound sound;
 
 
 public:
@@ -58,11 +60,8 @@ public:
 
 	int getNumberOfZombies() { return numOfZombies; }
 
+	bool isWaveLimitReached() { return (waveCount >= waveLimit); }
 
-	bool isWaveLimitReached()
-	{
-		return (waveCount >= waveLimit);
-	}
 	~ZombieFactory();
 
 };

@@ -3,6 +3,7 @@
 BackUpDancer::BackUpDancer(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
 	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY), speed_y(speed)
 {
+	switchTime = 0.3;
 	hitArea.x = Pos.x + 95;
 	hitArea.y = Pos.y + pixelsY;
 }
@@ -57,20 +58,20 @@ void BackUpDancer::SpawnAnimation(float deltaTime)
 	if (Total_Animation_Time >= switchTime)
 	{
 		Total_Animation_Time -= switchTime;
-		offset++;
+		offsetX++;
 
-		if (offset > 9)
+		if (offsetX > 9)
 		{
 			texture.loadFromFile("./Images/03.png");
-			sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
+			sprite.setTextureRect(IntRect(offsetX * pixelsX, 0, pixelsX, pixelsY));
 
 			spawned = true;
-			offset = 0;
+			offsetX = 0;
 			return;
 		}
 	}
 
-	sprite.setTextureRect(IntRect(offset * 153, 0, 153, 180));
+	sprite.setTextureRect(IntRect(offsetX * 153, 0, 153, 180));
 	sprite.setPosition(Pos.x, Pos.y);
 }
 
@@ -80,11 +81,11 @@ void BackUpDancer::UpdateAnimation(float deltaTime)
 	if (Total_Animation_Time >= switchTime)
 	{
 		Total_Animation_Time -= switchTime;
-		offset++;
+		offsetX++;
 
-		if (offset > 3)
-			offset = 0;
+		if (offsetX > 3)
+			offsetX = 0;
 	}
-	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
+	sprite.setTextureRect(IntRect(offsetX * pixelsX, 0, pixelsX, pixelsY));
 }
 

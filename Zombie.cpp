@@ -1,12 +1,12 @@
 #include "Zombie.h"
 
 Zombie::Zombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
-	: Pos(x, y), health(health), speed(speed), slowSpeed(speed/2), damage(damage), offset(0), Total_Animation_Time(0), switchTime(0.3), pixelsX(pixelsX), pixelsY(pixelsY),
+	: Pos(x, y), health(health), speed(speed), slowSpeed(speed/2), damage(damage), offsetX(0), offsetY(0), Total_Animation_Time(0), switchTime(0.1), pixelsX(pixelsX), pixelsY(pixelsY),
 	hitArea(x + 95, y + pixelsY), action("moving")
 {
 	std::cout << speed << " " << this->speed << '\n';
 
-	texture.loadFromFile("./Images/zombie.png");
+	texture.loadFromFile("./Images/basic_zombie.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 	sprite.setPosition(Pos.x, Pos.y);
@@ -47,12 +47,18 @@ void Zombie::UpdateAnimation(float deltaTime)
 	if (Total_Animation_Time >= switchTime)
 	{
 		Total_Animation_Time -= switchTime;
-		offset++;
+		offsetX++;
 
-		if (offset == 5)
-			offset = 0;
+		if (offsetX == 6)
+		{
+			offsetX = 0;
+			offsetY++;
+
+			if (offsetY == 4)
+				offsetY = 0;
+		}
 	}
-	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
+	sprite.setTextureRect(IntRect(offsetX * pixelsX, offsetY * pixelsY, pixelsX, pixelsY));
 }
 
 void Zombie::Move()

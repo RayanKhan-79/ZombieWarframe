@@ -4,9 +4,9 @@
 
 class FootballZombie : public Zombie
 {
-
+	
 public:
-	FootballZombie(int = 400, int = 3, int = 8, int = 1000, int = randGrid(180), int = 215, int = 180);
+	FootballZombie(int = 400, int = 3, int = 8, int = 1000, int = randGrid(240), int = 240, int = 240);
 	void UpdateAnimation(float deltaTime);
 	void Move();
 

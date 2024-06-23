@@ -19,7 +19,9 @@ protected:
 	
 	float Total_Animation_Time;
 	float switchTime;
-	int offset;
+	
+	int offsetX;
+	int offsetY;
 	int pixelsX;
 	int pixelsY;
 	
@@ -31,7 +33,7 @@ protected:
 
 
 public:
-	Zombie(int=200, int=2, int=5, int=1200, int=randGrid(180), int=180, int=180);
+	Zombie(int=200, int=2, int=5, int=1200, int=randGrid(180), int=132, int=180);
 	virtual void Draw(RenderWindow&, float);
 	virtual void Move();
 	virtual void UpdateAnimation(float interval);

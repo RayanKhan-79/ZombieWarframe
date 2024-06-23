@@ -3,6 +3,7 @@
 DancingZombie::DancingZombie(float spawnInterval, int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY)
 	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY), spawnInterval(spawnInterval), speed_y(speed)
 {
+	switchTime = 0.3;
 	hitArea.x = Pos.x + 95;
 	hitArea.y = Pos.y + pixelsY;
 	texture.loadFromFile("./Images/11.png");
@@ -94,12 +95,12 @@ void DancingZombie::UpdateAnimation(float deltaTime)
 	{
 		Total_Animation_Time -= switchTime;
 		
-		offset++;
-		if (offset == 4)
-			offset = 0;
+		offsetX++;
+		if (offsetX == 4)
+			offsetX = 0;
 	}
 
-	sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
+	sprite.setTextureRect(IntRect(offsetX * pixelsX, 0, pixelsX, pixelsY));
 }
 
 void DancingZombie::Move()

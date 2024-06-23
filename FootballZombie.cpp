@@ -1,13 +1,12 @@
 #include "FootballZombie.h"
 
 FootballZombie::FootballZombie(int health, int speed, int damage, int x, int y, int pixelsX, int pixelsY) 
-	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY) 
+	: Zombie(health, speed, damage, x, y, pixelsX, pixelsY)
 {
-	switchTime = 0.15;
 	hitArea.x = Pos.x + 95;
 	hitArea.y = Pos.y + pixelsY;
 
-	texture.loadFromFile("./Images/footballZombie.png");
+	texture.loadFromFile("./Images/football_zombie.png");
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, pixelsX, pixelsY));
 
@@ -20,22 +19,20 @@ void FootballZombie::UpdateAnimation(float deltaTime)
 	if (Total_Animation_Time >= switchTime)
 	{
 		Total_Animation_Time -= switchTime;
-		offset++;
+		offsetX++;
 
-		if (offset == 6)
-			offset = 0;
+		if (offsetX == 5)
+		{
+			offsetX = 0;
+			offsetY++;
+
+			if (offsetY == 6)
+				offsetY = 0;
+		}
 	}
 	
-	//if (health >= 300)
-	//{
-		sprite.setTextureRect(IntRect(offset * pixelsX, 0, pixelsX, pixelsY));
-	//	return;
-	//}
+		sprite.setTextureRect(IntRect(offsetX * pixelsX, offsetY * pixelsY, pixelsX, pixelsY));
 
-
-
-	//texture.loadFromFile("./Images/hfzanimation.png");
-	//sprite.setTextureRect(IntRect(offset * 237, 0, 237, 212));
 
 }
 
